@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>인천신용보증재단 통합 안내 센터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background: #f9fafb; margin: 0; color: #333; }
+        .container { max-width: 720px; margin: 0 auto; padding: 30px 20px; } /* 상단 및 하단 패딩 증가 */
+        
+        /* 재단 CI 색상 예시: 파랑 계열로 통일 */
+        h1 { font-size: 28px; margin-bottom: 8px; text-align: center; color: #004c99; font-weight: 700; } /* 제목 폰트 크기 및 굵기 증가 */
+        .description-p { font-size: 15px; color: #555; text-align: center; margin-bottom: 25px; } /* 설명 문구 마진 증가 */
+        
+        /* 링크 그리드 */
+        .card-grid { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 30px; margin-bottom: 30px; } /* 상단/하단 마진 증가 */
+        .card { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 18px; text-decoration: none; color: inherit; transition: all 0.2s; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .card:hover { box-shadow: 0 6px 15px rgba(0,0,0,0.1); border-color: #004c99; transform: translateY(-2px); }
+        .card h2 { font-size: 18px; margin-top: 0; color: #004c99; font-weight: 700; }
+        .card p { font-size: 13px; color: #666; margin: 0; }
+        
+        /* 섹션 공통 스타일 */
+        .section { background: #fff; border-radius: 12px; border: 1px solid #eee; padding: 25px; margin-top: 35px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); } /* 섹션 간격 증가 */
+        .section h3 { border-bottom: 2px solid #f0f0f0; padding-bottom: 12px; margin-top: 0; color: #004c99; font-size: 20px; }
+        
+        /* 푸터 스타일 */
+        footer { text-align: center; font-size: 12px; color: #777; margin-top: 40px; padding: 15px 0; border-top: 1px solid #eee; line-height: 1.4; } 
+        
+        /* 연락처 테이블 스타일 */
+        .contact-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        .contact-table th, .contact-table td { border: 1px solid #eee; padding: 10px; text-align: left; }
+        .contact-table th { background-color: #f7f7f7; font-weight: bold; width: 40%; }
+        .contact-table td a { color: #004c99; text-decoration: none; font-weight: bold; }
+        .hours-info { background: #e6f7ff; padding: 10px; border-radius: 6px; border: 1px solid #cceeff; margin-top: 15px; font-size: 15px; font-weight: bold; line-height: 1.6; }
+        .hours-info span { color: #cc0000; }
+
+        /* 공지/안내 상세 스타일 */
+        .notice-box { margin-bottom: 15px; padding: 10px; border-left: 4px solid #004c99; background: #f4f8fc; border-radius: 4px; }
+        .notice-box h4 { margin-top: 0; color: #004c99; font-size: 16px; }
+        .notice-box ul { padding-left: 20px; margin: 5px 0 10px 0; font-size: 14px; }
+        
+        /* 중요 주의사항 스타일 */
+        .notice-highlight { 
+            border: 2px solid #ff0000; 
+            background-color: #fff0f0; 
+            padding: 15px; 
+            border-radius: 6px; 
+            margin-top: 15px; 
+            font-size: 14px; 
+            color: #cc0000; 
+            font-weight: bold;
+        }
+        .notice-highlight h4 {
+            color: #cc0000;
+            margin-bottom: 10px;
+        }
+        .notice-highlight ul {
+            padding-left: 20px;
+        }
+        
+        /* 방문 상담 주의사항 (새로 분리된 섹션) */
+        .consult-notice {
+            border: 1px solid #ff7700;
+            background-color: #fffaf4;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .consult-notice h4 {
+            color: #ff7700;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        /* 공지사항 바로가기 버튼 스타일 */
+        .notice-link-button { 
+            display: block; 
+            text-align: center; 
+            padding: 15px; 
+            background: #ff7700; 
+            color: white; 
+            border-radius: 10px; 
+            font-size: 18px; 
+            font-weight: 700; 
+            text-decoration: none; 
+            margin-bottom: 30px; 
+            box-shadow: 0 4px 8px rgba(255, 119, 0, 0.4); 
+            transition: background 0.2s, transform 0.2s;
+        }
+        .notice-link-button:hover {
+            background: #e66a00;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>인천신용보증재단 통합 안내 센터</h1> 
+        <p class="description-p">보증드림 이용, 상품 안내, 필수 공지 및 연락처를 한 곳에서 빠르게 확인하세요.</p>
+
+        
+        <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000096" target="_blank" class="notice-link-button">
+            🔔 재단 공식 공지사항 게시판 바로가기
+        </a>
+        
+        <div class="card-grid">
+            <a href="https://untact.koreg.or.kr" target="_blank" class="card">
+                <h2>보증드림 바로가기</h2>
+                <p>보증신청 및 상담예약</p>
+            </a>
+            <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000178" target="_blank" class="card">
+                <h2>이용방법 안내</h2>
+                <p>이용 절차와 필요서류 확인</p>
+            </a>
+            <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000196" target="_blank" class="card">
+                <h2>보증상품 안내</h2>
+                <p>상품 종류 및 대상 확인</p>
+            </a>
+        </div>
+        
+        
+        <div class="section">
+            <h3>📢 보증서 발급 신청 및 진행 안내</h3>
+            
+            <div class="notice-box">
+                <h4>보증서 발급 신청 방식 (2가지)</h4>
+                <ul>
+                    <li>비대면 신청: 보증드림에서 직접 온라인 신청</li>
+                    <li>방문 상담 (예약 필수): 보증드림에서 상담 예약 후 재단 방문 신청</li>
+                </ul>
+            </div>
+            
+            <div class="consult-notice">
+                <h4>📞 방문 상담 주의사항</h4>
+                전화 예약은 불가하며, 보증드림 예약이 필수입니다 (미예약 시 상담 불가). 예약이 어려우시면 신분증을 지참하고 지점 방문 시 예약을 도와드립니다. (단, 브릿지/대환 업무는 예약 없이 방문 가능하나 긴 대기시간이 발생할 수 있습니다.) 필요 서류는 예약 완료 시 문자 또는 카카오톡으로 안내됩니다.
+            </div>
+            
+            <div class="notice-box" style="margin-top: 15px;">
+                <h4>📌 보증 ~ 대출 실행 과정 및 소요 기간</h4>
+                <div style="font-size: 14px;">
+                    보증 신청 후 최종 대출 실행까지 약 1주 ~ 3주 소요됩니다.
+                    <ul style="list-style-type: none; padding-left: 0; margin-top: 10px; font-weight: bold;">
+                        <li>진행: 심사 → 약정 → 보증서 은행 통지</li>
+                        <li>발급 안내: 재단에서 사업자께 문자 또는 전화로 최종 안내</li>
+                        <li>대출 실행: 안내를 받은 후 은행에 연락하여 대출 실행</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="notice-highlight">
+                <h4>📢 중요 주의사항 (보증서 효력)</h4>
+                <ul style="margin-top: 10px;">
+                    <li>보증서 발급일로부터 3주 이내 대출 실행을 부탁드립니다.</li>
+                    <li>발급일 기준 30일이 경과하면 해당 보증서는 효력을 잃으며, 재단에 통지 후 재신청해야 합니다.</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h3>▶ 보증드림 이용 가이드 영상</h3>
+            <div class="card-grid">
+                
+                <a href="https://www.youtube.com/watch?v=XlMR9O97mts" target="_blank" class="card video-guide-card">
+                    <h4 style="margin-top: 0;">🎬 보증드림 이용가이드</h4>
+                    <p>앱/웹 사용법 상세 확인</p>
+                </a>
+                
+                <a href="https://www.youtube.com/watch?v=AZFNrC_PQxo" target="_blank" class="card video-guide-card">
+                    <h4 style="margin-top: 0;">🎬 보증신청 가이드</h4>
+                    <p>온라인 신청 방법 상세 안내</p>
+                </a>
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="https://www.youtube.com/@koreg_tv" target="_blank" style="color:#004c99; text-decoration: none; font-weight: bold;">
+                    ➡️ 재단 유튜브 채널 전체 영상 보러가기
+                </a>
+            </p>
+        </div>
+
+
+        <div class="section">
+            <h3>📞 지점별 연락처 및 업무시간</h3>
+            
+            <table class="contact-table">
+                <thead>
+                    <tr>
+                        <th>지점명</th>
+                        <th>연락처</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th>본점 (대표)</th><td><a href="tel:1577-3790">1577-3790</a></td></tr>
+                    <tr><th>남동지점</th><td><a href="tel:032-429-7982">032-429-7982</a></td></tr>
+                    <tr><th>부평지점</th><td><a href="tel:032-508-1954">032-508-1954</a></td></tr>
+                    <tr><th>서인천지점</th><td><a href="tel:032-569-0321">032-569-0321</a></td></tr>
+                    <tr><th>남부지점</th><td><a href="tel:032-889-3611">032-889-3611</a></td></tr>
+                    <tr><th>계양지점</th><td><a href="tel:032-542-3911">032-542-3911</a></td></tr>
+                    <tr><th>중부지점</th><td><a href="tel:032-766-8090">032-766-8090</a></td></tr>
+                    <tr><th>연수지점</th><td><a href="tel:032-811-9531">032-811-9531</a></td></tr>
+                    <tr><th>검단지점</th><td><a href="tel:032-569-7919">032-569-7919</a></td></tr>
+                    <tr><th>소상공인종합지원센터</th><td><a href="tel:032-260-1508">032-260-1508</a></td></tr>
+                </tbody>
+            </table>
+            
+            <div class="hours-info">
+                * 지점 업무시간: <span>09:00 ~ 16:00</span><br>
+                * 휴무: <span>토요일, 일요일 및 공휴일</span>
+            </div>
+        </div>
+        
+        <footer>
+            © 2025. 인천신용보증재단. 본 페이지는 **공식 홈페이지가 아니며**, 이용자 편의를 위해 자체 제작된 통합 안내 페이지입니다.
+        </footer>
+    </div>
+
+    <script>
+        // 이 코드에는 동적인 JavaScript 기능이 없으므로 script 태그는 비워둡니다.
+    </script>
+</body>
+</html>
