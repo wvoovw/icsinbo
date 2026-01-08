@@ -22,8 +22,7 @@
         }
         
         /* 제목 디자인 */
-        h1 { font-size: 26px; margin: 0 0 10px 0; text-align: center; color: #004c99; font-weight: 800; letter-spacing: -0.5px; }
-        .description-p { font-size: 15px; color: #6b7684; text-align: center; margin-bottom: 30px; }
+        h1 { font-size: 26px; margin: 0 0 20px 0; text-align: center; color: #004c99; font-weight: 800; letter-spacing: -0.5px; }
         
         /* 상단 가이드 박스 */
         .top-guide-box {
@@ -42,14 +41,14 @@
         }
         .guide-a { padding: 5px 0; }
         
-        /* 파란색 버튼 */
+        /* 파란색 버튼 (공통 클래스) */
         .guide-action-btn {
             display: flex; justify-content: center; align-items: center; width: 100%;
             background-color: #3182f6; 
             color: white; font-weight: 700; font-size: 17px;
             padding: 18px 0; border-radius: 16px; text-decoration: none;
             box-shadow: 0 4px 12px rgba(49, 130, 246, 0.25);
-            margin-top: 25px; transition: transform 0.2s;
+            transition: transform 0.2s;
         }
         .guide-action-btn:active { transform: scale(0.98); }
         .guide-action-btn::after { content: " 👆"; margin-left: 5px; }
@@ -77,7 +76,7 @@
             margin-top: 20px; font-size: 14px; color: #8b95a1; border: 1px solid #e5e8eb;
         }
 
-        /* ★★★ 팝업 모달 수정 (Flex 레이아웃 적용) ★★★ */
+        /* 팝업 모달 */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 9999;
@@ -89,36 +88,29 @@
             border-radius: 24px; padding: 25px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-height: 80vh; /* 화면 높이의 80%까지만 */
-            display: flex; /* 내부 요소 정렬을 위해 Flex 사용 */
-            flex-direction: column; /* 세로 정렬 */
+            max-height: 80vh; 
+            display: flex; flex-direction: column; 
         }
         @keyframes popUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
-        /* 팝업 헤더 (고정) */
         .modal-header { 
             font-size: 20px; font-weight: 800; color: #004c99; 
             margin-bottom: 15px; text-align: center; 
             border-bottom: 2px solid #f2f4f6; padding-bottom: 15px; 
-            flex-shrink: 0; /* 크기 줄어들지 않음 */
+            flex-shrink: 0; 
         }
         
-        /* 팝업 내용 (스크롤 가능 영역) */
         .modal-scroll-area {
-            overflow-y: auto; /* 내용 넘치면 스크롤 */
-            flex-grow: 1; /* 남은 공간 모두 차지 */
-            padding-right: 5px; /* 스크롤바 여백 */
-            -webkit-overflow-scrolling: touch; /* 모바일 스크롤 부드럽게 */
+            overflow-y: auto; flex-grow: 1; padding-right: 5px; -webkit-overflow-scrolling: touch;
         }
         .modal-content ul { padding-left: 20px; margin: 0; font-size: 15px; color: #4e5968; }
         .modal-content li { margin-bottom: 12px; }
         
-        /* 팝업 닫기 버튼 (하단 고정) */
         .modal-close-btn {
             display: block; width: 100%; padding: 16px; margin-top: 15px;
             background: #333d4b; color: white; font-size: 16px; font-weight: 700;
             text-align: center; border-radius: 14px; cursor: pointer; border: none;
-            flex-shrink: 0; /* 크기 줄어들지 않음 */
+            flex-shrink: 0; 
         }
 
         /* 카카오톡 버튼 */
@@ -158,7 +150,7 @@
 
         footer { text-align: center; font-size: 13px; color: #b0b8c1; margin-top: 60px; padding-bottom: 20px; border-top: 1px solid #f2f4f6; padding-top: 20px;}
 
-        /* ★★★ 모바일 전용 최적화 ★★★ */
+        /* 모바일 전용 최적화 */
         @media screen and (max-width: 600px) {
             body { background: #fff; }
             .container { padding: 20px 18px; box-shadow: none; }
@@ -172,8 +164,17 @@
             .guide-action-btn { padding: 20px 0; font-size: 18px; }
             .kakao-link-button { padding: 20px 0; font-size: 18px; }
             
-            /* 팝업창 크기 최적화 */
             .modal-box { width: 85%; padding: 25px 20px; }
+        }
+        
+        /* 아래 내용 확인 유도 멘트 애니메이션 */
+        .check-below-text {
+            text-align: center; font-size: 14px; color: #ef4444; font-weight: 700; 
+            margin-top: 10px; margin-bottom: 20px; animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
         }
     </style>
 </head>
@@ -216,14 +217,21 @@
 
     <div class="container">
         <h1>신용보증재단 통합 안내 센터</h1> 
-        <p class="description-p">보증드림 이용, 상품 안내, 필수 공지 및 연락처를 한 곳에서 빠르게 확인하세요.</p>
+        
+        <a href="https://untact.koreg.or.kr" target="_blank" class="guide-action-btn" style="margin-top: 0; margin-bottom: 5px;">
+            🚀 [보증드림 바로가기] (클릭)
+        </a>
+        
+        <div class="check-below-text">
+            ▼ 아래 내용을 꼭 확인해주세요 ▼
+        </div>
 
         <div class="top-guide-box">
             <div class="guide-title"><i class="fa-solid fa-lightbulb"></i> [상품 선택이 어려우신가요?]</div>
             <div class="guide-q">Q. 어떤 상품인지 몰라 상담이 필요해요.</div>
             <div class="guide-a">
                 <div style="text-align: center; font-size: 14px; margin-bottom: 20px;">
-                    <strong>A. 아래 절차를 먼저 읽어보신 후,<br>맨 하단의 파란색 버튼을 눌러주세요.</strong>
+                    <strong>A. 아래 절차를 먼저 읽어보신 후,<br>위쪽의 [보증드림 바로가기] 버튼을 눌러주세요.</strong>
                 </div>
 
                 <ol class="step-list">
@@ -262,14 +270,8 @@
                     아래 <strong>[이용방법 안내]</strong> 버튼을 눌러 설명을 확인하시거나,<br>
                     시스템 문의처 <strong><a href="tel:044-270-4036" style="color:#004c99; text-decoration:underline;">044-270-4036</a></strong> 으로 연락해 주세요.
                 </div>
-
-                <div style="text-align: center; margin-top: 20px; font-size: 14px; font-weight: bold; color: #004c99;">
-                    ▼ 위 내용을 확인하셨다면 클릭하세요 ▼
+                
                 </div>
-                <a href="https://untact.koreg.or.kr" target="_blank" class="guide-action-btn">
-                    🚀 [보증드림 바로가기] (클릭)
-                </a>
-            </div>
         </div>
 
         <a href="https://open.kakao.com/o/YOUR_LINK_HERE" target="_blank" class="kakao-link-button">
