@@ -2,110 +2,161 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>신용보증재단 통합 안내 센터</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* 기본 스타일 설정 */
-        body { font-family: 'Noto Sans KR', sans-serif; background: #f9fafb; margin: 0; color: #333; line-height: 1.6; }
-        .container { max-width: 720px; margin: 0 auto; padding: 30px 20px; }
+        /* [공통] 기본 스타일 설정 */
+        body { font-family: 'Noto Sans KR', sans-serif; background: #f0f2f5; margin: 0; color: #333; line-height: 1.6; word-break: keep-all; }
+        .container { max-width: 720px; margin: 0 auto; padding: 40px 20px; background: #f9fafb; min-height: 100vh; }
         
-        h1 { font-size: 26px; margin-bottom: 8px; text-align: center; color: #004c99; font-weight: 700; word-break: keep-all; }
-        .description-p { font-size: 15px; color: #555; text-align: center; margin-bottom: 20px; word-break: keep-all; }
+        h1 { font-size: 28px; margin-bottom: 10px; text-align: center; color: #004c99; font-weight: 900; letter-spacing: -0.5px; }
+        .description-p { font-size: 16px; color: #666; text-align: center; margin-bottom: 30px; }
         
         /* 상단 가이드 박스 스타일 */
         .top-guide-box {
-            background-color: #eef6fc; 
+            background-color: #fff; 
             border: 2px solid #004c99;
-            border-radius: 12px; 
-            padding: 22px; 
+            border-radius: 16px; 
+            padding: 25px; 
             margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0, 76, 153, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 76, 153, 0.08);
         }
-        .guide-title { font-size: 18px; font-weight: 800; color: #004c99; margin-bottom: 12px; display: flex; align-items: center; }
-        .guide-title i { margin-right: 8px; color: #fbc02d; font-size: 20px; }
-        .guide-q { font-weight: bold; color: #333; margin-bottom: 10px; font-size: 15px; }
-        .guide-a { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #cce4ff; }
+        .guide-title { font-size: 20px; font-weight: 800; color: #004c99; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .guide-title i { margin-right: 10px; color: #fbc02d; font-size: 24px; }
+        .guide-q { font-weight: bold; color: #222; margin-bottom: 12px; font-size: 16px; background: #f4f8ff; padding: 10px; border-radius: 8px; }
+        .guide-a { background: #fff; padding: 10px 0; }
         
-        /* 가이드 내 바로가기 버튼 디자인 */
+        /* 가이드 내 바로가기 버튼 디자인 (PC/모바일 공통 강화) */
         .guide-action-btn {
             display: block; width: 100%; text-align: center;
             background: linear-gradient(135deg, #004c99, #003366);
-            color: white; font-weight: 700; font-size: 16px;
-            padding: 14px 0; border-radius: 50px; text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            margin-top: 15px; transition: transform 0.2s;
+            color: white; font-weight: 700; font-size: 18px;
+            padding: 18px 0; border-radius: 12px; text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,76,153,0.3);
+            margin-top: 20px; transition: transform 0.2s;
         }
-        .guide-action-btn:hover { transform: scale(1.02); }
+        .guide-action-btn:hover { transform: translateY(-2px); }
         .guide-action-btn::after { content: " 👆"; }
 
         /* 단계별 리스트 스타일 */
         .step-list { margin: 0; padding-left: 0; list-style: none; counter-reset: step-counter; }
-        .step-list li { position: relative; padding-left: 35px; margin-bottom: 15px; font-size: 15px; line-height: 1.5; }
+        .step-list li { position: relative; padding-left: 45px; margin-bottom: 18px; font-size: 16px; line-height: 1.5; }
         .step-list li::before {
             content: counter(step-counter); counter-increment: step-counter;
             position: absolute; left: 0; top: 2px;
-            width: 24px; height: 24px; background: #004c99; color: white;
-            border-radius: 50%; text-align: center; font-size: 14px; font-weight: bold; line-height: 24px;
+            width: 32px; height: 32px; background: #004c99; color: white;
+            border-radius: 50%; text-align: center; font-size: 18px; font-weight: bold; line-height: 32px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .highlight-blue { color: #004c99; font-weight: 700; background: #e3f2fd; padding: 2px 4px; border-radius: 4px; }
+        .highlight-blue { color: #004c99; font-weight: 700; background: #eef6fc; padding: 2px 6px; border-radius: 4px; }
         
         /* 요청사항 박스 */
         .req-box {
-            background-color: #fff8e1; border: 1px solid #ffe082;
-            padding: 12px; border-radius: 6px; margin-top: 15px; margin-bottom: 10px; font-size: 14px; color: #5d4037;
+            background-color: #fffbe6; border: 1px solid #ffe58f;
+            padding: 15px; border-radius: 10px; margin-top: 20px; margin-bottom: 10px; font-size: 15px; color: #5d4037;
         }
 
         /* 시스템 문의 안내 박스 */
         .system-help-box {
-            background-color: #f5f5f5; border-radius: 6px; padding: 12px; 
-            margin-top: 20px; font-size: 13px; color: #666; border: 1px solid #eee;
+            background-color: #f8f9fa; border-radius: 10px; padding: 15px; 
+            margin-top: 20px; font-size: 14px; color: #666; border: 1px solid #eee;
         }
 
         /* 팝업 모달 스타일 */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 9999;
+            background: rgba(0,0,0,0.7); z-index: 9999;
             display: flex; justify-content: center; align-items: center;
+            backdrop-filter: blur(3px); /* 배경 블러 효과 */
         }
         .modal-box {
-            background: white; width: 85%; max-width: 450px;
-            border-radius: 15px; padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,76,153,0.2);
-            position: relative; animation: slideUp 0.3s ease-out;
+            background: white; width: 90%; max-width: 450px;
+            border-radius: 20px; padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative; animation: slideUp 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
             max-height: 85vh; overflow-y: auto;
             border-top: 6px solid #004c99;
         }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        .modal-header { font-size: 19px; font-weight: 800; color: #004c99; margin-bottom: 15px; border-bottom: 2px solid #eef6fc; padding-bottom: 12px; text-align: center; }
+        .modal-header { font-size: 20px; font-weight: 800; color: #004c99; margin-bottom: 15px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; text-align: center; }
         .modal-content ul { padding-left: 20px; margin: 0; font-size: 15px; color: #333; }
         .modal-content li { margin-bottom: 12px; line-height: 1.5; }
         
         .modal-close-btn {
-            display: block; width: 100%; padding: 15px; margin-top: 20px;
-            background: #004c99; color: white; font-size: 16px; font-weight: bold;
-            text-align: center; border-radius: 10px; cursor: pointer; border: none;
+            display: block; width: 100%; padding: 16px; margin-top: 20px;
+            background: #333; color: white; font-size: 16px; font-weight: bold;
+            text-align: center; border-radius: 12px; cursor: pointer; border: none;
             transition: background 0.2s;
         }
-        .modal-close-btn:hover { background: #003366; }
 
-        /* 기타 스타일 */
-        .kakao-link-button { display: block; text-align: center; padding: 16px; background: #FEE500; color: #3C1E1E; border-radius: 12px; font-size: 17px; font-weight: 700; text-decoration: none; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .kakao-desc { text-align: center; font-size: 13px; color: #666; margin-bottom: 30px; }
+        /* 카카오톡 버튼 */
+        .kakao-link-button { 
+            display: block; text-align: center; padding: 18px; 
+            background: #FEE500; color: #3C1E1E; border-radius: 12px; 
+            font-size: 18px; font-weight: 700; text-decoration: none; 
+            margin-bottom: 10px; box-shadow: 0 4px 10px rgba(254, 229, 0, 0.4); 
+        }
+        .kakao-desc { text-align: center; font-size: 13px; color: #888; margin-bottom: 30px; }
+
+        /* 카드 그리드 */
         .card-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 30px; }
-        .card { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; text-decoration: none; color: inherit; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .card:hover { border-color: #004c99; transform: translateY(-2px); }
-        .card h2 { font-size: 17px; margin: 5px 0; color: #004c99; font-weight: 700; }
-        .card p { font-size: 13px; margin: 0; color: #666; }
-        .section { background: #fff; border-radius: 12px; border: 1px solid #eee; padding: 25px 20px; margin-top: 30px; }
-        .section h3 { border-bottom: 2px solid #f0f0f0; padding-bottom: 12px; margin-top: 0; color: #004c99; font-size: 19px; }
-        .method-box-online { background-color: #f6fbff; border: 1px solid #cce4ff; border-radius: 8px; padding: 18px; margin-bottom: 15px; }
-        .hours-info { background: #f0f7ff; padding: 15px; border-radius: 6px; margin-top: 0; font-size: 15px; font-weight: bold; color: #004c99; text-align: center; }
+        .card { 
+            background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 20px; 
+            text-decoration: none; color: inherit; text-align: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.2s;
+        }
+        .card:hover { border-color: #004c99; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 76, 153, 0.1); }
+        .card h2 { font-size: 18px; margin: 5px 0 8px 0; color: #004c99; font-weight: 700; }
+        .card p { font-size: 14px; margin: 0; color: #777; }
+
+        .section { background: #fff; border-radius: 16px; border: none; padding: 25px; margin-top: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .section h3 { border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-top: 0; color: #004c99; font-size: 20px; font-weight: 800; }
+        .method-box-online { background-color: #f0f7ff; border: 1px solid #cce4ff; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+        
+        .hours-info { background: #eef6fc; padding: 20px; border-radius: 12px; margin-top: 0; font-size: 16px; font-weight: bold; color: #004c99; text-align: center; border: 1px solid #dbe9f9; }
         .hours-info span { color: #d32f2f; }
-        footer { text-align: center; font-size: 12px; color: #888; margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee; }
+        footer { text-align: center; font-size: 13px; color: #aaa; margin-top: 50px; padding: 30px 0; border-top: 1px solid #eee; }
+
+        /* =========================================
+           [모바일 전용 스타일] - 화면 좁을 때 적용
+           ========================================= */
+        @media screen and (max-width: 600px) {
+            /* 컨테이너 여백 축소: 화면을 꽉 채우게 */
+            .container { padding: 20px 15px; width: 100%; box-sizing: border-box; background: #fff; }
+            
+            /* 폰트 크기 조정 */
+            h1 { font-size: 24px; margin-top: 10px; }
+            .description-p { font-size: 14px; margin-bottom: 25px; }
+            
+            /* 상단 가이드 박스: 더 컴팩트하게 */
+            .top-guide-box { padding: 20px 15px; border-width: 1.5px; margin-bottom: 25px; }
+            .guide-title { font-size: 18px; }
+            .guide-q { font-size: 15px; }
+            .step-list li { font-size: 15px; padding-left: 40px; }
+            .step-list li::before { width: 28px; height: 28px; font-size: 15px; line-height: 28px; top: 0; }
+            
+            /* 버튼들: 더 크고 누르기 쉽게 */
+            .guide-action-btn { font-size: 17px; padding: 16px 0; }
+            .kakao-link-button { padding: 16px 0; font-size: 17px; }
+
+            /* 카드 그리드: 모바일에서는 꽉 찬 1단 또는 2단 */
+            /* 여기서는 2단으로 유지하되 간격을 좁힘 */
+            .card-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .card { padding: 15px 10px; }
+            .card h2 { font-size: 16px; }
+            .card p { font-size: 12px; }
+
+            /* 섹션: 그림자 빼고 깔끔하게 */
+            .section { padding: 20px 15px; border: 1px solid #eee; box-shadow: none; }
+            .section h3 { font-size: 18px; }
+            
+            /* 모달: 거의 꽉 차게 */
+            .modal-box { width: 85%; padding: 20px; }
+        }
     </style>
 </head>
 
@@ -149,7 +200,7 @@
             <div class="guide-title"><i class="fa-solid fa-lightbulb"></i> [상품 선택이 어려우신가요?]</div>
             <div class="guide-q">Q. 어떤 상품인지 몰라 상담이 필요해요.</div>
             <div class="guide-a">
-                <div style="text-align: center; font-size: 14px; margin-bottom: 20px;">
+                <div style="text-align: center; font-size: 15px; margin-bottom: 20px; color: #444;">
                     <strong>A. 아래 절차를 먼저 읽어보신 후,<br>맨 하단의 파란색 버튼을 눌러주세요.</strong>
                 </div>
 
@@ -161,7 +212,7 @@
                     <li>
                         지역 선택 팝업이 뜨면<br>
                         <strong>사업장 주소지가 위치한 지역</strong>을 선택합니다.<br>
-                        <span style="font-size: 13px; color: #555;">(예: 인천, 부산, 대구, 광주 등)</span>
+                        <span style="font-size: 13px; color: #888;">(예: 인천, 부산, 대구, 광주 등)</span>
                     </li>
                     <li>
                         다음 화면에서<br>
@@ -170,7 +221,7 @@
                     <li>
                         상품 목록이 나오면 고민하지 마시고<br>
                         <span class="highlight-blue">③ [일반보증 또는 재단추천상품]</span>을 선택하세요.<br>
-                        <span style="font-size: 13px; color: #555;">(※ 소진공 대리대출 연계 가능 / 상시 접수 가능)</span>
+                        <span style="font-size: 13px; color: #888;">(※ 소진공 대리대출 연계 가능 / 상시 접수 가능)</span>
                     </li>
                 </ol>
 
@@ -225,8 +276,8 @@
         <div class="section">
             <h3>📢 보증서 발급 신청 및 기한연장 신청 안내</h3>
             <div class="method-box-online">
-                <div class="method-title">✅ 비대면(모바일) 신청 [권장]</div>
-                <p style="font-size: 14px; margin: 0;">
+                <div class="method-title" style="font-weight:700; color:#004c99; font-size: 17px; margin-bottom:5px;">✅ 비대면(모바일) 신청 [권장]</div>
+                <p style="font-size: 15px; margin: 0; color: #444;">
                     번거로운 방문이나 대기 없이, <strong>지금 바로 고객님의 휴대폰으로 접수</strong>해주시기 바랍니다.<br>
                     <span style="color: #004c99; font-size: 13px;">(※ 심사 및 승인 효력은 방문과 100% 동일합니다.)</span>
                 </p>
