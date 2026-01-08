@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [스타일] 디자인만 수정하고 내용은 건드리지 않았습니다 */
+        /* [공통 스타일] */
         body { 
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; 
             background: #f2f4f6; margin: 0; color: #333; line-height: 1.6; word-break: keep-all; 
@@ -25,7 +25,7 @@
         h1 { font-size: 26px; margin: 0 0 10px 0; text-align: center; color: #004c99; font-weight: 800; letter-spacing: -0.5px; }
         .description-p { font-size: 15px; color: #6b7684; text-align: center; margin-bottom: 30px; }
         
-        /* 상단 가이드 박스 (깔끔하게 변경) */
+        /* 상단 가이드 박스 */
         .top-guide-box {
             background-color: #f9fafb; 
             border-radius: 20px; 
@@ -42,10 +42,10 @@
         }
         .guide-a { padding: 5px 0; }
         
-        /* 파란색 버튼 (보증드림 바로가기) */
+        /* 파란색 버튼 */
         .guide-action-btn {
             display: flex; justify-content: center; align-items: center; width: 100%;
-            background-color: #3182f6; /* 세련된 블루 */
+            background-color: #3182f6; 
             color: white; font-weight: 700; font-size: 17px;
             padding: 18px 0; border-radius: 16px; text-decoration: none;
             box-shadow: 0 4px 12px rgba(49, 130, 246, 0.25);
@@ -77,7 +77,7 @@
             margin-top: 20px; font-size: 14px; color: #8b95a1; border: 1px solid #e5e8eb;
         }
 
-        /* 팝업 모달 (고급스러운 느낌) */
+        /* ★★★ 팝업 모달 수정 (Flex 레이아웃 적용) ★★★ */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 9999;
@@ -86,21 +86,39 @@
         }
         .modal-box {
             background: white; width: 85%; max-width: 420px;
-            border-radius: 24px; padding: 30px 25px;
+            border-radius: 24px; padding: 25px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-height: 90vh; overflow-y: auto;
+            max-height: 80vh; /* 화면 높이의 80%까지만 */
+            display: flex; /* 내부 요소 정렬을 위해 Flex 사용 */
+            flex-direction: column; /* 세로 정렬 */
         }
         @keyframes popUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
-        .modal-header { font-size: 20px; font-weight: 800; color: #004c99; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #f2f4f6; padding-bottom: 15px; }
+        /* 팝업 헤더 (고정) */
+        .modal-header { 
+            font-size: 20px; font-weight: 800; color: #004c99; 
+            margin-bottom: 15px; text-align: center; 
+            border-bottom: 2px solid #f2f4f6; padding-bottom: 15px; 
+            flex-shrink: 0; /* 크기 줄어들지 않음 */
+        }
+        
+        /* 팝업 내용 (스크롤 가능 영역) */
+        .modal-scroll-area {
+            overflow-y: auto; /* 내용 넘치면 스크롤 */
+            flex-grow: 1; /* 남은 공간 모두 차지 */
+            padding-right: 5px; /* 스크롤바 여백 */
+            -webkit-overflow-scrolling: touch; /* 모바일 스크롤 부드럽게 */
+        }
         .modal-content ul { padding-left: 20px; margin: 0; font-size: 15px; color: #4e5968; }
         .modal-content li { margin-bottom: 12px; }
         
+        /* 팝업 닫기 버튼 (하단 고정) */
         .modal-close-btn {
-            display: block; width: 100%; padding: 16px; margin-top: 25px;
+            display: block; width: 100%; padding: 16px; margin-top: 15px;
             background: #333d4b; color: white; font-size: 16px; font-weight: 700;
             text-align: center; border-radius: 14px; cursor: pointer; border: none;
+            flex-shrink: 0; /* 크기 줄어들지 않음 */
         }
 
         /* 카카오톡 버튼 */
@@ -112,7 +130,7 @@
         }
         .kakao-desc { text-align: center; font-size: 13px; color: #8b95a1; margin-bottom: 40px; }
 
-        /* 카드 그리드 (모바일에서 한 줄에 하나씩 보이게 수정) */
+        /* 카드 그리드 */
         .card-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 40px; }
         .card { 
             background: #fff; border: 1px solid #e5e8eb; border-radius: 16px; padding: 20px; 
@@ -140,19 +158,17 @@
 
         footer { text-align: center; font-size: 13px; color: #b0b8c1; margin-top: 60px; padding-bottom: 20px; border-top: 1px solid #f2f4f6; padding-top: 20px;}
 
-        /* ★★★ 모바일 전용 최적화 (화면 작을 때 적용) ★★★ */
+        /* ★★★ 모바일 전용 최적화 ★★★ */
         @media screen and (max-width: 600px) {
-            body { background: #fff; } /* 모바일은 흰색 배경으로 깔끔하게 */
+            body { background: #fff; }
             .container { padding: 20px 18px; box-shadow: none; }
             
-            /* 카드 한 줄로 시원하게 배치 */
             .card-grid { grid-template-columns: 1fr; gap: 15px; }
             .card { padding: 20px; display: flex; align-items: center; justify-content: space-between; text-align: left; }
             .card h2 { font-size: 16px; margin: 0; }
-            .card p { display: none; } /* 심플하게 제목만 표시 */
+            .card p { display: none; } 
             .card::after { content: "›"; font-size: 24px; color: #ccc; font-weight: 300; }
 
-            /* 버튼 큼직하게 */
             .guide-action-btn { padding: 20px 0; font-size: 18px; }
             .kakao-link-button { padding: 20px 0; font-size: 18px; }
             
@@ -167,30 +183,34 @@
     <div id="infoModal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-header">📢 보증 신청 불가 대상 안내</div>
-            <div class="modal-content">
-                <p style="text-align: center; margin-bottom: 20px; font-size: 14px; color: #555;">
-                    아래 항목 중 <strong>하나라도 해당되는 경우</strong><br>
-                    보증서 발급이 제한됩니다.
-                </p>
-                <ul>
-                    <li><strong>연체 보유:</strong> 은행 대출금이나 카드값이 현재 하루라도 연체 중인 경우</li>
-                    <li><strong>세금 체납:</strong> 국세 또는 지방세 체납 내역이 있는 경우 (완납 후 가능)</li>
-                    
-                    <li>
-                        <strong>권리 침해:</strong> 소유자산에 <span style="color:#d32f2f; font-weight:bold;">압류, 가압류, 경매 등</span> 권리침해 사실이 있는 경우
-                    </li>
-                    
-                    <li><strong>법적 절차:</strong> 개인회생, 파산면책, 신용회복지원 등 채무조정 절차 진행/미완료</li>
-                    <li><strong>제한 업종:</strong> 유흥주점, 무도장, 도박 관련업, 담배 중개업 등</li>
-                    <li><strong>휴/폐업:</strong> 현재 사업장이 휴업 중이거나 폐업 상태인 경우</li>
+            
+            <div class="modal-scroll-area">
+                <div class="modal-content">
+                    <p style="text-align: center; margin-bottom: 20px; font-size: 14px; color: #555;">
+                        아래 항목 중 <strong>하나라도 해당되는 경우</strong><br>
+                        보증서 발급이 제한됩니다.
+                    </p>
+                    <ul>
+                        <li><strong>연체 보유:</strong> 은행 대출금이나 카드값이 현재 하루라도 연체 중인 경우</li>
+                        <li><strong>세금 체납:</strong> 국세 또는 지방세 체납 내역이 있는 경우 (완납 후 가능)</li>
+                        
+                        <li>
+                            <strong>권리 침해:</strong> 소유자산에 <span style="color:#d32f2f; font-weight:bold;">압류, 가압류, 경매 등</span> 권리침해 사실이 있는 경우
+                        </li>
+                        
+                        <li><strong>법적 절차:</strong> 개인회생, 파산면책, 신용회복지원 등 채무조정 절차 진행/미완료</li>
+                        <li><strong>제한 업종:</strong> 유흥주점, 무도장, 도박 관련업, 담배 중개업 등</li>
+                        <li><strong>휴/폐업:</strong> 현재 사업장이 휴업 중이거나 폐업 상태인 경우</li>
 
-                    <li style="background: #f0f7ff; padding: 8px; border-radius: 6px; margin-top: 10px;">
-                        <strong>⚠️ 최근 대출 이력:</strong><br>
-                        최근 <strong>3~6개월 이내</strong>에 재단 보증서를 발급받아 대출을 받은 이력이 있는 경우
-                    </li>
-                </ul>
-                <button class="modal-close-btn" onclick="closeModal()">확인했습니다 (닫기)</button>
+                        <li style="background: #f0f7ff; padding: 8px; border-radius: 6px; margin-top: 10px;">
+                            <strong>⚠️ 최근 대출 이력:</strong><br>
+                            최근 <strong>3~6개월 이내</strong>에 재단 보증서를 발급받아 대출을 받은 이력이 있는 경우
+                        </li>
+                    </ul>
+                </div>
             </div>
+            
+            <button class="modal-close-btn" onclick="closeModal()">확인했습니다 (닫기)</button>
         </div>
     </div>
 
