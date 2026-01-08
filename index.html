@@ -3,115 +3,214 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>인천신용보증재단 통합 안내 센터</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <title>신용보증재단 통합 안내 센터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Noto Sans KR', sans-serif; background: #f9fafb; margin: 0; color: #333; }
-        .container { max-width: 720px; margin: 0 auto; padding: 30px 20px; } /* 상단 및 하단 패딩 증가 */
+        /* 기본 스타일 설정 */
+        body { font-family: 'Noto Sans KR', sans-serif; background: #f9fafb; margin: 0; color: #333; line-height: 1.6; }
+        .container { max-width: 720px; margin: 0 auto; padding: 30px 20px; }
         
-        /* 재단 CI 색상 예시: 파랑 계열로 통일 */
-        h1 { font-size: 28px; margin-bottom: 8px; text-align: center; color: #004c99; font-weight: 700; } /* 제목 폰트 크기 및 굵기 증가 */
-        .description-p { font-size: 15px; color: #555; text-align: center; margin-bottom: 25px; } /* 설명 문구 마진 증가 */
+        h1 { font-size: 26px; margin-bottom: 8px; text-align: center; color: #004c99; font-weight: 700; word-break: keep-all; }
+        .description-p { font-size: 15px; color: #555; text-align: center; margin-bottom: 20px; word-break: keep-all; }
         
-        /* 링크 그리드 */
-        .card-grid { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 30px; margin-bottom: 30px; } /* 상단/하단 마진 증가 */
-        .card { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 18px; text-decoration: none; color: inherit; transition: all 0.2s; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .card:hover { box-shadow: 0 6px 15px rgba(0,0,0,0.1); border-color: #004c99; transform: translateY(-2px); }
-        .card h2 { font-size: 18px; margin-top: 0; color: #004c99; font-weight: 700; }
-        .card p { font-size: 13px; color: #666; margin: 0; }
+        /* 상단 가이드 박스 스타일 */
+        .top-guide-box {
+            background-color: #eef6fc; 
+            border: 2px solid #004c99;
+            border-radius: 12px; 
+            padding: 22px; 
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 76, 153, 0.1);
+        }
+        .guide-title { font-size: 18px; font-weight: 800; color: #004c99; margin-bottom: 12px; display: flex; align-items: center; }
+        .guide-title i { margin-right: 8px; color: #fbc02d; font-size: 20px; }
+        .guide-q { font-weight: bold; color: #333; margin-bottom: 10px; font-size: 15px; }
+        .guide-a { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #cce4ff; }
         
-        /* 섹션 공통 스타일 */
-        .section { background: #fff; border-radius: 12px; border: 1px solid #eee; padding: 25px; margin-top: 35px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); } /* 섹션 간격 증가 */
-        .section h3 { border-bottom: 2px solid #f0f0f0; padding-bottom: 12px; margin-top: 0; color: #004c99; font-size: 20px; }
-        
-        /* 푸터 스타일 */
-        footer { text-align: center; font-size: 12px; color: #777; margin-top: 40px; padding: 15px 0; border-top: 1px solid #eee; line-height: 1.4; } 
-        
-        /* 연락처 테이블 스타일 */
-        .contact-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
-        .contact-table th, .contact-table td { border: 1px solid #eee; padding: 10px; text-align: left; }
-        .contact-table th { background-color: #f7f7f7; font-weight: bold; width: 40%; }
-        .contact-table td a { color: #004c99; text-decoration: none; font-weight: bold; }
-        .hours-info { background: #e6f7ff; padding: 10px; border-radius: 6px; border: 1px solid #cceeff; margin-top: 15px; font-size: 15px; font-weight: bold; line-height: 1.6; }
-        .hours-info span { color: #cc0000; }
+        /* 가이드 내 바로가기 버튼 디자인 */
+        .guide-action-btn {
+            display: block; width: 100%; text-align: center;
+            background: linear-gradient(135deg, #004c99, #003366);
+            color: white; font-weight: 700; font-size: 16px;
+            padding: 14px 0; border-radius: 50px; text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            margin-top: 15px; transition: transform 0.2s;
+        }
+        .guide-action-btn:hover { transform: scale(1.02); }
+        .guide-action-btn::after { content: " 👆"; }
 
-        /* 공지/안내 상세 스타일 */
-        .notice-box { margin-bottom: 15px; padding: 10px; border-left: 4px solid #004c99; background: #f4f8fc; border-radius: 4px; }
-        .notice-box h4 { margin-top: 0; color: #004c99; font-size: 16px; }
-        .notice-box ul { padding-left: 20px; margin: 5px 0 10px 0; font-size: 14px; }
+        /* 단계별 리스트 스타일 */
+        .step-list { margin: 0; padding-left: 0; list-style: none; counter-reset: step-counter; }
+        .step-list li { position: relative; padding-left: 35px; margin-bottom: 15px; font-size: 15px; line-height: 1.5; }
+        .step-list li::before {
+            content: counter(step-counter); counter-increment: step-counter;
+            position: absolute; left: 0; top: 2px;
+            width: 24px; height: 24px; background: #004c99; color: white;
+            border-radius: 50%; text-align: center; font-size: 14px; font-weight: bold; line-height: 24px;
+        }
+        .highlight-blue { color: #004c99; font-weight: 700; background: #e3f2fd; padding: 2px 4px; border-radius: 4px; }
         
-        /* 중요 주의사항 스타일 */
-        .notice-highlight { 
-            border: 2px solid #ff0000; 
-            background-color: #fff0f0; 
-            padding: 15px; 
-            border-radius: 6px; 
-            margin-top: 15px; 
-            font-size: 14px; 
-            color: #cc0000; 
-            font-weight: bold;
+        /* 요청사항 박스 */
+        .req-box {
+            background-color: #fff8e1; border: 1px solid #ffe082;
+            padding: 12px; border-radius: 6px; margin-top: 15px; margin-bottom: 10px; font-size: 14px; color: #5d4037;
         }
-        .notice-highlight h4 {
-            color: #cc0000;
-            margin-bottom: 10px;
+
+        /* 시스템 문의 안내 박스 */
+        .system-help-box {
+            background-color: #f5f5f5; border-radius: 6px; padding: 12px; 
+            margin-top: 20px; font-size: 13px; color: #666; border: 1px solid #eee;
         }
-        .notice-highlight ul {
-            padding-left: 20px;
+
+        /* 팝업 모달 스타일 */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
         }
+        .modal-box {
+            background: white; width: 85%; max-width: 450px;
+            border-radius: 15px; padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,76,153,0.2);
+            position: relative; animation: slideUp 0.3s ease-out;
+            max-height: 85vh; overflow-y: auto;
+            border-top: 6px solid #004c99;
+        }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        /* 방문 상담 주의사항 (새로 분리된 섹션) */
-        .consult-notice {
-            border: 1px solid #ff7700;
-            background-color: #fffaf4;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        .consult-notice h4 {
-            color: #ff7700;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
+        .modal-header { font-size: 19px; font-weight: 800; color: #004c99; margin-bottom: 15px; border-bottom: 2px solid #eef6fc; padding-bottom: 12px; text-align: center; }
+        .modal-content ul { padding-left: 20px; margin: 0; font-size: 15px; color: #333; }
+        .modal-content li { margin-bottom: 12px; line-height: 1.5; }
         
-        /* 공지사항 바로가기 버튼 스타일 */
-        .notice-link-button { 
-            display: block; 
-            text-align: center; 
-            padding: 15px; 
-            background: #ff7700; 
-            color: white; 
-            border-radius: 10px; 
-            font-size: 18px; 
-            font-weight: 700; 
-            text-decoration: none; 
-            margin-bottom: 30px; 
-            box-shadow: 0 4px 8px rgba(255, 119, 0, 0.4); 
-            transition: background 0.2s, transform 0.2s;
+        .modal-close-btn {
+            display: block; width: 100%; padding: 15px; margin-top: 20px;
+            background: #004c99; color: white; font-size: 16px; font-weight: bold;
+            text-align: center; border-radius: 10px; cursor: pointer; border: none;
+            transition: background 0.2s;
         }
-        .notice-link-button:hover {
-            background: #e66a00;
-            transform: translateY(-2px);
-        }
+        .modal-close-btn:hover { background: #003366; }
+
+        /* 기타 스타일 */
+        .kakao-link-button { display: block; text-align: center; padding: 16px; background: #FEE500; color: #3C1E1E; border-radius: 12px; font-size: 17px; font-weight: 700; text-decoration: none; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .kakao-desc { text-align: center; font-size: 13px; color: #666; margin-bottom: 30px; }
+        .card-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 30px; }
+        .card { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; text-decoration: none; color: inherit; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .card:hover { border-color: #004c99; transform: translateY(-2px); }
+        .card h2 { font-size: 17px; margin: 5px 0; color: #004c99; font-weight: 700; }
+        .card p { font-size: 13px; margin: 0; color: #666; }
+        .section { background: #fff; border-radius: 12px; border: 1px solid #eee; padding: 25px 20px; margin-top: 30px; }
+        .section h3 { border-bottom: 2px solid #f0f0f0; padding-bottom: 12px; margin-top: 0; color: #004c99; font-size: 19px; }
+        .method-box-online { background-color: #f6fbff; border: 1px solid #cce4ff; border-radius: 8px; padding: 18px; margin-bottom: 15px; }
+        .hours-info { background: #f0f7ff; padding: 15px; border-radius: 6px; margin-top: 0; font-size: 15px; font-weight: bold; color: #004c99; text-align: center; }
+        .hours-info span { color: #d32f2f; }
+        footer { text-align: center; font-size: 12px; color: #888; margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee; }
     </style>
 </head>
 
 <body>
+
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">📢 보증 신청 불가 대상 안내</div>
+            <div class="modal-content">
+                <p style="text-align: center; margin-bottom: 20px; font-size: 14px; color: #555;">
+                    아래 항목 중 <strong>하나라도 해당되는 경우</strong><br>
+                    보증서 발급이 제한됩니다.
+                </p>
+                <ul>
+                    <li><strong>연체 보유:</strong> 은행 대출금이나 카드값이 현재 하루라도 연체 중인 경우</li>
+                    <li><strong>세금 체납:</strong> 국세 또는 지방세 체납 내역이 있는 경우 (완납 후 가능)</li>
+                    
+                    <li>
+                        <strong>권리 침해:</strong> 소유자산에 <span style="color:#d32f2f; font-weight:bold;">압류, 가압류, 경매 등</span> 권리침해 사실이 있는 경우
+                    </li>
+                    
+                    <li><strong>법적 절차:</strong> 개인회생, 파산면책, 신용회복지원 등 채무조정 절차 진행/미완료</li>
+                    <li><strong>제한 업종:</strong> 유흥주점, 무도장, 도박 관련업, 담배 중개업 등</li>
+                    <li><strong>휴/폐업:</strong> 현재 사업장이 휴업 중이거나 폐업 상태인 경우</li>
+
+                    <li style="background: #f0f7ff; padding: 8px; border-radius: 6px; margin-top: 10px;">
+                        <strong>⚠️ 최근 대출 이력:</strong><br>
+                        최근 <strong>3~6개월 이내</strong>에 재단 보증서를 발급받아 대출을 받은 이력이 있는 경우
+                    </li>
+                </ul>
+                <button class="modal-close-btn" onclick="closeModal()">확인했습니다 (닫기)</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <h1>인천신용보증재단 통합 안내 센터</h1> 
+        <h1>신용보증재단 통합 안내 센터</h1> 
         <p class="description-p">보증드림 이용, 상품 안내, 필수 공지 및 연락처를 한 곳에서 빠르게 확인하세요.</p>
 
-        
-        <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000096" target="_blank" class="notice-link-button">
-            🔔 재단 공식 공지사항 게시판 바로가기
+        <div class="top-guide-box">
+            <div class="guide-title"><i class="fa-solid fa-lightbulb"></i> [상품 선택이 어려우신가요?]</div>
+            <div class="guide-q">Q. 어떤 상품인지 몰라 상담이 필요해요.</div>
+            <div class="guide-a">
+                <div style="text-align: center; font-size: 14px; margin-bottom: 20px;">
+                    <strong>A. 아래 절차를 먼저 읽어보신 후,<br>맨 하단의 파란색 버튼을 눌러주세요.</strong>
+                </div>
+
+                <ol class="step-list">
+                    <li>
+                        아래 버튼을 눌러 <strong>[보증드림]</strong> 접속 후,<br>
+                        메인 화면의 <span class="highlight-blue">① [보증신청]</span> 메뉴를 누릅니다.
+                    </li>
+                    <li>
+                        지역 선택 팝업이 뜨면<br>
+                        <strong>사업장 주소지가 위치한 지역</strong>을 선택합니다.<br>
+                        <span style="font-size: 13px; color: #555;">(예: 인천, 부산, 대구, 광주 등)</span>
+                    </li>
+                    <li>
+                        다음 화면에서<br>
+                        <span class="highlight-blue">② [상품선택 후 보증신청]</span>을 선택합니다.
+                    </li>
+                    <li>
+                        상품 목록이 나오면 고민하지 마시고<br>
+                        <span class="highlight-blue">③ [일반보증 또는 재단추천상품]</span>을 선택하세요.<br>
+                        <span style="font-size: 13px; color: #555;">(※ 소진공 대리대출 연계 가능 / 상시 접수 가능)</span>
+                    </li>
+                </ol>
+
+                <div class="req-box">
+                    <strong>💡 제일 중요한 마지막 단계!</strong><br>
+                    신청화면 맨 끝 '요청사항' 칸에 이렇게 적어주세요.<br><br>
+                    👉 <strong>[전화 상담 요청]</strong> 또는<br>
+                    👉 <strong>[소상공인진흥공단 대리대출 확인서 발급]</strong> 등<br>
+                    <div style="margin-top:10px; font-size:13px; color:#d32f2f; font-weight: bold;">
+                        ※ 이렇게 적으시면, 담당자가 확인 후 고객님께 가장 유리한 상품으로 알아서 변경해 드립니다.
+                    </div>
+                </div>
+
+                <div class="system-help-box">
+                    <i class="fa-solid fa-circle-exclamation"></i> <strong>보증드림 이용에 어려움이 있으신가요?</strong><br>
+                    아래 <strong>[이용방법 안내]</strong> 버튼을 눌러 설명을 확인하시거나,<br>
+                    시스템 문의처 <strong><a href="tel:044-270-4036" style="color:#004c99; text-decoration:underline;">044-270-4036</a></strong> 으로 연락해 주세요.
+                </div>
+
+                <div style="text-align: center; margin-top: 20px; font-size: 14px; font-weight: bold; color: #004c99;">
+                    ▼ 위 내용을 확인하셨다면 클릭하세요 ▼
+                </div>
+                <a href="https://untact.koreg.or.kr" target="_blank" class="guide-action-btn">
+                    🚀 [보증드림 바로가기] (클릭)
+                </a>
+            </div>
+        </div>
+
+        <a href="https://open.kakao.com/o/YOUR_LINK_HERE" target="_blank" class="kakao-link-button">
+            🔔 정책자금 알림방 바로가기 (클릭)
         </a>
+        <p class="kakao-desc">
+            ※ 선착순 자금 정보를 가장 빠르게 알려드리는 정보 공유방입니다.<br>
+            (대화 금지 / 알림 전용)
+        </p>
         
         <div class="card-grid">
             <a href="https://untact.koreg.or.kr" target="_blank" class="card">
                 <h2>보증드림 바로가기</h2>
-                <p>보증신청 및 상담예약</p>
+                <p>보증신청 · 상담예약 · 무방문 기한연장</p>
             </a>
             <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000178" target="_blank" class="card">
                 <h2>이용방법 안내</h2>
@@ -123,105 +222,36 @@
             </a>
         </div>
         
-        
         <div class="section">
-            <h3>📢 보증서 발급 신청 및 진행 안내</h3>
-            
-            <div class="notice-box">
-                <h4>보증서 발급 신청 방식 (2가지)</h4>
-                <ul>
-                    <li>비대면 신청: 보증드림에서 직접 온라인 신청</li>
-                    <li>방문 상담 (예약 필수): 보증드림에서 상담 예약 후 재단 방문 신청</li>
-                </ul>
-            </div>
-            
-            <div class="consult-notice">
-                <h4>📞 방문 상담 주의사항</h4>
-                전화 예약은 불가하며, 보증드림 예약이 필수입니다 (미예약 시 상담 불가). 예약이 어려우시면 신분증을 지참하고 지점 방문 시 예약을 도와드립니다. (단, 브릿지/대환 업무는 예약 없이 방문 가능하나 긴 대기시간이 발생할 수 있습니다.) 필요 서류는 예약 완료 시 문자 또는 카카오톡으로 안내됩니다.
-            </div>
-            
-            <div class="notice-box" style="margin-top: 15px;">
-                <h4>📌 보증 ~ 대출 실행 과정 및 소요 기간</h4>
-                <div style="font-size: 14px;">
-                    보증 신청 후 최종 대출 실행까지 약 1주 ~ 3주 소요됩니다.
-                    <ul style="list-style-type: none; padding-left: 0; margin-top: 10px; font-weight: bold;">
-                        <li>진행: 심사 → 약정 → 보증서 은행 통지</li>
-                        <li>발급 안내: 재단에서 사업자께 문자 또는 전화로 최종 안내</li>
-                        <li>대출 실행: 안내를 받은 후 은행에 연락하여 대출 실행</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="notice-highlight">
-                <h4>📢 중요 주의사항 (보증서 효력)</h4>
-                <ul style="margin-top: 10px;">
-                    <li>보증서 발급일로부터 3주 이내 대출 실행을 부탁드립니다.</li>
-                    <li>발급일 기준 30일이 경과하면 해당 보증서는 효력을 잃으며, 재단에 통지 후 재신청해야 합니다.</li>
-                </ul>
+            <h3>📢 보증서 발급 신청 및 기한연장 신청 안내</h3>
+            <div class="method-box-online">
+                <div class="method-title">✅ 비대면(모바일) 신청 [권장]</div>
+                <p style="font-size: 14px; margin: 0;">
+                    번거로운 방문이나 대기 없이, <strong>지금 바로 고객님의 휴대폰으로 접수</strong>해주시기 바랍니다.<br>
+                    <span style="color: #004c99; font-size: 13px;">(※ 심사 및 승인 효력은 방문과 100% 동일합니다.)</span>
+                </p>
             </div>
         </div>
 
-
         <div class="section">
-            <h3>▶ 보증드림 이용 가이드 영상</h3>
-            <div class="card-grid">
-                
-                <a href="https://www.youtube.com/watch?v=XlMR9O97mts" target="_blank" class="card video-guide-card">
-                    <h4 style="margin-top: 0;">🎬 보증드림 이용가이드</h4>
-                    <p>앱/웹 사용법 상세 확인</p>
-                </a>
-                
-                <a href="https://www.youtube.com/watch?v=AZFNrC_PQxo" target="_blank" class="card video-guide-card">
-                    <h4 style="margin-top: 0;">🎬 보증신청 가이드</h4>
-                    <p>온라인 신청 방법 상세 안내</p>
-                </a>
-            </div>
-            
-            <p style="text-align: center; margin-top: 20px;">
-                <a href="https://www.youtube.com/@koreg_tv" target="_blank" style="color:#004c99; text-decoration: none; font-weight: bold;">
-                    ➡️ 재단 유튜브 채널 전체 영상 보러가기
-                </a>
-            </p>
-        </div>
-
-
-        <div class="section">
-            <h3>📞 지점별 연락처 및 업무시간</h3>
-            
-            <table class="contact-table">
-                <thead>
-                    <tr>
-                        <th>지점명</th>
-                        <th>연락처</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><th>본점 (대표)</th><td><a href="tel:1577-3790">1577-3790</a></td></tr>
-                    <tr><th>남동지점</th><td><a href="tel:032-429-7982">032-429-7982</a></td></tr>
-                    <tr><th>부평지점</th><td><a href="tel:032-508-1954">032-508-1954</a></td></tr>
-                    <tr><th>서인천지점</th><td><a href="tel:032-569-0321">032-569-0321</a></td></tr>
-                    <tr><th>남부지점</th><td><a href="tel:032-889-3611">032-889-3611</a></td></tr>
-                    <tr><th>계양지점</th><td><a href="tel:032-542-3911">032-542-3911</a></td></tr>
-                    <tr><th>중부지점</th><td><a href="tel:032-766-8090">032-766-8090</a></td></tr>
-                    <tr><th>연수지점</th><td><a href="tel:032-811-9531">032-811-9531</a></td></tr>
-                    <tr><th>검단지점</th><td><a href="tel:032-569-7919">032-569-7919</a></td></tr>
-                    <tr><th>소상공인종합지원센터</th><td><a href="tel:032-260-1508">032-260-1508</a></td></tr>
-                </tbody>
-            </table>
-            
+            <h3>📞 업무시간 안내</h3>
             <div class="hours-info">
-                * 지점 업무시간: <span>09:00 ~ 16:00</span><br>
+                * 업무시간: 09:00 ~ 16:00 <br>
                 * 휴무: <span>토요일, 일요일 및 공휴일</span>
             </div>
         </div>
         
         <footer>
-            © 2025. 인천신용보증재단. 본 페이지는 **공식 홈페이지가 아니며**, 이용자 편의를 위해 자체 제작된 통합 안내 페이지입니다.
+            © 2026. 신용보증재단.<br>
+            본 페이지는 <strong>공식 홈페이지가 아니며</strong>,<br>
+            이용자 편의를 위해 자체 제작된 통합 안내 페이지입니다.
         </footer>
     </div>
 
     <script>
-        // 이 코드에는 동적인 JavaScript 기능이 없으므로 script 태그는 비워둡니다.
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
     </script>
 </body>
 </html>
