@@ -3,330 +3,429 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>신용보증재단 통합 안내 센터</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <title>신용보증재단 통합 안내</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [공통 스타일] */
+        :root {
+            --primary: #004c99;
+            --primary-bg: #eef6fc;
+            --text-main: #191f28;
+            --text-sub: #6b7684;
+            --bg: #f2f4f6;
+            --white: #ffffff;
+            --alert: #d32f2f;
+            --app-blue: #2b6fd3;
+        }
+
         body { 
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; 
-            background: #f2f4f6; margin: 0; color: #333; line-height: 1.6; word-break: keep-all; 
-            -webkit-font-smoothing: antialiased; 
-        }
-        
-        .container { 
-            max-width: 680px; margin: 0 auto; padding: 40px 20px; 
-            background: #ffffff; min-height: 100vh; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.03); 
-        }
-        
-        /* 제목 디자인 */
-        h1 { font-size: 26px; margin: 0 0 20px 0; text-align: center; color: #004c99; font-weight: 800; letter-spacing: -0.5px; }
-        
-        /* 상단 가이드 박스 */
-        .top-guide-box {
-            background-color: #f9fafb; 
-            border-radius: 20px; 
-            padding: 25px; 
-            margin-bottom: 30px;
-        }
-        .guide-title { font-size: 19px; font-weight: 700; color: #333d4b; margin-bottom: 15px; display: flex; align-items: center; }
-        .guide-title i { margin-right: 8px; color: #ffd400; font-size: 22px; }
-        
-        .guide-q { 
-            font-weight: 600; color: #4e5968; margin-bottom: 15px; font-size: 15px; 
-            background: #ffffff; padding: 15px; border-radius: 12px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .guide-a { padding: 5px 0; }
-        
-        /* 파란색 버튼 (공통 클래스) */
-        .guide-action-btn {
-            display: flex; justify-content: center; align-items: center; width: 100%;
-            background-color: #3182f6; 
-            color: white; font-weight: 700; font-size: 17px;
-            padding: 18px 0; border-radius: 16px; text-decoration: none;
-            box-shadow: 0 4px 12px rgba(49, 130, 246, 0.25);
-            transition: transform 0.2s;
-        }
-        .guide-action-btn:active { transform: scale(0.98); }
-        .guide-action-btn::after { content: " 👆"; margin-left: 5px; }
-
-        /* 단계별 리스트 */
-        .step-list { margin: 0; padding-left: 0; list-style: none; counter-reset: step-counter; }
-        .step-list li { position: relative; padding-left: 38px; margin-bottom: 20px; font-size: 16px; color: #4e5968; line-height: 1.5; }
-        .step-list li::before {
-            content: counter(step-counter); counter-increment: step-counter;
-            position: absolute; left: 0; top: 0px;
-            width: 26px; height: 26px; background: #e8f3ff; color: #3182f6;
-            border-radius: 50%; text-align: center; font-size: 14px; font-weight: 800; line-height: 26px;
-        }
-        .highlight-blue { color: #3182f6; font-weight: 700; }
-        
-        /* 요청사항 박스 */
-        .req-box {
-            background-color: #fff9db; 
-            padding: 16px; border-radius: 12px; margin-top: 20px; margin-bottom: 10px; font-size: 15px; color: #5c4b00;
+            font-family: 'Pretendard', sans-serif; background: var(--bg);
+            margin: 0; color: var(--text-main); line-height: 1.5;
+            -webkit-tap-highlight-color: transparent; word-break: keep-all;
         }
 
-        /* 시스템 문의 안내 */
-        .system-help-box {
-            background-color: #f2f4f6; border-radius: 12px; padding: 15px; 
-            margin-top: 20px; font-size: 14px; color: #8b95a1; border: 1px solid #e5e8eb;
+        /* 레이아웃 공통 */
+        .container { max-width: 600px; margin: 0 auto; min-height: 100vh; padding-bottom: 120px; }
+        
+        /* 상단 네비게이션 */
+        .navbar {
+            background: var(--white); height: 50px; display: flex; align-items: center; justify-content: center;
+            position: sticky; top: 0; z-index: 900; border-bottom: 1px solid #e5e8eb;
+        }
+        .nav-title { font-weight: 700; font-size: 16px; color: var(--text-main); }
+        .back-btn {
+            position: absolute; left: 15px; font-size: 18px; color: #333; cursor: pointer; padding: 10px;
+            display: none; /* 메인에서는 숨김 */
         }
 
-        /* 팝업 모달 */
+        /* 페이지 전환용 클래스 */
+        .page { display: none; padding: 20px 16px; animation: fadeIn 0.3s; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* [메인화면] 메뉴 디자인 */
+        .main-header { text-align: center; margin: 30px 0 40px; }
+        .main-title { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
+        .main-sub { font-size: 15px; color: var(--text-sub); }
+
+        .menu-grid { display: grid; gap: 15px; }
+        .menu-card {
+            background: var(--white); border-radius: 16px; padding: 25px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #e9ecef;
+            cursor: pointer; transition: transform 0.1s;
+        }
+        .menu-card:active { transform: scale(0.98); background: #f9f9f9; }
+        
+        .menu-text h2 { margin: 0 0 5px; font-size: 18px; font-weight: 700; color: #333; }
+        .menu-text p { margin: 0; font-size: 13px; color: #888; }
+        .menu-icon { font-size: 28px; color: var(--primary); width: 40px; text-align: center; }
+
+        /* [서브페이지] 공통 스타일 */
+        .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; }
+        .section-header i { color: #fbc02d; margin-right: 8px; font-size: 20px; }
+        
+        .step-card {
+            background: var(--white); border-radius: 16px; padding: 24px 20px; margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05); border: 1px solid #e9ecef; position: relative;
+        }
+        .step-badge { display: inline-block; background: var(--primary); color: white; font-size: 12px; font-weight: 800; padding: 4px 8px; border-radius: 6px; margin-bottom: 10px; }
+        .step-title { font-size: 17px; font-weight: 700; color: #333; margin-bottom: 8px; line-height: 1.4; }
+        .ui-menu { color: var(--primary); background: var(--primary-bg); padding: 2px 6px; border-radius: 4px; font-weight: 800; }
+
+        /* [연장/폐업] 시나리오 박스 */
+        .scenario-box {
+            border: 2px solid #e5e8eb; border-radius: 12px; padding: 15px; margin-top: 15px; background: #fff;
+        }
+        .scenario-title { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 10px; display: flex; align-items: center; }
+        .scenario-badge { font-size: 11px; padding: 3px 6px; border-radius: 4px; margin-right: 8px; font-weight: bold; }
+        .badge-green { background: #e6fcf5; color: #0ca678; }
+        .badge-blue { background: #e7f5ff; color: #1c7ed6; }
+        .action-arrow { text-align: center; color: #aaa; margin: 10px 0; font-size: 14px; }
+
+        /* 은행 확인 강조 박스 */
+        .check-bank-box {
+            background: #fff4e6; border: 1px solid #ffc078; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px;
+        }
+        .check-icon { font-size: 30px; margin-bottom: 10px; display: block; }
+        .check-title { font-size: 18px; font-weight: 800; color: #d9480f; margin-bottom: 5px; }
+        .check-desc { font-size: 14px; color: #555; }
+
+        /* UI 모사 */
+        .mock-screen { display: flex; gap: 8px; margin-top: 15px; }
+        .mock-btn { flex: 1; height: 80px; border-radius: 8px; padding: 10px; color: white; font-size: 13px; font-weight: bold; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+        .mock-btn.left { background: var(--app-blue); border: 3px solid #ffeb3b; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .mock-btn.left::after { content: '👈 여기 클릭!'; position: absolute; bottom: -25px; color: var(--alert); font-weight: 800; font-size: 14px; width: 100%; }
+        .mock-btn.right { background: #84a9e6; opacity: 0.7; }
+        .mock-btn.right::before { content: '❌'; font-size: 24px; position: absolute; }
+
+        /* 상품 목록 모사 스타일 (업그레이드) */
+        .mock-list-item { 
+            border: 2px solid var(--alert); background: white; padding: 15px; 
+            border-radius: 4px; margin-top: 15px; position: relative; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .mock-list-item::after { content: '👈 이것을 선택!'; position: absolute; right: 10px; bottom: 10px; font-size: 12px; color: var(--alert); font-weight: bold; }
+        
+        .list-row { display: flex; align-items: flex-start; margin-bottom: 6px; }
+        .list-row:last-child { margin-bottom: 0; }
+        
+        .list-label { 
+            font-size: 13px; font-weight: 700; color: #004c99; 
+            margin-right: 8px; border-left: 2px solid #004c99; padding-left: 6px; 
+            white-space: nowrap; width: 60px; /* 라벨 정렬 */
+        }
+        /* 상품특성용 라벨 (회색) */
+        .list-label.sub-type { border-color: transparent; color: #666; font-weight: 500; }
+
+        .list-title { font-size: 14px; font-weight: 800; color: #333; }
+        .list-desc { font-size: 13px; color: #555; font-weight: 400; }
+        .list-sub { font-size: 12px; color: #666; }
+
+        .input-guide { background: var(--highlight); border: 2px dashed #fab005; border-radius: 10px; padding: 15px; margin-top: 10px; text-align: center; }
+        .copy-text { font-size: 16px; font-weight: 800; color: var(--text-main); display: block; margin: 5px 0; }
+
+        /* 하단 고정바 */
+        .fixed-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px 25px; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 900; max-width: 600px; margin: 0 auto; }
+        .main-btn { display: flex; justify-content: center; align-items: center; width: 100%; height: 56px; background: var(--primary); color: white; font-size: 18px; font-weight: 700; border-radius: 14px; text-decoration: none; box-shadow: 0 4px 12px rgba(0, 76, 153, 0.3); }
+        .inquiry-text { text-align: center; font-size: 13px; color: #666; margin-top: 12px; font-weight: 500; }
+        
+        /* 모달 스타일 */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.6); z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            backdrop-filter: blur(4px);
+            display: flex; align-items: flex-end;
+            visibility: hidden; opacity: 0; transition: all 0.3s;
         }
-        .modal-box {
-            background: white; width: 85%; max-width: 420px;
-            border-radius: 24px; padding: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-height: 80vh; 
-            display: flex; flex-direction: column; 
+        .modal-overlay.active { visibility: visible; opacity: 1; }
+        .modal-sheet {
+            background: white; width: 100%; max-width: 600px; margin: 0 auto;
+            border-radius: 20px 20px 0 0; padding: 30px 20px 40px;
+            transform: translateY(100%); transition: transform 0.3s;
+            max-height: 80vh; overflow-y: auto;
         }
-        @keyframes popUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        .modal-header { 
-            font-size: 20px; font-weight: 800; color: #004c99; 
-            margin-bottom: 15px; text-align: center; 
-            border-bottom: 2px solid #f2f4f6; padding-bottom: 15px; 
-            flex-shrink: 0; 
-        }
-        
-        .modal-scroll-area {
-            overflow-y: auto; flex-grow: 1; padding-right: 5px; -webkit-overflow-scrolling: touch;
-        }
-        .modal-content ul { padding-left: 20px; margin: 0; font-size: 15px; color: #4e5968; }
-        .modal-content li { margin-bottom: 12px; }
-        
-        .modal-close-btn {
-            display: block; width: 100%; padding: 16px; margin-top: 15px;
-            background: #333d4b; color: white; font-size: 16px; font-weight: 700;
-            text-align: center; border-radius: 14px; cursor: pointer; border: none;
-            flex-shrink: 0; 
-        }
+        .modal-overlay.active .modal-sheet { transform: translateY(0); }
+        .close-btn { width: 100%; padding: 15px; background: #333; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; margin-top: 20px; }
+        .check-list li { margin-bottom: 10px; font-size: 15px; padding-left: 24px; position: relative; list-style: none; }
+        .check-list li::before { content: '🚫'; position: absolute; left: 0; top: 0; font-size: 14px; }
 
-        /* 카카오톡 버튼 */
-        .kakao-link-button { 
-            display: flex; justify-content: center; align-items: center; padding: 18px; 
-            background: #fee500; color: #191919; border-radius: 16px; 
-            font-size: 17px; font-weight: 700; text-decoration: none; 
-            margin-bottom: 10px; box-shadow: 0 4px 12px rgba(254, 229, 0, 0.3); 
-        }
-        .kakao-desc { text-align: center; font-size: 13px; color: #8b95a1; margin-bottom: 40px; }
-
-        /* 카드 그리드 */
-        .card-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 40px; }
-        .card { 
-            background: #fff; border: 1px solid #e5e8eb; border-radius: 16px; padding: 20px; 
-            text-decoration: none; color: inherit; text-align: center; 
-            transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        }
-        .card:hover { border-color: #3182f6; transform: translateY(-3px); }
-        .card h2 { font-size: 17px; margin: 5px 0 5px 0; color: #333d4b; font-weight: 700; }
-        .card p { font-size: 13px; margin: 0; color: #8b95a1; }
-
-        /* 섹션 스타일 */
-        .section { margin-top: 40px; margin-bottom: 20px; }
-        .section h3 { font-size: 18px; font-weight: 800; color: #191f28; margin-bottom: 15px; border-bottom: 2px solid #f2f4f6; padding-bottom: 10px; }
-        
-        .method-box-online { 
-            background-color: #f2f4f6; border-radius: 16px; padding: 20px; border: 1px solid #e5e8eb;
-        }
-        .method-title { font-weight: 700; color: #004c99; font-size: 16px; margin-bottom: 5px; }
-
-        .hours-info { 
-            background: #ffffff; padding: 20px; border-radius: 16px; border: 1px solid #e5e8eb;
-            text-align: center; font-size: 15px; font-weight: 600; color: #4e5968;
-        }
-        .hours-info span { color: #ef4444; }
-
-        footer { text-align: center; font-size: 13px; color: #b0b8c1; margin-top: 60px; padding-bottom: 20px; border-top: 1px solid #f2f4f6; padding-top: 20px;}
-
-        /* 모바일 전용 최적화 */
-        @media screen and (max-width: 600px) {
-            body { background: #fff; }
-            .container { padding: 20px 18px; box-shadow: none; }
-            
-            .card-grid { grid-template-columns: 1fr; gap: 15px; }
-            .card { padding: 20px; display: flex; align-items: center; justify-content: space-between; text-align: left; }
-            .card h2 { font-size: 16px; margin: 0; }
-            .card p { display: none; } 
-            .card::after { content: "›"; font-size: 24px; color: #ccc; font-weight: 300; }
-
-            .guide-action-btn { padding: 20px 0; font-size: 18px; }
-            .kakao-link-button { padding: 20px 0; font-size: 18px; }
-            
-            .modal-box { width: 85%; padding: 25px 20px; }
-        }
-        
-        /* 아래 내용 확인 유도 멘트 애니메이션 */
-        .check-below-text {
-            text-align: center; font-size: 14px; color: #ef4444; font-weight: 700; 
-            margin-top: 10px; margin-bottom: 20px; animation: bounce 1.5s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(3px); }
-        }
+        footer { font-size: 12px; color: #999; text-align: center; margin-top: 40px; border-top: 1px solid #e5e8eb; padding-top: 20px; }
     </style>
 </head>
 
 <body>
 
-    <div id="infoModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="modal-header">📢 보증 신청 불가 대상 안내</div>
-            
-            <div class="modal-scroll-area">
-                <div class="modal-content">
-                    <p style="text-align: center; margin-bottom: 20px; font-size: 14px; color: #555;">
-                        아래 항목 중 <strong>하나라도 해당되는 경우</strong><br>
-                        보증서 발급이 제한됩니다.
-                    </p>
-                    <ul>
-                        <li><strong>연체 보유:</strong> 은행 대출금이나 카드값이 현재 하루라도 연체 중인 경우</li>
-                        <li><strong>세금 체납:</strong> 국세 또는 지방세 체납 내역이 있는 경우 (완납 후 가능)</li>
-                        
-                        <li>
-                            <strong>권리 침해:</strong> 소유자산에 <span style="color:#d32f2f; font-weight:bold;">압류, 가압류, 경매 등</span> 권리침해 사실이 있는 경우
-                        </li>
-                        
-                        <li><strong>법적 절차:</strong> 개인회생, 파산면책, 신용회복지원 등 채무조정 절차 진행/미완료</li>
-                        <li><strong>제한 업종:</strong> 유흥주점, 무도장, 도박 관련업, 담배 중개업 등</li>
-                        <li><strong>휴/폐업:</strong> 현재 사업장이 휴업 중이거나 폐업 상태인 경우</li>
-
-                        <li style="background: #f0f7ff; padding: 8px; border-radius: 6px; margin-top: 10px;">
-                            <strong>⚠️ 최근 대출 이력:</strong><br>
-                            최근 <strong>3~6개월 이내</strong>에 재단 보증서를 발급받아 대출을 받은 이력이 있는 경우
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <button class="modal-close-btn" onclick="closeModal()">확인했습니다 (닫기)</button>
+    <div id="infoModal" class="modal-overlay active">
+        <div class="modal-sheet">
+            <div style="width:40px; height:4px; background:#e0e0e0; margin:0 auto 20px; border-radius:2px;"></div>
+            <h2 style="text-align:center; font-size:19px; margin-bottom:15px; color:#c92a2a;">✋ 신청 전 확인해주세요</h2>
+            <p style="text-align:center; font-size:14px; color:#666; margin-bottom:20px;">
+                다음 중 하나라도 해당되면 보증서 발급이 제한됩니다.
+            </p>
+            <ul class="check-list">
+                <li>현재 대출금/카드값 연체 중</li>
+                <li>국세/지방세 체납 (완납 후 가능)</li>
+                <li>압류, 경매, 회생, 파산 진행 중</li>
+                <li>휴업 또는 폐업 상태</li>
+                <li style="font-weight:bold; color:#004c99;">💡 최근 3~6개월 내 재단 대출 이력 있음</li>
+            </ul>
+            <button class="close-btn" onclick="closeModal()">네, 확인했습니다 (닫기)</button>
         </div>
+    </div>
+
+    <div class="navbar">
+        <i class="fa-solid fa-chevron-left back-btn" onclick="goMain()"></i>
+        <div class="nav-title" id="pageTitle">신용보증재단 통합 안내</div>
     </div>
 
     <div class="container">
-        <h1>신용보증재단 통합 안내 센터</h1> 
         
-        <a href="https://untact.koreg.or.kr" target="_blank" class="guide-action-btn" style="margin-top: 0; margin-bottom: 5px;">
-            🚀 [보증드림 바로가기] (클릭)
-        </a>
-        
-        <div class="check-below-text">
-            ▼ 아래 내용을 꼭 확인해주세요 ▼
-        </div>
+        <div id="page-main" class="page active">
+            <div class="main-header">
+                <div class="main-title">무엇을 도와드릴까요?</div>
+                <div class="main-sub">가장 궁금해하시는 메뉴를 선택해주세요.</div>
+            </div>
 
-        <div class="top-guide-box">
-            <div class="guide-title"><i class="fa-solid fa-lightbulb"></i> [상품 선택이 어려우신가요?]</div>
-            <div class="guide-q">Q. 어떤 상품인지 몰라 상담이 필요해요.</div>
-            <div class="guide-a">
-                <div style="text-align: center; font-size: 14px; margin-bottom: 20px;">
-                    <strong>A. 아래 절차를 먼저 읽어보신 후,<br>위쪽의 [보증드림 바로가기] 버튼을 눌러주세요.</strong>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="goPage('page-apply', '신규 보증신청 안내')">
+                    <div class="menu-text">
+                        <h2>1. 보증신청 하러가기</h2>
+                        <p>처음 신청하거나 추가 대출이 필요할 때</p>
+                    </div>
+                    <div class="menu-icon"><i class="fa-solid fa-file-pen"></i></div>
                 </div>
 
-                <ol class="step-list">
-                    <li>
-                        아래 버튼을 눌러 <strong>[보증드림]</strong> 접속 후,<br>
-                        메인 화면의 <span class="highlight-blue">① [보증신청]</span> 메뉴를 누릅니다.
-                    </li>
-                    <li>
-                        지역 선택 팝업이 뜨면<br>
-                        <strong>사업장 주소지가 위치한 지역</strong>을 선택합니다.<br>
-                        <span style="font-size: 13px; color: #555;">(예: 인천, 부산, 대구, 광주 등)</span>
-                    </li>
-                    <li>
-                        다음 화면에서<br>
-                        <span class="highlight-blue">② [상품선택 후 보증신청]</span>을 선택합니다.
-                    </li>
-                    <li>
-                        상품 목록이 나오면 고민하지 마시고<br>
-                        <span class="highlight-blue">③ [일반보증 또는 재단추천상품]</span>을 선택하세요.<br>
-                        <span style="font-size: 13px; color: #555;">(※ 소진공 대리대출 연계 가능 / 상시 접수 가능)</span>
-                    </li>
-                </ol>
+                <div class="menu-card" onclick="goPage('page-extension', '기한연장 안내')">
+                    <div class="menu-text">
+                        <h2>2. 기한연장 (만기연장)</h2>
+                        <p>일반연장 vs 대환연장 구분 방법</p>
+                    </div>
+                    <div class="menu-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                </div>
 
-                <div class="req-box">
-                    <strong>💡 제일 중요한 마지막 단계!</strong><br>
-                    신청화면 맨 끝 '요청사항' 칸에 이렇게 적어주세요.<br><br>
-                    👉 <strong>[전화 상담 요청]</strong> 또는<br>
-                    👉 <strong>[소상공인진흥공단 대리대출 확인서 발급]</strong> 등<br>
-                    <div style="margin-top:10px; font-size:13px; color:#d32f2f; font-weight: bold;">
-                        ※ 이렇게 적으시면, 담당자가 확인 후 고객님께 가장 유리한 상품으로 알아서 변경해 드립니다.
+                <div class="menu-card" onclick="goPage('page-closure', '폐업 사업자 안내')">
+                    <div class="menu-text">
+                        <h2>3. 폐업한 경우</h2>
+                        <p>폐업 후 상환 또는 브릿지보증</p>
+                    </div>
+                    <div class="menu-icon"><i class="fa-solid fa-store-slash"></i></div>
+                </div>
+            </div>
+
+            <footer>
+                © 2026. 신용보증재단 통합안내<br>
+                <span style="color:#e03131; font-weight:bold;">
+                    ※ 본 페이지는 신용보증재단 공식 사이트가 아닌<br>
+                    이용자 편의를 위한 단순 안내 페이지입니다.
+                </span>
+            </footer>
+        </div>
+
+
+        <div id="page-apply" class="page">
+            <div class="section-header"><i class="fa-solid fa-check-double"></i> 보증신청 6단계</div>
+
+            <div class="step-card">
+                <span class="step-badge">STEP 01</span>
+                <div class="step-title">맨 아래 <span class="ui-menu">보증드림 바로가기</span> 클릭</div>
+                <div style="font-size:13px; color:#888;">* 앱 설치 또는 웹페이지로 이동합니다.</div>
+            </div>
+
+            <div class="step-card">
+                <span class="step-badge">STEP 02</span>
+                <div class="step-title">사업장 주소지의 <span class="ui-menu">지역 선택</span></div>
+                <div class="alert-box" style="background:#fff5f5; border:1px solid #ffc9c9; padding:10px; border-radius:8px; margin-top:8px; color:#c92a2a; font-size:13px;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> <strong>잠깐! 서울/경기는 제외</strong><br>
+                    서울과 경기는 별도 플랫폼 이용 (여기서 신청 불가)
+                </div>
+            </div>
+
+            <div class="step-card">
+                <span class="step-badge">STEP 03</span>
+                <div class="step-title"><span class="ui-menu">보증신청하러가기</span> 클릭</div>
+            </div>
+
+            <div class="step-card">
+                <span class="step-badge">STEP 04 (주의)</span>
+                <div class="step-title">반드시 <strong>왼쪽 버튼</strong>을 눌러주세요.</div>
+                <div class="mock-screen">
+                    <div class="mock-btn left">상품 선택 후<br>보증신청</div>
+                    <div class="mock-btn right">재단 추천 상품<br>보증신청</div>
+                </div>
+                <div style="font-size:13px; color:#d32f2f; margin-top:5px; text-align:center;">※ 오른쪽 버튼 클릭 금지</div>
+            </div>
+
+            <div class="step-card">
+                <span class="step-badge">STEP 05 (상품선택)</span>
+                <div class="step-title">목록에서 <strong>아래 상품</strong>을 선택하세요.</div>
+                <div class="mock-list-item">
+                    <div class="list-row">
+                        <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
+                        <span class="list-label">상품명</span>
+                        <div style="flex:1;">
+                            <span class="list-title">일반보증 또는 재단추천상품<br><span class="list-sub" style="font-weight:400;">(소진공 정책자금 대리대출 연계 가능)</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="expert-option">
+                    <strong>💡 본인이 원하는 상품이 있다면?</strong><br>
+                    특정 상품(청년전용 등) 신청이 확실하다면 해당 상품을 선택하셔도 무방합니다.
+                </div>
+            </div>
+
+            <div class="step-card" style="border:2px solid #004c99;">
+                <span class="step-badge" style="background:#d32f2f;">STEP 06 (필수)</span>
+                <div class="step-title">마지막 <strong>'요청사항'</strong> 칸 입력</div>
+                <div class="input-guide">
+                    <span style="font-size:13px; color:#888;">입력 예시 (택 1)</span>
+                    <span class="copy-text">[상품설명 요청]</span>
+                    <div style="margin:4px 0; font-size:12px;">또는</div>
+                    <span class="copy-text">[소진공 대리대출확인서 발급]</span>
+                    <div style="border-top:1px dashed #fab005; margin:10px 0 5px;"></div>
+                    <span style="font-size:12px; color:#555;">※ 그 외 특이사항도 함께 적어주세요.</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="page-extension" class="page">
+            <div class="check-bank-box">
+                <span class="check-icon">🏦</span>
+                <div class="check-title">은행 확인이 먼저입니다!</div>
+                <div class="check-desc">
+                    대출받으신 은행 지점에 전화하여<br>
+                    <strong>"일반연장인지, 대환연장인지"</strong> 꼭 물어보세요.
+                </div>
+            </div>
+
+            <div class="section-header">은행 답변에 따른 신청방법</div>
+
+            <div class="scenario-box">
+                <div class="scenario-title">
+                    <span class="scenario-badge badge-green">CASE 1</span>
+                    은행에서 "그냥 연장하시면 됩니다" 라고 한 경우
+                </div>
+                <div class="action-arrow">▼ 신청 절차 ▼</div>
+                <div style="background:#f8f9fa; padding:12px; border-radius:8px; font-size:14px; font-weight:bold; color:#333; line-height:1.6;">
+                    ① 하단 [보증드림 바로가기] 클릭<br>
+                    ② 메인 화면 하단의 <span style="color:#004c99; text-decoration:underline;">[보증기한연장 바로가기]</span> 메뉴 클릭<br>
+                    ③ 안내에 따라 진행
+                </div>
+            </div>
+
+            <div class="scenario-box">
+                <div class="scenario-title">
+                    <span class="scenario-badge badge-blue">CASE 2</span>
+                    은행에서 "대환으로 연장해야 합니다" 라고 한 경우
+                </div>
+                <div class="action-arrow">▼ 신청 절차 ▼</div>
+                <div style="background:#f8f9fa; padding:12px; border-radius:8px; font-size:14px; font-weight:bold; color:#333; line-height:1.6;">
+                    ① 하단 [보증드림 바로가기] 클릭<br>
+                    ② <span style="color:#004c99;">[보증신청 하러가기]</span> (신규신청과 동일)<br>
+                    ③ 상품 목록에서 <span style="color:#d32f2f;">[전환보증]</span> 선택 신청
+                </div>
+                
+                <div class="mock-list-item">
+                    <div class="list-row">
+                        <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
+                        <span class="list-label">상품명</span>
+                        <div style="flex:1;">
+                            <span class="list-title">전환보증</span>
+                        </div>
+                    </div>
+                    <div class="list-row">
+                        <span class="list-label sub-type">상품특성</span>
+                        <div style="flex:1;">
+                            <span class="list-desc">법인가능,재기지원특화</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="system-help-box">
-                    <i class="fa-solid fa-circle-exclamation"></i> <strong>보증드림 이용에 어려움이 있으신가요?</strong><br>
-                    아래 <strong>[이용방법 안내]</strong> 버튼을 눌러 설명을 확인하시거나,<br>
-                    시스템 문의처 <strong><a href="tel:044-270-4036" style="color:#004c99; text-decoration:underline;">044-270-4036</a></strong> 으로 연락해 주세요.
-                </div>
-                
-                </div>
+            </div>
         </div>
 
-        <a href="https://open.kakao.com/o/YOUR_LINK_HERE" target="_blank" class="kakao-link-button">
-            🔔 정책자금 알림방 바로가기 (클릭)
+
+        <div id="page-closure" class="page">
+            <div class="check-bank-box" style="background:#fff0f0; border-color:#ffc9c9;">
+                <span class="check-icon">🚫</span>
+                <div class="check-title" style="color:#c92a2a;">폐업하셨나요?</div>
+                <div class="check-desc">
+                    <strong>'브릿지 보증'</strong>으로 분할상환이 가능한지<br>
+                    은행에 먼저 확인하셔야 합니다.
+                </div>
+            </div>
+
+            <div class="section-header">은행에서 가능하다고 했나요?</div>
+
+            <div class="scenario-box">
+                <div class="scenario-title">
+                    <span class="scenario-badge badge-blue">브릿지보증 신청</span>
+                </div>
+                <div class="action-arrow">▼ 신청 절차 ▼</div>
+                <div style="background:#f8f9fa; padding:12px; border-radius:8px; font-size:14px; font-weight:bold; color:#333; line-height:1.6;">
+                    ① 하단 [보증드림 바로가기] 클릭<br>
+                    ② <span style="color:#004c99;">[보증신청 하러가기]</span> 메뉴 클릭<br>
+                    ③ 상품 목록에서 <span style="color:#d32f2f;">[브릿지보증]</span> 선택 신청
+                </div>
+
+                <div class="mock-list-item">
+                    <div class="list-row">
+                        <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
+                        <span class="list-label">상품명</span>
+                        <div style="flex:1;">
+                            <span class="list-title">브릿지보증</span>
+                        </div>
+                    </div>
+                    <div class="list-row">
+                        <span class="list-label sub-type">상품특성</span>
+                        <div style="flex:1;">
+                            <span class="list-desc">재기지원특화</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="fixed-bottom">
+        <a href="https://untact.koreg.or.kr" target="_blank" class="main-btn">
+            보증드림 바로가기 🚀
         </a>
-        <p class="kakao-desc">
-            ※ 선착순 자금 정보를 가장 빠르게 알려드리는 정보 공유방입니다.<br>
-            (대화 금지 / 알림 전용)
-        </p>
-        
-        <div class="card-grid">
-            <a href="https://untact.koreg.or.kr" target="_blank" class="card">
-                <h2>보증드림 바로가기</h2>
-                <p>보증신청 · 상담예약 · 무방문 기한연장</p>
-            </a>
-            <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000178" target="_blank" class="card">
-                <h2>이용방법 안내</h2>
-                <p>이용 절차와 필요서류 확인</p>
-            </a>
-            <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000196" target="_blank" class="card">
-                <h2>보증상품 안내</h2>
-                <p>상품 종류 및 대상 확인</p>
-            </a>
+        <div class="inquiry-text">
+            <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
         </div>
-        
-        <div class="section">
-            <h3>📢 보증서 발급 신청 및 기한연장 신청 안내</h3>
-            <div class="method-box-online">
-                <div class="method-title">✅ 비대면(모바일) 신청 [권장]</div>
-                <p style="font-size: 14px; margin: 0;">
-                    번거로운 방문이나 대기 없이, <strong>지금 바로 고객님의 휴대폰으로 접수</strong>해주시기 바랍니다.<br>
-                    <span style="color: #004c99; font-size: 13px;">(※ 심사 및 승인 효력은 방문과 100% 동일합니다.)</span>
-                </p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h3>📞 업무시간 안내</h3>
-            <div class="hours-info">
-                * 업무시간: 09:00 ~ 16:00 <br>
-                * 휴무: <span>토요일, 일요일 및 공휴일</span>
-            </div>
-        </div>
-        
-        <footer>
-            © 2026. 신용보증재단.<br>
-            본 페이지는 <strong>공식 홈페이지가 아니며</strong>,<br>
-            이용자 편의를 위해 자체 제작된 통합 안내 페이지입니다.
-        </footer>
     </div>
 
     <script>
-        function closeModal() {
-            document.getElementById('infoModal').style.display = 'none';
+        // 페이지 이동 함수
+        function goPage(pageId, title) {
+            document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            document.getElementById('pageTitle').innerText = title;
+            document.querySelector('.back-btn').style.display = 'block';
+            window.scrollTo(0, 0);
         }
+
+        // 메인으로 가기
+        function goMain() {
+            document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+            document.getElementById('page-main').classList.add('active');
+            
+            document.getElementById('pageTitle').innerText = '신용보증재단 통합 안내';
+            document.querySelector('.back-btn').style.display = 'none';
+        }
+
+        // 팝업 닫기
+        function closeModal() {
+            document.getElementById('infoModal').classList.remove('active');
+        }
+        document.getElementById('infoModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
     </script>
 </body>
 </html>
