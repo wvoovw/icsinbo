@@ -17,6 +17,8 @@
             --white: #ffffff;
             --alert: #d32f2f;
             --app-blue: #2b6fd3;
+            /* 네이버 밴드 컬러 (유지하되 브랜드 느낌 제거) */
+            --band-green: #03c75a; 
         }
 
         body { 
@@ -62,6 +64,30 @@
         .menu-text p { margin: 0; font-size: 13px; color: #888; }
         .menu-icon { font-size: 28px; color: var(--primary); width: 40px; text-align: center; }
 
+        /* [수정됨] 안전한 알림 배너 스타일 (공적인 느낌 강조) */
+        .band-banner {
+            margin-top: 25px;
+            background: var(--band-green);
+            color: white;
+            padding: 22px 20px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(3, 199, 90, 0.25);
+            text-decoration: none;
+            cursor: pointer; transition: transform 0.1s;
+            position: relative; overflow: hidden;
+        }
+        .band-banner:active { transform: scale(0.98); }
+        
+        .band-content { flex: 1; position: relative; z-index: 2; }
+        .band-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; }
+        /* 닥터비즈 태그 삭제 -> '무료 알림'으로 변경 */
+        .band-tag { font-size: 11px; background: #fff; color: var(--band-green); padding: 3px 8px; border-radius: 20px; margin-left: 8px; font-weight:800; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .band-desc { font-size: 13px; font-weight: 500; opacity: 0.95; line-height: 1.4; }
+        
+        .band-icon { font-size: 24px; color: var(--band-green); margin-left: 15px; background: white; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 14px; font-weight: 900; font-family: sans-serif; position: relative; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .band-banner::before { content: ''; position: absolute; right: -20px; top: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1; }
+
         /* [서브페이지] 공통 스타일 */
         .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; }
         .section-header i { color: #fbc02d; margin-right: 8px; font-size: 20px; }
@@ -100,7 +126,7 @@
         .mock-btn.right { background: #84a9e6; opacity: 0.7; }
         .mock-btn.right::before { content: '❌'; font-size: 24px; position: absolute; }
 
-        /* 상품 목록 모사 스타일 (업그레이드) */
+        /* 상품 목록 모사 스타일 */
         .mock-list-item { 
             border: 2px solid var(--alert); background: white; padding: 15px; 
             border-radius: 4px; margin-top: 15px; position: relative; 
@@ -127,7 +153,13 @@
         .copy-text { font-size: 16px; font-weight: 800; color: var(--text-main); display: block; margin: 5px 0; }
 
         /* 하단 고정바 */
-        .fixed-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px 25px; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 900; max-width: 600px; margin: 0 auto; }
+        .fixed-bottom { 
+            display: none; 
+            position: fixed; bottom: 0; left: 0; right: 0; 
+            background: white; padding: 15px 20px 25px; 
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); 
+            z-index: 900; max-width: 600px; margin: 0 auto; 
+        }
         .main-btn { display: flex; justify-content: center; align-items: center; width: 100%; height: 56px; background: var(--primary); color: white; font-size: 18px; font-weight: 700; border-radius: 14px; text-decoration: none; box-shadow: 0 4px 12px rgba(0, 76, 153, 0.3); }
         .inquiry-text { text-align: center; font-size: 13px; color: #666; margin-top: 12px; font-weight: 500; }
         
@@ -204,14 +236,37 @@
                     <div class="menu-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
                 </div>
 
+                <div class="menu-card" onclick="goPage('page-repayment', '전환보증 신청 안내')">
+                    <div class="menu-text">
+                        <h2>3. 원금상환이 어려운 경우</h2>
+                        <p>기존 재단 보증 이용 고객 전용</p>
+                    </div>
+                    <div class="menu-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                </div>
+
                 <div class="menu-card" onclick="goPage('page-closure', '폐업 사업자 안내')">
                     <div class="menu-text">
-                        <h2>3. 폐업한 경우</h2>
+                        <h2>4. 폐업한 경우</h2>
                         <p>폐업 후 상환 또는 브릿지보증</p>
                     </div>
                     <div class="menu-icon"><i class="fa-solid fa-store-slash"></i></div>
                 </div>
             </div>
+
+            <a href="https://www.band.us/@drbiz" target="_blank" class="band-banner">
+                <div class="band-content">
+                    <div class="band-title">
+                        정책자금 알림 서비스 <span class="band-tag">무료/BAND</span>
+                    </div>
+                    <div class="band-desc">
+                        새로운 자금 공고가 뜨면<br>
+                        <strong>놓치지 않게 알림</strong>을 보내드립니다 🔔
+                    </div>
+                </div>
+                <div class="band-icon">
+                    N
+                </div>
+            </a>
 
             <footer>
                 © 2026. 신용보증재단 통합안내<br>
@@ -345,6 +400,50 @@
             </div>
         </div>
 
+        <div id="page-repayment" class="page">
+            <div class="check-bank-box" style="background:#e7f5ff; border-color:#74c0fc;">
+                <span class="check-icon">📢</span>
+                <div class="check-title" style="color:#1971c2;">신청 대상 확인</div>
+                <div class="check-desc">
+                    <strong>현재 신용보증재단 보증서를 이용 중인</strong><br>
+                    고객님만 신청 가능합니다.<br>
+                    <span style="font-size:13px; color:#666; margin-top:5px; display:block;">(타기관 대출 대환 불가 / 상환유예 불가)</span>
+                </div>
+            </div>
+
+            <div class="section-header">전환보증 신청 절차</div>
+
+            <div class="scenario-box">
+                <div class="scenario-title">
+                    <span class="scenario-badge badge-blue">전환보증 신청</span>
+                </div>
+                <div style="background:#f8f9fa; padding:12px; border-radius:8px; font-size:14px; font-weight:bold; color:#333; line-height:1.6;">
+                    ① 하단 [보증드림 바로가기] 클릭<br>
+                    ② <span style="color:#004c99;">[보증신청 하러가기]</span> 메뉴 클릭<br>
+                    ③ 상품 목록에서 <span style="color:#d32f2f;">[전환보증]</span> 선택 신청
+                </div>
+
+                <div class="mock-list-item">
+                    <div class="list-row">
+                        <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
+                        <span class="list-label">상품명</span>
+                        <div style="flex:1;">
+                            <span class="list-title">전환보증</span>
+                        </div>
+                    </div>
+                    <div class="list-row">
+                        <span class="list-label sub-type">상품특성</span>
+                        <div style="flex:1;">
+                            <span class="list-desc">법인가능,재기지원특화</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:15px; font-size:13px; color:#666; background:#eee; padding:10px; border-radius:8px;">
+                    ※ 기존에 이용 중인 재단 보증부 대출을 갚으면서 상환 기간을 늘리는 상품입니다. (신규자금 아님)
+                </div>
+            </div>
+        </div>
+
 
         <div id="page-closure" class="page">
             <div class="check-bank-box" style="background:#fff0f0; border-color:#ffc9c9;">
@@ -407,6 +506,10 @@
             
             document.getElementById('pageTitle').innerText = title;
             document.querySelector('.back-btn').style.display = 'block';
+            
+            // 상세 페이지에서는 하단 버튼 보이기
+            document.querySelector('.fixed-bottom').style.display = 'block';
+
             window.scrollTo(0, 0);
         }
 
@@ -417,6 +520,9 @@
             
             document.getElementById('pageTitle').innerText = '신용보증재단 통합 안내';
             document.querySelector('.back-btn').style.display = 'none';
+
+            // 메인 페이지에서는 하단 버튼 숨기기
+            document.querySelector('.fixed-bottom').style.display = 'none';
         }
 
         // 팝업 닫기
