@@ -17,7 +17,6 @@
             --white: #ffffff;
             --alert: #d32f2f;
             --app-blue: #2b6fd3;
-            /* 네이버 밴드 컬러 (유지하되 브랜드 느낌 제거) */
             --band-green: #03c75a; 
         }
 
@@ -27,7 +26,6 @@
             -webkit-tap-highlight-color: transparent; word-break: keep-all;
         }
 
-        /* 레이아웃 공통 */
         .container { max-width: 600px; margin: 0 auto; min-height: 100vh; padding-bottom: 120px; }
         
         /* 상단 네비게이션 */
@@ -38,16 +36,15 @@
         .nav-title { font-weight: 700; font-size: 16px; color: var(--text-main); }
         .back-btn {
             position: absolute; left: 15px; font-size: 18px; color: #333; cursor: pointer; padding: 10px;
-            display: none; /* 메인에서는 숨김 */
+            display: none; 
         }
 
-        /* 페이지 전환용 클래스 */
         .page { display: none; padding: 20px 16px; animation: fadeIn 0.3s; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* [메인화면] 메뉴 디자인 */
-        .main-header { text-align: center; margin: 30px 0 40px; }
+        .main-header { text-align: center; margin: 30px 0 20px; /* 하단 여백 줄임 */ }
         .main-title { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
         .main-sub { font-size: 15px; color: var(--text-sub); }
 
@@ -64,9 +61,10 @@
         .menu-text p { margin: 0; font-size: 13px; color: #888; }
         .menu-icon { font-size: 28px; color: var(--primary); width: 40px; text-align: center; }
 
-        /* [수정됨] 안전한 알림 배너 스타일 (공적인 느낌 강조) */
+        /* [수정됨] 밴드 배너 위치 이동에 따른 스타일 조정 */
         .band-banner {
-            margin-top: 25px;
+            /* margin-top: 25px; 기존 삭제 */
+            margin-bottom: 30px; /* 메뉴와의 간격 확보 */
             background: var(--band-green);
             color: white;
             padding: 22px 20px;
@@ -81,14 +79,13 @@
         
         .band-content { flex: 1; position: relative; z-index: 2; }
         .band-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; }
-        /* 닥터비즈 태그 삭제 -> '무료 알림'으로 변경 */
         .band-tag { font-size: 11px; background: #fff; color: var(--band-green); padding: 3px 8px; border-radius: 20px; margin-left: 8px; font-weight:800; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .band-desc { font-size: 13px; font-weight: 500; opacity: 0.95; line-height: 1.4; }
         
         .band-icon { font-size: 24px; color: var(--band-green); margin-left: 15px; background: white; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 14px; font-weight: 900; font-family: sans-serif; position: relative; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .band-banner::before { content: ''; position: absolute; right: -20px; top: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1; }
 
-        /* [서브페이지] 공통 스타일 */
+        /* [서브페이지 스타일] */
         .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; }
         .section-header i { color: #fbc02d; margin-right: 8px; font-size: 20px; }
         
@@ -100,25 +97,18 @@
         .step-title { font-size: 17px; font-weight: 700; color: #333; margin-bottom: 8px; line-height: 1.4; }
         .ui-menu { color: var(--primary); background: var(--primary-bg); padding: 2px 6px; border-radius: 4px; font-weight: 800; }
 
-        /* [연장/폐업] 시나리오 박스 */
-        .scenario-box {
-            border: 2px solid #e5e8eb; border-radius: 12px; padding: 15px; margin-top: 15px; background: #fff;
-        }
+        .scenario-box { border: 2px solid #e5e8eb; border-radius: 12px; padding: 15px; margin-top: 15px; background: #fff; }
         .scenario-title { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 10px; display: flex; align-items: center; }
         .scenario-badge { font-size: 11px; padding: 3px 6px; border-radius: 4px; margin-right: 8px; font-weight: bold; }
         .badge-green { background: #e6fcf5; color: #0ca678; }
         .badge-blue { background: #e7f5ff; color: #1c7ed6; }
         .action-arrow { text-align: center; color: #aaa; margin: 10px 0; font-size: 14px; }
 
-        /* 은행 확인 강조 박스 */
-        .check-bank-box {
-            background: #fff4e6; border: 1px solid #ffc078; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px;
-        }
+        .check-bank-box { background: #fff4e6; border: 1px solid #ffc078; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px; }
         .check-icon { font-size: 30px; margin-bottom: 10px; display: block; }
         .check-title { font-size: 18px; font-weight: 800; color: #d9480f; margin-bottom: 5px; }
         .check-desc { font-size: 14px; color: #555; }
 
-        /* UI 모사 */
         .mock-screen { display: flex; gap: 8px; margin-top: 15px; }
         .mock-btn { flex: 1; height: 80px; border-radius: 8px; padding: 10px; color: white; font-size: 13px; font-weight: bold; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
         .mock-btn.left { background: var(--app-blue); border: 3px solid #ffeb3b; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
@@ -126,25 +116,13 @@
         .mock-btn.right { background: #84a9e6; opacity: 0.7; }
         .mock-btn.right::before { content: '❌'; font-size: 24px; position: absolute; }
 
-        /* 상품 목록 모사 스타일 */
-        .mock-list-item { 
-            border: 2px solid var(--alert); background: white; padding: 15px; 
-            border-radius: 4px; margin-top: 15px; position: relative; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+        .mock-list-item { border: 2px solid var(--alert); background: white; padding: 15px; border-radius: 4px; margin-top: 15px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .mock-list-item::after { content: '👈 이것을 선택!'; position: absolute; right: 10px; bottom: 10px; font-size: 12px; color: var(--alert); font-weight: bold; }
         
         .list-row { display: flex; align-items: flex-start; margin-bottom: 6px; }
         .list-row:last-child { margin-bottom: 0; }
-        
-        .list-label { 
-            font-size: 13px; font-weight: 700; color: #004c99; 
-            margin-right: 8px; border-left: 2px solid #004c99; padding-left: 6px; 
-            white-space: nowrap; width: 60px; /* 라벨 정렬 */
-        }
-        /* 상품특성용 라벨 (회색) */
+        .list-label { font-size: 13px; font-weight: 700; color: #004c99; margin-right: 8px; border-left: 2px solid #004c99; padding-left: 6px; white-space: nowrap; width: 60px; }
         .list-label.sub-type { border-color: transparent; color: #666; font-weight: 500; }
-
         .list-title { font-size: 14px; font-weight: 800; color: #333; }
         .list-desc { font-size: 13px; color: #555; font-weight: 400; }
         .list-sub { font-size: 12px; color: #666; }
@@ -152,31 +130,13 @@
         .input-guide { background: var(--highlight); border: 2px dashed #fab005; border-radius: 10px; padding: 15px; margin-top: 10px; text-align: center; }
         .copy-text { font-size: 16px; font-weight: 800; color: var(--text-main); display: block; margin: 5px 0; }
 
-        /* 하단 고정바 */
-        .fixed-bottom { 
-            display: none; 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: white; padding: 15px 20px 25px; 
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); 
-            z-index: 900; max-width: 600px; margin: 0 auto; 
-        }
+        .fixed-bottom { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px 25px; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 900; max-width: 600px; margin: 0 auto; }
         .main-btn { display: flex; justify-content: center; align-items: center; width: 100%; height: 56px; background: var(--primary); color: white; font-size: 18px; font-weight: 700; border-radius: 14px; text-decoration: none; box-shadow: 0 4px 12px rgba(0, 76, 153, 0.3); }
         .inquiry-text { text-align: center; font-size: 13px; color: #666; margin-top: 12px; font-weight: 500; }
         
-        /* 모달 스타일 */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); z-index: 9999;
-            display: flex; align-items: flex-end;
-            visibility: hidden; opacity: 0; transition: all 0.3s;
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 9999; display: flex; align-items: flex-end; visibility: hidden; opacity: 0; transition: all 0.3s; }
         .modal-overlay.active { visibility: visible; opacity: 1; }
-        .modal-sheet {
-            background: white; width: 100%; max-width: 600px; margin: 0 auto;
-            border-radius: 20px 20px 0 0; padding: 30px 20px 40px;
-            transform: translateY(100%); transition: transform 0.3s;
-            max-height: 80vh; overflow-y: auto;
-        }
+        .modal-sheet { background: white; width: 100%; max-width: 600px; margin: 0 auto; border-radius: 20px 20px 0 0; padding: 30px 20px 40px; transform: translateY(100%); transition: transform 0.3s; max-height: 80vh; overflow-y: auto; }
         .modal-overlay.active .modal-sheet { transform: translateY(0); }
         .close-btn { width: 100%; padding: 15px; background: #333; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; margin-top: 20px; }
         .check-list li { margin-bottom: 10px; font-size: 15px; padding-left: 24px; position: relative; list-style: none; }
@@ -187,7 +147,6 @@
 </head>
 
 <body>
-
     <div id="infoModal" class="modal-overlay active">
         <div class="modal-sheet">
             <div style="width:40px; height:4px; background:#e0e0e0; margin:0 auto 20px; border-radius:2px;"></div>
@@ -218,6 +177,21 @@
                 <div class="main-title">무엇을 도와드릴까요?</div>
                 <div class="main-sub">가장 궁금해하시는 메뉴를 선택해주세요.</div>
             </div>
+
+            <a href="https://www.band.us/@drbiz" target="_blank" class="band-banner">
+                <div class="band-content">
+                    <div class="band-title">
+                        정책자금 알림 서비스 <span class="band-tag">무료/BAND</span>
+                    </div>
+                    <div class="band-desc">
+                        새로운 자금 공고가 뜨면<br>
+                        <strong>놓치지 않게 알림</strong>을 보내드립니다 🔔
+                    </div>
+                </div>
+                <div class="band-icon">
+                    N
+                </div>
+            </a>
 
             <div class="menu-grid">
                 <div class="menu-card" onclick="goPage('page-apply', '신규 보증신청 안내')">
@@ -253,21 +227,6 @@
                 </div>
             </div>
 
-            <a href="https://www.band.us/@drbiz" target="_blank" class="band-banner">
-                <div class="band-content">
-                    <div class="band-title">
-                        정책자금 알림 서비스 <span class="band-tag">무료/BAND</span>
-                    </div>
-                    <div class="band-desc">
-                        새로운 자금 공고가 뜨면<br>
-                        <strong>놓치지 않게 알림</strong>을 보내드립니다 🔔
-                    </div>
-                </div>
-                <div class="band-icon">
-                    N
-                </div>
-            </a>
-
             <footer>
                 © 2026. 신용보증재단 통합안내<br>
                 <span style="color:#e03131; font-weight:bold;">
@@ -280,13 +239,11 @@
 
         <div id="page-apply" class="page">
             <div class="section-header"><i class="fa-solid fa-check-double"></i> 보증신청 6단계</div>
-
             <div class="step-card">
                 <span class="step-badge">STEP 01</span>
                 <div class="step-title">맨 아래 <span class="ui-menu">보증드림 바로가기</span> 클릭</div>
                 <div style="font-size:13px; color:#888;">* 앱 설치 또는 웹페이지로 이동합니다.</div>
             </div>
-
             <div class="step-card">
                 <span class="step-badge">STEP 02</span>
                 <div class="step-title">사업장 주소지의 <span class="ui-menu">지역 선택</span></div>
@@ -295,12 +252,10 @@
                     서울과 경기는 별도 플랫폼 이용 (여기서 신청 불가)
                 </div>
             </div>
-
             <div class="step-card">
                 <span class="step-badge">STEP 03</span>
                 <div class="step-title"><span class="ui-menu">보증신청하러가기</span> 클릭</div>
             </div>
-
             <div class="step-card">
                 <span class="step-badge">STEP 04 (주의)</span>
                 <div class="step-title">반드시 <strong>왼쪽 버튼</strong>을 눌러주세요.</div>
@@ -310,7 +265,6 @@
                 </div>
                 <div style="font-size:13px; color:#d32f2f; margin-top:5px; text-align:center;">※ 오른쪽 버튼 클릭 금지</div>
             </div>
-
             <div class="step-card">
                 <span class="step-badge">STEP 05 (상품선택)</span>
                 <div class="step-title">목록에서 <strong>아래 상품</strong>을 선택하세요.</div>
@@ -328,7 +282,6 @@
                     특정 상품(청년전용 등) 신청이 확실하다면 해당 상품을 선택하셔도 무방합니다.
                 </div>
             </div>
-
             <div class="step-card" style="border:2px solid #004c99;">
                 <span class="step-badge" style="background:#d32f2f;">STEP 06 (필수)</span>
                 <div class="step-title">마지막 <strong>'요청사항'</strong> 칸 입력</div>
@@ -343,7 +296,6 @@
             </div>
         </div>
 
-
         <div id="page-extension" class="page">
             <div class="check-bank-box">
                 <span class="check-icon">🏦</span>
@@ -353,9 +305,7 @@
                     <strong>"일반연장인지, 대환연장인지"</strong> 꼭 물어보세요.
                 </div>
             </div>
-
             <div class="section-header">은행 답변에 따른 신청방법</div>
-
             <div class="scenario-box">
                 <div class="scenario-title">
                     <span class="scenario-badge badge-green">CASE 1</span>
@@ -368,7 +318,6 @@
                     ③ 안내에 따라 진행
                 </div>
             </div>
-
             <div class="scenario-box">
                 <div class="scenario-title">
                     <span class="scenario-badge badge-blue">CASE 2</span>
@@ -380,7 +329,6 @@
                     ② <span style="color:#004c99;">[보증신청 하러가기]</span> (신규신청과 동일)<br>
                     ③ 상품 목록에서 <span style="color:#d32f2f;">[전환보증]</span> 선택 신청
                 </div>
-                
                 <div class="mock-list-item">
                     <div class="list-row">
                         <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
@@ -396,7 +344,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -410,9 +357,7 @@
                     <span style="font-size:13px; color:#666; margin-top:5px; display:block;">(타기관 대출 대환 불가 / 상환유예 불가)</span>
                 </div>
             </div>
-
             <div class="section-header">전환보증 신청 절차</div>
-
             <div class="scenario-box">
                 <div class="scenario-title">
                     <span class="scenario-badge badge-blue">전환보증 신청</span>
@@ -422,7 +367,6 @@
                     ② <span style="color:#004c99;">[보증신청 하러가기]</span> 메뉴 클릭<br>
                     ③ 상품 목록에서 <span style="color:#d32f2f;">[전환보증]</span> 선택 신청
                 </div>
-
                 <div class="mock-list-item">
                     <div class="list-row">
                         <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
@@ -444,7 +388,6 @@
             </div>
         </div>
 
-
         <div id="page-closure" class="page">
             <div class="check-bank-box" style="background:#fff0f0; border-color:#ffc9c9;">
                 <span class="check-icon">🚫</span>
@@ -454,9 +397,7 @@
                     은행에 먼저 확인하셔야 합니다.
                 </div>
             </div>
-
             <div class="section-header">은행에서 가능하다고 했나요?</div>
-
             <div class="scenario-box">
                 <div class="scenario-title">
                     <span class="scenario-badge badge-blue">브릿지보증 신청</span>
@@ -467,7 +408,6 @@
                     ② <span style="color:#004c99;">[보증신청 하러가기]</span> 메뉴 클릭<br>
                     ③ 상품 목록에서 <span style="color:#d32f2f;">[브릿지보증]</span> 선택 신청
                 </div>
-
                 <div class="mock-list-item">
                     <div class="list-row">
                         <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
@@ -483,7 +423,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -499,33 +438,21 @@
     </div>
 
     <script>
-        // 페이지 이동 함수
         function goPage(pageId, title) {
             document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            
             document.getElementById('pageTitle').innerText = title;
             document.querySelector('.back-btn').style.display = 'block';
-            
-            // 상세 페이지에서는 하단 버튼 보이기
             document.querySelector('.fixed-bottom').style.display = 'block';
-
             window.scrollTo(0, 0);
         }
-
-        // 메인으로 가기
         function goMain() {
             document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
             document.getElementById('page-main').classList.add('active');
-            
             document.getElementById('pageTitle').innerText = '신용보증재단 통합 안내';
             document.querySelector('.back-btn').style.display = 'none';
-
-            // 메인 페이지에서는 하단 버튼 숨기기
             document.querySelector('.fixed-bottom').style.display = 'none';
         }
-
-        // 팝업 닫기
         function closeModal() {
             document.getElementById('infoModal').classList.remove('active');
         }
