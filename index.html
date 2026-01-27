@@ -201,6 +201,33 @@
         .check-list li::before { content: '🚫'; position: absolute; left: 0; top: 0; font-size: 14px; }
 
         footer { font-size: 12px; color: #999; text-align: center; margin-top: 40px; border-top: 1px solid #e5e8eb; padding-top: 20px; padding-bottom: 20px; }
+
+/* [▼▼▼ 1. 여기에 붙여넣기 (스타일 추가) ▼▼▼] */
+    
+    /* AI 상품매칭 전용 스타일 */
+    .q-title { font-size: 19px; font-weight: 800; margin-bottom: 8px; color: #333; line-height: 1.3; }
+    .q-sub { font-size: 13px; color: #666; margin-bottom: 15px; display: block; } /* 설명글 보이게 설정 */
+
+    .option-btn {
+        width: 100%; padding: 16px; margin-bottom: 10px; border: 1px solid #e5e8eb; border-radius: 12px;
+        background: white; font-size: 15px; font-weight: 600; color: #333; text-align: left; cursor: pointer;
+        display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;
+    }
+    .option-btn:active { background: #f2f4f6; transform: scale(0.98); }
+    .option-btn:hover { border-color: #004c99; color: #004c99; background: #eef6fc; }
+
+    .recommend-box { background: #f4f9ff; border: 2px solid #2b6fd3; border-radius: 16px; padding: 25px; margin: 20px 0; text-align: center; }
+    .recommend-badge { display: inline-block; background: #2b6fd3; color: white; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
+    .recommend-title { font-size: 22px; font-weight: 800; color: #004c99; margin-bottom: 10px; line-height: 1.3; }
+    .recommend-desc { font-size: 14px; color: #555; line-height: 1.5; }
+    
+    .next-btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; }
+
+
+
+
+
+
     </style>
 </head>
 
@@ -252,12 +279,12 @@
 </a>
 
             <div class="menu-grid">
-                <div class="menu-card" onclick="alert('아직 준비중입니다.')" style="border:2px solid #2b6fd3; background:#f4f9ff;">
+		<div class="menu-card" onclick="goPage('page-calc', '상품추천'); initCalculator();" style="border:2px solid #2b6fd3; background:#f4f9ff;">
                     <div class="menu-text">
-                        <h2 style="color:#004c99;">💰 내 보증한도 1분 조회</h2>
-                        <p style="color:#2b6fd3; font-weight:bold;">내 매출로 얼마까지 나올까?</p>
+                        <h2 style="color:#004c99;">🔍 내게 맞는 상품 찾기</h2>
+                        <p style="color:#2b6fd3; font-weight:bold;">내 자격요건으로 가능한 상품은?</p>
                     </div>
-                    <div class="menu-icon" style="color:#004c99;"><i class="fa-solid fa-calculator"></i></div>
+                    <div class="menu-icon" style="color:#004c99;"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
                 </div>
 
                 <div class="menu-card" onclick="goPage('page-apply', '신규 보증신청 안내')">
@@ -302,6 +329,11 @@
                     3. 민원 접수 및 상세 상담은 공식 콜센터를 이용해 주시기 바랍니다.
                 </div>
             </footer>
+        </div>
+
+<div id="page-calc" class="page">
+            <div id="wizard-container"></div>
+            <div id="result-area"></div>
         </div>
 
         <div id="page-apply" class="page">
@@ -588,7 +620,8 @@
         </div>
     </div>
 
-    <script>
+  <script>
+        // --- [기존 UI 기능 유지] ---
         function goPage(pageId, title) {
             document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
@@ -604,30 +637,271 @@
             document.querySelector('.back-btn').style.display = 'none';
             document.querySelector('.fixed-bottom').style.display = 'none';
         }
-        function closeModal() {
-            document.getElementById('infoModal').classList.remove('active');
-        }
-        document.getElementById('infoModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        // [아코디언 & 복사 스크립트]
+        function closeModal() { document.getElementById('infoModal').classList.remove('active'); }
+        document.getElementById('infoModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+        
         function toggleAccordion(id) {
             var x = document.getElementById(id);
-            if (x.style.display && x.style.display !== "none") {
-                x.style.display = "none";
+            x.style.display = (x.style.display === "none" || !x.style.display) ? "block" : "none";
+        }
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => alert('복사되었습니다!'), () => alert('복사 실패!'));
+        }
+
+        // -----------------------------------------------------------
+        // [AI 상품 매칭 로직 시작]
+        // -----------------------------------------------------------
+
+        // 1. 상품 DB
+        const productDB = {
+            hope_incheon: {
+                name: "🌅 희망인천 특례보증",
+                desc: "사장님께 딱 맞는 <strong>인천시 대표 상품</strong>입니다.<br>(이자지원 혜택 / 완화된 심사 기준 적용)"
+            },
+            valueup_startup: {
+                name: "💎 소상공인 밸류업 특별보증",
+                desc: "매출과 신용이 우수한 사장님을 위한 <strong>한도 우대(최대 1억)</strong> 상품입니다."
+            }
+        };
+
+        // 2. 질문 리스트 (10단계)
+        const wizardSteps = [
+            {
+                id: "industry",
+                q: "1. 사업자등록증상 주업종 형태는?", sub: "",
+                options: [
+                    { label: "🏪 일반 점포 (음식/소매/서비스)", val: "store", next: 1 },
+                    { label: "💻 전자상거래/무점포 (통신판매업)", val: "ecommerce", next: 1 },
+                    { label: "🏭 제조업/건설업", val: "manuf", next: 1 },
+                    { label: "🚚 운수/화물", val: "transport", next: 1 },
+                    { label: "🚫 금융/유흥/도박/향락 (금지업종)", val: "banned", next: 1 }
+                ]
+            },
+            {
+                // [수정] 3개월 미만도 신청 가능하므로 '부결' 표기 삭제
+                id: "biz_months",
+                q: "2. 개업일로부터 운영 기간은?", sub: "",
+                options: [
+                    { label: "🌱 3개월 미만", val: 2, next: 2 }, 
+                    { label: "🌿 3개월 ~ 6개월 미만", val: 4, next: 2 },
+                    { label: "🌳 6개월 ~ 1년 미만", val: 9, next: 2 },
+                    { label: "🏢 1년 ~ 3년 미만", val: 24, next: 2 },
+                    { label: "🏰 3년 이상", val: 36, next: 2 }
+                ]
+            },
+            {
+                id: "vat_count",
+                q: "3. 부가가치세 확정 신고 내역이 있나요?", sub: "",
+                options: [
+                    { label: "아니요 (신규/미신고)", val: 0, next: 3 },
+                    { label: "네, 1회 이상 신고함", val: 1, next: 3 }
+                ]
+            },
+            {
+                id: "revenue",
+                q: "4. 연 매출액 규모는 어느 정도인가요?", sub: "1년 미만인 경우, 월 평균 매출 x 12로 계산해주세요.",
+                options: [
+                    { label: "5천만 원 미만 (3천만 원 수준)", val: 3000, next: 4 },
+                    { label: "5천만 원 ~ 1억 원", val: 5000, next: 4 },
+                    { label: "1억 원 ~ 3억 원", val: 10000, next: 4 },
+                    { label: "3억 원 ~ 5억 원", val: 30000, next: 4 },
+                    { label: "5억 원 이상", val: 50000, next: 4 }
+                ]
+            },
+            {
+                id: "credit_score",
+                q: "5. 대표님의 NICE 신용평점 구간은?", sub: "",
+                options: [
+                    { label: "💎 최상위 (965점 이상)", val: 970, next: 5 },
+                    { label: "🥇 우수 (880 ~ 964점)", val: 900, next: 5 },
+                    { label: "🥈 양호 (790 ~ 879점)", val: 800, next: 5 },
+                    { label: "🥉 보통 (710 ~ 789점)", val: 750, next: 5 },
+                    { label: "⚠️ 관리 필요 (709점 이하)", val: 650, next: 5 }
+                ]
+            },
+            {
+                id: "loan_quality",
+                q: "6. 현재 보유 중인 대출의 구성(질)은?", sub: "가장 비중이 큰 대출을 기준으로 선택해주세요.",
+                options: [
+                    { label: "🌟 1금융권(시중은행) 위주", risk: 0, next: 6 },
+                    { label: "🙂 2금융권(저축/캐피탈) 1건 보유", risk: 10, next: 6 },
+                    { label: "😐 2금융권 2건 이상 (복수 이용)", risk: 30, next: 6 },
+                    { label: "😅 현금서비스/카드론 빈번 이용", risk: 50, next: 6 },
+                    { label: "🚨 대부업/사채/연체 중 (부결)", risk: 100, next: 6 }
+                ]
+            },
+            {
+                id: "legal_status",
+                q: "7. 과거 개인회생, 파산 또는 대위변제 이력이 있나요?", sub: "재단 심사 시 필수 확인 사항입니다.",
+                options: [
+                    { label: "없습니다 (해당사항 없음)", status: "clean", next: 7 },
+                    { label: "개인회생/파산/면책 이력 있음", status: "bad", next: 7 },
+                    { label: "재단 대위변제(보증채무이행) 이력 있음", status: "bad", next: 7 },
+                    { label: "현재 국세/지방세 체납 중", status: "bad", next: 7 },
+                    { label: "잘 모르겠습니다", status: "unknown", next: 7 }
+                ]
+            },
+            {
+                id: "last_guarantee_gap",
+                q: "8. 최근 재단 보증서를 발급받은 시점은?", sub: "",
+                options: [
+                    { label: "받은 적 없음 (또는 1년 경과)", val: 12, next: 8 },
+                    { label: "6개월 이상 지났음", val: 7, next: 8 },
+                    { label: "3개월 ~ 6개월 사이", val: 4, next: 8 },
+                    { label: "3개월 이내", val: 1, next: 8 }
+                ]
+            },
+            {
+                id: "hope_amount",
+                q: "9. 희망하시는 보증서 발급 금액은?", sub: "재단 한도 심사에 참고됩니다.",
+                options: [
+                    { label: "1천만 원 ~ 2천만 원", val: 1000, next: 9 },
+                    { label: "3천만 원", val: 3000, next: 9 },
+                    { label: "5천만 원", val: 5000, next: 9 },
+                    { label: "7천만 원", val: 7000, next: 9 },
+                    { label: "1억 원 이상", val: 10000, next: 9 }
+                ]
+            },
+            {
+                id: "preference",
+                q: "10. 가장 중요하게 생각하는 조건은?", sub: "",
+                options: [
+                    { label: "💰 한도가 넉넉해야 합니다", type: "limit", next: 10 },
+                    { label: "📉 금리가 저렴해야 합니다", type: "rate", next: 10 }
+                ]
+            }
+        ];
+
+        let currentStep = 0;
+        let userData = {};
+
+        function initCalculator() {
+            currentStep = 0;
+            userData = {};
+            document.getElementById('wizard-container').style.display = 'block';
+            document.getElementById('result-area').innerHTML = '';
+            renderStep();
+        }
+
+        function renderStep() {
+            const container = document.getElementById('wizard-container');
+            const step = wizardSteps[currentStep];
+            if (!step) { matchProduct(); return; }
+
+            let html = `<div class="wizard-step">
+                            <div class="q-title">${step.q}</div>
+                            <div class="q-sub" style="display:block; font-size:13px; color:#666; margin-bottom:15px;">${step.sub}</div>`;
+            step.options.forEach((opt, idx) => {
+                html += `<div class="option-btn" onclick="handleSelect(${idx})">
+                            <span>${opt.label}</span> <i class="fa-solid fa-chevron-right"></i>
+                         </div>`;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function handleSelect(idx) {
+            const step = wizardSteps[currentStep];
+            const selected = step.options[idx];
+            
+            userData[step.id] = selected.val;
+            if (selected.risk !== undefined) userData['risk'] = selected.risk; 
+            if (selected.status !== undefined) userData['status'] = selected.status;
+            
+            if (currentStep === wizardSteps.length - 1) {
+                matchProduct();
             } else {
-                x.style.display = "block";
+                currentStep++;
+                renderStep();
             }
         }
 
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(function() {
-                alert('복사되었습니다! 요청사항 칸에 붙여넣기 하세요.');
-            }, function(err) {
-                alert('복사 실패! 직접 입력해주세요.');
-            });
+        // [★ 핵심] 최종 심사 로직
+        function matchProduct() {
+            document.getElementById('wizard-container').style.display = 'none';
+
+            // 1. [절대 부결 사유 체크]
+            if (userData.industry === "banned") return showFail("banned_industry");
+            if (userData.status === "bad" || userData.risk >= 100) return showFail("legal_issue");
+            if (userData.last_guarantee_gap <= 1) return showFail("recent_guarantee");
+
+            // [수정됨] 3개월 미만 거절 로직 삭제됨 (이제 3개월 미만도 통과)
+
+            // 전자상거래 요건 (6개월 미만 or 부가세 0회) -> 부결
+            if (userData.industry === "ecommerce") {
+                if (userData.biz_months < 9 || userData.vat_count === 0) {
+                    return showFail("ecommerce_strict");
+                }
+            }
+
+            // 2. [상품 추천 로직]
+            // 기본값: 희망인천 특례보증 (웬만하면 이거 추천)
+            let recommended = productDB.hope_incheon;
+
+            // [밸류업 추천 조건 (AND)]
+            // ① 매출 3억 이상 (val >= 30000)
+            // ② 희망금액 5천만 원 이상 (val >= 5000)
+            // ③ 최근 6개월 이내 보증 이력 없음 (val >= 7)
+            if (
+                userData.revenue >= 30000 && 
+                userData.hope_amount >= 5000 && 
+                userData.last_guarantee_gap >= 7
+            ) {
+                recommended = productDB.valueup_startup;
+            }
+
+            showSuccess(recommended);
         }
+
+        function showSuccess(product) {
+            const resultArea = document.getElementById('result-area');
+            resultArea.innerHTML = `
+                <div class="result-card">
+                    <div style="margin-bottom:10px; color:#2b6fd3; font-weight:bold;">🎉 맞춤 추천</div>
+                    
+                    <div class="recommend-box">
+                        <span class="recommend-badge">추천 상품</span>
+                        <div class="recommend-title">${product.name}</div>
+                        <div class="recommend-desc">${product.desc}</div>
+                    </div>
+
+                    <div style="margin-top:20px; padding:20px; background:#f8f9fa; border-radius:10px; font-size:13px; color:#555; line-height:1.6; text-align:center; border:1px solid #eee;">
+                        해당 결과는 대략적인 결과이며,<br>정확한 상품 안내를 위해서는<br><strong>재단 상담을 통해 다시 확인해 주세요.</strong>
+                    </div>
+                    
+                    <button class="next-btn" style="margin-top:20px;" onclick="initCalculator()">다시 진단하기</button>
+                    <button class="next-btn" style="margin-top:10px; background:#333;" onclick="goPage('page-apply', '보증신청 안내')">신청방법 보러가기</button>
+                </div>`;
+        }
+
+        function showFail(reasonCode) {
+            const resultArea = document.getElementById('result-area');
+            let failTitle = "보증서 발급이 어렵습니다.";
+            let failDesc = "입력하신 정보로는<br>현재 진행 가능한 상품이 없습니다.";
+            
+            if (reasonCode === "ecommerce_strict") {
+                failDesc = "전자상거래(통신판매) 업종은<br><strong>사업기간 6개월 이상 & 부가세 신고 1회 이상</strong><br>내역이 있어야 신청 가능합니다.";
+            } else if (reasonCode === "legal_issue") {
+                failDesc = "개인회생, 파산, 면책, 대위변제 이력<br>또는 현재 연체/대부업 이용 중인 경우<br><strong>보증서 발급이 불가능</strong>합니다.";
+            } else if (reasonCode === "recent_guarantee") {
+                failDesc = "최근 <strong>3개월 이내</strong>에 재단 보증서를<br>발급받은 이력이 있어 추가 신청이 제한됩니다.";
+            } else if (reasonCode === "banned_industry") {
+                failDesc = "도박, 유흥, 향락 등<br><strong>보증 제한 업종</strong>은 신청이 불가능합니다.";
+            }
+
+            resultArea.innerHTML = `
+                <div class="result-card" style="background:#fff5f5; border-color:#ffc9c9; text-align:center;">
+                    <div style="font-size:50px; margin-bottom:10px;">🤔</div>
+                    <h3 style="color:#d32f2f;">${failTitle}</h3>
+                    <p style="color:#666; font-size:14px; margin-bottom:20px; line-height:1.5;">${failDesc}</p>
+                    
+                    <div style="margin-top:20px; padding:20px; background:white; border-radius:10px; font-size:13px; color:#555; line-height:1.6; text-align:center; border:1px solid #eee;">
+                        해당 결과는 대략적인 결과이며,<br>정확한 상품 안내를 위해서는<br><strong>재단 상담을 통해 다시 확인해 주세요.</strong>
+                    </div>
+                    <button class="next-btn" style="background:#555; margin-top:20px;" onclick="initCalculator()">처음으로</button>
+                </div>`;
+        }
+    </script>
     </script>
 </body>
 </html>
