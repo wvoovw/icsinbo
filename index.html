@@ -15,40 +15,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [중요] 브라우저 자동 글자 크기 조정 방지 */
-        html {
-            -webkit-text-size-adjust: 100%; /* 크롬, 사파리 등 */
-            -moz-text-size-adjust: 100%;    /* 파이어폭스 */
-            text-size-adjust: 100%;         /* 표준 */
-        }
-
+        /* [기본 설정] */
+        html { -webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; text-size-adjust: 100%; }
         :root {
-            /* CSS에서도 라이트모드 강제 */
             color-scheme: light;
-            
-            --primary: #004c99;
-            --primary-bg: #eef6fc;
-            --text-main: #191f28;
-            --text-sub: #6b7684;
-            --bg: #f2f4f6;
-            --white: #ffffff;
-            --alert: #d32f2f;
-            --app-blue: #2b6fd3;
-            --band-green: #03c75a; 
+            --primary: #004c99; --primary-bg: #eef6fc; --text-main: #191f28;
+            --text-sub: #6b7684; --bg: #f2f4f6; --white: #ffffff;
+            --alert: #d32f2f; --app-blue: #2b6fd3; --band-green: #03c75a; 
+            --btn-gray: #4a4a4a;
         }
 
         body { 
             font-family: 'Pretendard', sans-serif; background: var(--bg);
             margin: 0; color: var(--text-main); line-height: 1.5;
             -webkit-tap-highlight-color: transparent; word-break: keep-all;
-            /* 기본 폰트 사이즈 명시 (작게 나오는 문제 방지) */
             font-size: 16px; 
         }
 
-        /* 아이폰 하단 안전구역 고려하여 여백 추가 */
         .container { 
             max-width: 600px; margin: 0 auto; min-height: 100vh; 
-            padding-bottom: calc(120px + env(safe-area-inset-bottom)); 
+            padding-bottom: 50px; 
         }
         
         /* 상단 네비게이션 */
@@ -66,46 +52,61 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* [메인화면] 메뉴 디자인 */
-        .main-header { text-align: center; margin: 30px 0 20px; }
-        .main-title { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
-        .main-sub { font-size: 15px; color: var(--text-sub); }
-
-        .menu-grid { display: grid; gap: 15px; }
-        .menu-card {
-            background: var(--white); border-radius: 16px; padding: 25px 20px;
-            display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #e9ecef;
-            cursor: pointer; transition: transform 0.1s;
+        /* [수정된 메뉴 디자인 - 그리드 적용] */
+        .menu-container {
+            display: flex; flex-direction: column; gap: 12px; margin-top: 15px;
         }
-        .menu-card:active { transform: scale(0.98); background: #f9f9f9; }
+
+        /* 1. 상단 중요 메뉴 (가로 꽉 참) */
+        .menu-full-card {
+            background: var(--white); border-radius: 16px; padding: 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
+            cursor: pointer; position: relative; overflow: hidden;
+            transition: transform 0.1s;
+        }
+        .menu-full-card:active { transform: scale(0.98); background: #f9f9f9; }
         
-        .menu-text h2 { margin: 0 0 5px; font-size: 18px; font-weight: 700; color: #333; }
-        .menu-text p { margin: 0; font-size: 13px; color: #888; }
-        .menu-icon { font-size: 28px; color: var(--primary); width: 40px; text-align: center; }
+        /* 2. 하단 일반 메뉴 (2개씩 배치) */
+        .menu-grid-2col {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+        }
+        
+        .menu-half-card {
+            background: var(--white); border-radius: 16px; padding: 20px 15px;
+            display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid #e9ecef;
+            cursor: pointer; height: 110px; /* 높이 고정 */
+        }
+        .menu-half-card:active { transform: scale(0.98); background: #f8f9fa; }
+
+        /* 텍스트 스타일 */
+        .menu-text h2 { margin: 0 0 4px; font-size: 17px; font-weight: 700; color: #333; line-height: 1.3; }
+        .menu-text p { margin: 0; font-size: 12px; color: #888; letter-spacing: -0.5px; }
+        
+        /* 아이콘 스타일 */
+        .icon-box {
+            width: 40px; height: 40px; border-radius: 10px; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 10px;
+        }
+        .full-icon { font-size: 24px; color: inherit; }
 
         /* [밴드 배너] */
         .band-banner {
-            margin-bottom: 30px;
-            background: var(--band-green);
-            color: white;
-            padding: 22px 20px;
-            border-radius: 16px;
+            margin-top: 10px; margin-bottom: 20px;
+            background: #fee500; color: #3a1d1d;
+            padding: 22px 20px; border-radius: 16px;
             display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 8px 20px rgba(3, 199, 90, 0.25);
-            text-decoration: none;
-            cursor: pointer; transition: transform 0.1s;
-            position: relative; overflow: hidden;
+            box-shadow: 0 8px 20px rgba(254, 229, 0, 0.2);
+            text-decoration: none; cursor: pointer; position: relative; overflow: hidden;
         }
         .band-banner:active { transform: scale(0.98); }
-        
         .band-content { flex: 1; position: relative; z-index: 2; }
         .band-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; }
-        .band-tag { font-size: 11px; background: #fff; color: var(--band-green); padding: 3px 8px; border-radius: 20px; margin-left: 8px; font-weight:800; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .band-desc { font-size: 13px; font-weight: 500; opacity: 0.95; line-height: 1.4; }
-        
-        .band-icon { font-size: 24px; color: var(--band-green); margin-left: 15px; background: white; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 14px; font-weight: 900; font-family: sans-serif; position: relative; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .band-banner::before { content: ''; position: absolute; right: -20px; top: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1; }
+        .band-tag { font-size: 11px; background: #fff; color: #3a1d1d; padding: 3px 8px; border-radius: 20px; margin-left: 8px; font-weight:800; }
+        .band-desc { font-size: 13px; font-weight: 600; opacity: 0.9; line-height: 1.4; }
+        .band-icon { font-size: 24px; color: #3a1d1d; margin-left: 15px; width: 40px; text-align: center; }
 
         /* [서브페이지 스타일] */
         .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; }
@@ -139,10 +140,8 @@
         .mock-btn.right::before { content: '❌'; font-size: 24px; position: absolute; }
 
         .mock-list-item { border: 2px solid var(--alert); background: white; padding: 15px; border-radius: 4px; margin-top: 15px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .mock-list-item::after { content: '👈 이것을 선택!'; position: absolute; right: 10px; bottom: 10px; font-size: 12px; color: var(--alert); font-weight: bold; }
         
         .list-row { display: flex; align-items: flex-start; margin-bottom: 6px; }
-        .list-row:last-child { margin-bottom: 0; }
         .list-label { font-size: 13px; font-weight: 700; color: #004c99; margin-right: 8px; border-left: 2px solid #004c99; padding-left: 6px; white-space: nowrap; width: 60px; }
         .list-label.sub-type { border-color: transparent; color: #666; font-weight: 500; }
         .list-title { font-size: 14px; font-weight: 800; color: #333; }
@@ -150,83 +149,112 @@
         .list-sub { font-size: 12px; color: #666; }
 
         .input-guide { background: #fff9db; border: 2px dashed #fab005; border-radius: 10px; padding: 15px; margin-top: 10px; text-align: center; }
-        .copy-text { font-size: 15px; font-weight: 700; color: var(--text-main); display: block; margin: 3px 0; }
         
-        /* [밴드 버튼 & 아코디언 스타일] */
+        /* 밴드 버튼 & 아코디언 스타일 */
         .band-mini-btn { display: inline-block; background: var(--band-green); color: white; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .band-mini-btn.blue { background: #004c99; }
         
         .accordion-box { text-align: left; margin-top: 15px; }
         .accordion-btn { width: 100%; background: white; border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 13px; font-weight: bold; color: #333; border-radius: 8px; margin-bottom: 6px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
-        .accordion-btn:hover { background: #f8f9fa; }
         .accordion-content { display: none; background: #fffdf5; padding: 10px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ffeeba; }
         
         .copy-box { display: flex; justify-content: space-between; align-items: center; background: white; border: 1px solid #ddd; padding: 10px; border-radius: 6px; margin-bottom: 6px; }
         .text-val { font-size: 12px; color: #333; font-weight: 500; line-height: 1.3; margin-right: 5px; }
         .copy-btn { background: #333; color: white; border: none; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; white-space: nowrap; font-weight: bold; }
-        .copy-btn:active { transform: scale(0.95); }
 
-        /* [하단 버튼 그룹] */
-        .fixed-bottom { 
-            display: none; 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            background: white; 
-            padding: 15px 20px 25px; 
-            /* [중요] 아이폰 하단바만큼 패딩 추가 */
-            padding-bottom: calc(25px + env(safe-area-inset-bottom));
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); 
-            z-index: 900; 
-            max-width: 600px; 
-            margin: 0 auto; 
+        /* [수정됨] 본문 하단 버튼 그룹 (Static) */
+        .static-action-group {
+            margin-top: 40px;
+            padding: 25px 15px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            border-radius: 16px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.03);
+            text-align: center;
         }
-        .btn-group { display: flex; gap: 8px; width: 100%; }
-        .main-btn { display: flex; justify-content: center; align-items: center; flex: 1; height: 56px; color: white; font-size: 16px; font-weight: 700; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); transition: opacity 0.2s; }
-        .main-btn.app { background: var(--primary); flex: 2; } 
-        .main-btn.band { background: #555; flex: 1; font-size: 14px; } 
-        .main-btn:active { opacity: 0.8; }
+
+        .btn-group { display: flex; gap: 10px; width: 100%; margin-bottom: 12px; }
         
-        .inquiry-text { text-align: center; font-size: 13px; color: #666; margin-top: 12px; font-weight: 500; }
+        .action-btn {
+            display: flex; justify-content: center; align-items: center;
+            height: 54px; border-radius: 10px; text-decoration: none;
+            font-size: 15px; font-weight: 700; color: white;
+            transition: opacity 0.2s; border: none; cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .action-btn:active { opacity: 0.9; transform: scale(0.98); }
+        
+        /* 왼쪽: 자료실/질문 (회색) */
+        .btn-gray { background: var(--btn-gray); flex: 1; font-size: 14px; }
+        /* 오른쪽: 보증드림 (파란색) */
+        .btn-blue { background: var(--primary); flex: 1.8; font-size: 17px; }
+
+        .inquiry-text { text-align: center; font-size: 13px; color: #666; font-weight: 600; }
+        .inquiry-text a { color: #555; text-decoration: none; font-weight: 800; border-bottom: 1px solid #ccc; }
         
         .disclaimer-box { background:#f8f9fa; padding:12px; margin-top:10px; border-radius:8px; text-align:left; color:#888; font-size:11px; line-height:1.4; border: 1px solid #eee; }
 
+        /* 모달 스타일 */
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 9999; display: flex; align-items: flex-end; visibility: hidden; opacity: 0; transition: all 0.3s; }
         .modal-overlay.active { visibility: visible; opacity: 1; }
         .modal-sheet { background: white; width: 100%; max-width: 600px; margin: 0 auto; border-radius: 20px 20px 0 0; padding: 30px 20px 40px; transform: translateY(100%); transition: transform 0.3s; max-height: 80vh; overflow-y: auto; }
         .modal-overlay.active .modal-sheet { transform: translateY(0); }
-        .close-btn { width: 100%; padding: 15px; background: #333; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; margin-top: 20px; }
+        .close-btn { width: 100%; padding: 15px; background: #333; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; margin-top: 20px; cursor: pointer; }
         .check-list li { margin-bottom: 10px; font-size: 15px; padding-left: 24px; position: relative; list-style: none; }
         .check-list li::before { content: '🚫'; position: absolute; left: 0; top: 0; font-size: 14px; }
 
         footer { font-size: 12px; color: #999; text-align: center; margin-top: 40px; border-top: 1px solid #e5e8eb; padding-top: 20px; padding-bottom: 20px; }
 
-/* [▼▼▼ 1. 여기에 붙여넣기 (스타일 추가) ▼▼▼] */
-    
-    /* AI 상품매칭 전용 스타일 */
-    .q-title { font-size: 19px; font-weight: 800; margin-bottom: 8px; color: #333; line-height: 1.3; }
-    .q-sub { font-size: 13px; color: #666; margin-bottom: 15px; display: block; } /* 설명글 보이게 설정 */
+        /* [상품찾기 관련 스타일 - 모바일 흔들림 방지 적용] */
+        #wizard-container {
+            /* [중요] 최소 높이를 지정하여 질문 변경 시 화면이 덜컹거리는 현상 방지 */
+            min-height: 400px; 
+            transition: all 0.2s ease;
+        }
 
-    .option-btn {
-        width: 100%; padding: 16px; margin-bottom: 10px; border: 1px solid #e5e8eb; border-radius: 12px;
-        background: white; font-size: 15px; font-weight: 600; color: #333; text-align: left; cursor: pointer;
-        display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;
-    }
-    .option-btn:active { background: #f2f4f6; transform: scale(0.98); }
-    .option-btn:hover { border-color: #004c99; color: #004c99; background: #eef6fc; }
+        .q-title { font-size: 19px; font-weight: 800; margin-bottom: 8px; color: #333; line-height: 1.3; }
+        .q-sub { font-size: 13px; color: #666; margin-bottom: 15px; display: block; }
 
-    .recommend-box { background: #f4f9ff; border: 2px solid #2b6fd3; border-radius: 16px; padding: 25px; margin: 20px 0; text-align: center; }
-    .recommend-badge { display: inline-block; background: #2b6fd3; color: white; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
-    .recommend-title { font-size: 22px; font-weight: 800; color: #004c99; margin-bottom: 10px; line-height: 1.3; }
-    .recommend-desc { font-size: 14px; color: #555; line-height: 1.5; }
-    
-    .next-btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .option-btn {
+            width: 100%; padding: 16px; margin-bottom: 10px; border: 1px solid #e5e8eb; border-radius: 12px;
+            background: white; font-size: 15px; font-weight: 600; color: #333; text-align: left; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;
+        }
+        .option-btn:active { background: #f2f4f6; transform: scale(0.98); }
+        .option-btn:hover { border-color: #004c99; color: #004c99; background: #eef6fc; }
 
+        .recommend-box { background: #f4f9ff; border: 2px solid #2b6fd3; border-radius: 16px; padding: 25px; margin: 20px 0; text-align: center; }
+        .recommend-badge { display: inline-block; background: #2b6fd3; color: white; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
+        .recommend-title { font-size: 22px; font-weight: 800; color: #004c99; margin-bottom: 10px; line-height: 1.3; }
+        .recommend-desc { font-size: 14px; color: #555; line-height: 1.5; }
+        
+        .next-btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; }
 
-
-
-
+        /* [추가됨] 영상 가이드 버튼 스타일 */
+        .video-box {
+            border: 2px solid #ff9999;
+            background: #fff5f5;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+        .video-box-header {
+            font-size: 16px; font-weight: 800; color: #d32f2f; margin-bottom: 12px;
+            display: flex; align-items: center;
+        }
+        .video-box-header i { margin-right: 8px; font-size: 20px; }
+        
+        .video-link-btn {
+            display: flex; justify-content: space-between; align-items: center;
+            background: white; padding: 14px; border-radius: 8px;
+            margin-bottom: 8px; border: 1px solid #ffdcdc;
+            text-decoration: none; color: #333; transition: all 0.2s;
+        }
+        .video-link-btn:active { background: #ffebeb; transform: scale(0.98); }
+        .video-link-title { font-size: 14px; font-weight: 700; color: #333; }
+        .video-link-badge { font-size: 11px; background: #d32f2f; color: white; padding: 2px 6px; border-radius: 4px; margin-right: 6px; }
+        .video-icon { color: #d32f2f; font-size: 18px; }
 
     </style>
 </head>
@@ -246,7 +274,44 @@
                 <li>휴업 또는 폐업 상태</li>
                 <li style="font-weight:bold; color:#004c99;">💡 최근 3~6개월 내 재단 대출 이력 있음</li>
             </ul>
-            <button class="close-btn" onclick="closeModal()">네, 확인했습니다 (닫기)</button>
+            <button class="close-btn" onclick="closeModal('infoModal')">네, 확인했습니다 (닫기)</button>
+        </div>
+    </div>
+
+    <div id="systemErrorModal" class="modal-overlay">
+        <div class="modal-sheet">
+            <div style="width:40px; height:4px; background:#e0e0e0; margin:0 auto 20px; border-radius:2px;"></div>
+            
+            <div style="text-align:center; font-size:50px; margin-bottom:10px;">⚙️</div>
+            
+            <h2 style="text-align:center; font-size:20px; margin-bottom:15px; color:#333; line-height:1.3; font-weight:800;">
+                잠깐! 앱이 멈추거나<br>작동하지 않으시나요?
+            </h2>
+            
+            <div style="text-align:center; font-size:15px; color:#444; margin-bottom:20px; line-height:1.6; word-break:keep-all; background:#f8f9fa; padding:15px; border-radius:12px;">
+                "사진 <strong>업로드가 안 되거나</strong>,<br>
+                다음 <strong>화면으로 넘어가지 않는</strong> 경우"<br><br>
+                
+                이러한 시스템(전산) 오류는<br>
+                <span style="color:#d32f2f; font-weight:bold; background:#fff0f0; padding:2px 4px;">❌ 지점 직원분들이 해결해 드릴 수 없습니다.</span>
+            </div>
+
+            <p style="text-align:center; font-size:14px; color:#666; margin-bottom:15px;">
+                번거로우시겠지만, 문제 해결을 위해<br>아래 <strong>전산 전용 센터</strong>로 문의 부탁드립니다.
+            </p>
+            
+            <div style="text-align:center; margin-bottom:25px;">
+                <a href="tel:044-270-4036" style="font-size:26px; font-weight:900; color:#004c99; text-decoration:none; border-bottom:2px solid #004c99; padding-bottom:2px;">
+                    📞 044-270-4036
+                </a>
+            </div>
+            
+            <button class="close-btn" style="background:#2b6fd3; width:100%;" onclick="confirmAndGo()">
+                확인했습니다. 앱으로 이동 🚀
+            </button>
+            <div style="text-align:center; margin-top:15px;">
+                <span onclick="closeModal('systemErrorModal')" style="font-size:13px; color:#999; text-decoration:underline; cursor:pointer;">취소하고 돌아가기</span>
+            </div>
         </div>
     </div>
 
@@ -258,65 +323,70 @@
     <div class="container">
         
         <div id="page-main" class="page active">
-            <div class="main-header">
-                <div class="main-title">무엇을 도와드릴까요?</div>
-                <div class="main-sub">가장 궁금해하시는 메뉴를 선택해주세요.</div>
-            </div>
+            
+            <a href="https://open.kakao.com/o/pllUO2ci" target="_blank" class="band-banner">
+                <div class="band-content">
+                    <div class="band-title">
+                        정책자금 알림방 <span class="band-tag">무료/Kakao</span>
+                    </div>
+                    <div class="band-desc">
+                        복잡한 공고 핵심요약 & 신청 가이드<br>
+                        <strong>카톡으로 가장 빠르게</strong> 받으세요 🔔
+                    </div>
+                </div>
+                <div class="band-icon"><i class="fa-solid fa-comment"></i></div>
+            </a>
 
-     <a href="https://open.kakao.com/o/pllUO2ci" target="_blank" class="band-banner" style="background:#fee500; color:#3a1d1d;">
-    <div class="band-content">
-        <div class="band-title">
-            정책자금 알림방 <span class="band-tag" style="color:#3a1d1d; margin-left:5px;">무료/Kakao</span>
-        </div>
-        <div class="band-desc">
-            복잡한 공고 핵심요약 & 신청 가이드<br>
-            <strong>카톡으로 가장 빠르게</strong> 받으세요 🔔
-        </div>
-    </div>
-    <div class="band-icon" style="color:#3a1d1d; font-size:16px;">
-        TALK
-    </div>
-</a>
+            <div class="menu-container">
+                
+                <div class="menu-full-card" onclick="goPage('page-video-guide', '영상 가이드')" style="border:2px solid #ff9999; background:#fff5f5;">
+                    <div class="menu-text">
+                        <h2 style="color:#d32f2f;">📂 서류제출 / 약정체결</h2>
+                        <p style="color:#d32f2f; font-weight:bold;">문자를 받으신 고객님은 여기!</p>
+                    </div>
+                    <div style="font-size:28px; color:#d32f2f;"><i class="fa-brands fa-youtube"></i></div>
+                </div>
 
-            <div class="menu-grid">
-		<div class="menu-card" onclick="goPage('page-calc', '상품추천'); initCalculator();" style="border:2px solid #2b6fd3; background:#f4f9ff;">
+                <div class="menu-full-card" onclick="goPage('page-calc', '상품 찾기'); initCalculator();" style="border:2px solid #2b6fd3; background:#f4f9ff;">
                     <div class="menu-text">
                         <h2 style="color:#004c99;">🔍 내게 맞는 상품 찾기</h2>
-                        <p style="color:#2b6fd3; font-weight:bold;">내 자격요건으로 가능한 상품은?</p>
+                        <p style="color:#2b6fd3; font-weight:bold;">자격요건 간편 조회</p>
                     </div>
-                    <div class="menu-icon" style="color:#004c99;"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <div style="font-size:26px; color:#004c99;"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
                 </div>
 
-                <div class="menu-card" onclick="goPage('page-apply', '신규 보증신청 안내')">
-                    <div class="menu-text">
-                        <h2>1. 보증신청 하러가기</h2>
-                        <p>처음 신청하거나 추가 대출이 필요할 때</p>
+                <div class="menu-grid-2col">
+                    <div class="menu-half-card" onclick="goPage('page-apply', '신규 보증신청 안내')">
+                        <div class="icon-box" style="background:#eef6fc; color:#004c99;"><i class="fa-solid fa-file-pen"></i></div>
+                        <div class="menu-text">
+                            <h2>1. 보증신청</h2>
+                            <p>신규 / 추가 대출</p>
+                        </div>
                     </div>
-                    <div class="menu-icon"><i class="fa-solid fa-file-pen"></i></div>
-                </div>
 
-                <div class="menu-card" onclick="goPage('page-extension', '기한연장 안내')">
-                    <div class="menu-text">
-                        <h2>2. 기한연장 (만기연장)</h2>
-                        <p>일반연장 vs 대환연장 구분 방법</p>
+                    <div class="menu-half-card" onclick="goPage('page-extension', '기한연장 안내')">
+                        <div class="icon-box" style="background:#fff4e6; color:#fd7e14;"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div class="menu-text">
+                            <h2>2. 기한연장</h2>
+                            <p>만기 연장 안내</p>
+                        </div>
                     </div>
-                    <div class="menu-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                </div>
 
-                <div class="menu-card" onclick="goPage('page-repayment', '전환보증 신청 안내')">
-                    <div class="menu-text">
-                        <h2>3. 원금상환이 어려운 경우</h2>
-                        <p>기존 재단 보증 이용 고객 전용</p>
+                    <div class="menu-half-card" onclick="goPage('page-repayment', '전환보증 신청 안내')">
+                        <div class="icon-box" style="background:#e6fcf5; color:#0ca678;"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <div class="menu-text">
+                            <h2>3. 전환보증</h2>
+                            <p>원금상환 곤란 시</p>
+                        </div>
                     </div>
-                    <div class="menu-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                </div>
 
-                <div class="menu-card" onclick="goPage('page-closure', '폐업 사업자 안내')">
-                    <div class="menu-text">
-                        <h2>4. 폐업한 경우</h2>
-                        <p>폐업 후 상환 또는 브릿지보증</p>
+                    <div class="menu-half-card" onclick="goPage('page-closure', '폐업 사업자 안내')">
+                        <div class="icon-box" style="background:#f1f3f5; color:#495057;"><i class="fa-solid fa-store-slash"></i></div>
+                        <div class="menu-text">
+                            <h2>4. 폐업한 경우</h2>
+                            <p>브릿지 보증 등</p>
+                        </div>
                     </div>
-                    <div class="menu-icon"><i class="fa-solid fa-store-slash"></i></div>
                 </div>
             </div>
 
@@ -331,7 +401,51 @@
             </footer>
         </div>
 
-<div id="page-calc" class="page">
+        <div id="page-video-guide" class="page">
+            <div class="video-box" style="margin-top:0;">
+                <div class="video-box-header">
+                    <i class="fa-brands fa-youtube"></i> 단계별 영상 가이드
+                </div>
+                <div style="font-size:13px; color:#555; margin-bottom:15px; line-height:1.4;">
+                    진행하시려는 업무를 선택해주세요.<br>
+                    <strong>버튼을 누르면 해당 가이드 영상이 재생됩니다.</strong>
+                </div>
+
+                <a href="https://youtube.com/clip/UgkxSxTnpVdKwszH78ZcCyYTkO3WJ0_5ASsw?si=C_kjym7PAbdPrmz6" target="_blank" class="video-link-btn">
+                    <div>
+                        <span class="video-link-badge" style="background:#004c99;">서류/사진</span>
+                        <span class="video-link-title">📄 필요서류 제출 & 사업사실 증빙</span>
+                    </div>
+                    <i class="fa-solid fa-play video-icon"></i>
+                </a>
+
+                <a href="https://youtube.com/clip/UgkxQ2GrbjyhpbYoOumpvskiQntut-7EJv3W?si=0HoI7Gzr3yM08qeq" target="_blank" class="video-link-btn">
+                    <div>
+                        <span class="video-link-badge" style="background:#d32f2f;">전자약정</span>
+                        <span class="video-link-title">✍️ 전자약정 서명 방법</span>
+                    </div>
+                    <i class="fa-solid fa-play video-icon"></i>
+                </a>
+            </div>
+
+            <div class="static-action-group">
+                <div style="font-size:13px; color:#d32f2f; font-weight:800; margin-bottom:10px;">👇 위 내용을 모두 확인하셨나요?</div>
+                <div class="btn-group">
+                    <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
+                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                    </a>
+                    <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
+                        보증드림 바로가기 🚀
+                    </button>
+                </div>
+                <div class="inquiry-text">
+                    <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="page-calc" class="page">
             <div id="wizard-container"></div>
             <div id="result-area"></div>
         </div>
@@ -376,7 +490,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="expert-option">
+                <div style="margin-top:10px; padding:10px; background:#f4f9ff; border-radius:8px; font-size:13px; color:#004c99;">
                     <strong>💡 본인이 원하는 상품이 있다면?</strong><br>
                     특정 상품(청년전용 등) 신청이 확실하다면 해당 상품을 선택하셔도 무방합니다.
                 </div>
@@ -402,9 +516,9 @@
                                 원하는 상품이 명확하게 있으신 경우, '상품설명 요청'보다 <span style="text-decoration:underline; font-weight:bold;">해당 상품명을 적어주시면 심사가 훨씬 빨라집니다.</span>
                             </div>
 
-                            <a href="https://www.band.us/@drbiz" target="_blank" class="band-mini-btn blue" style="display:block; text-align:center; margin-bottom:12px;">
-                                📢 현재 진행 중인 보증상품 보러 가기
-                            </a>
+                            <div class="band-mini-btn blue" onclick="goPage('page-calc', '상품 찾기'); initCalculator();" style="display:block; text-align:center; margin-bottom:12px; cursor:pointer;">
+                                🔍 내게 맞는 보증상품 찾으러 가기
+                            </div>
 
                             <div style="font-size:12px; color:#333; margin-bottom:4px; font-weight:bold;">▼ 상품명을 아시는 경우 (추천)</div>
                             <div class="copy-box">
@@ -466,6 +580,39 @@
                     </div>
                 </div>
             </div>
+
+            <div class="step-card" onclick="window.open('https://www.youtube.com/watch?v=AZFNrC_PQxo', '_blank')" style="cursor:pointer; border:2px solid #ff0000; background:#fff5f5; margin-top:20px;">
+                <div style="display:flex; align-items:center;">
+                    <div style="font-size:36px; color:#ff0000; margin-right:15px; width:50px; text-align:center;">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <div style="flex:1;">
+                        <div class="step-title" style="margin-bottom:4px; color:#d32f2f;">영상으로 보는 신청 방법</div>
+                        <div style="font-size:13px; color:#555;">
+                            글 설명이 어려우신가요?<br>
+                            <strong>여기를 눌러 영상으로 확인하세요!</strong>
+                        </div>
+                    </div>
+                    <div style="color:#ccc; font-size:18px;">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="static-action-group">
+                <div style="font-size:13px; color:#d32f2f; font-weight:800; margin-bottom:10px;">👇 위 내용을 모두 확인하셨나요?</div>
+                <div class="btn-group">
+                    <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
+                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                    </a>
+                    <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
+                        보증드림 바로가기 🚀
+                    </button>
+                </div>
+                <div class="inquiry-text">
+                    <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
+                </div>
+            </div>
         </div>
 
         <div id="page-extension" class="page">
@@ -517,6 +664,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="static-action-group">
+                <div class="btn-group">
+                    <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
+                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                    </a>
+                    <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
+                        보증드림 바로가기 🚀
+                    </button>
+                </div>
+                <div class="inquiry-text">
+                    <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
+                </div>
+            </div>
         </div>
 
         <div id="page-repayment" class="page">
@@ -556,6 +717,20 @@
                 </div>
                 <div style="margin-top:15px; font-size:13px; color:#666; background:#eee; padding:10px; border-radius:8px;">
                     ※ 기존에 이용 중인 재단 보증부 대출을 갚으면서 상환 기간을 늘리는 상품입니다. (신규자금 아님)
+                </div>
+            </div>
+
+            <div class="static-action-group">
+                <div class="btn-group">
+                    <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
+                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                    </a>
+                    <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
+                        보증드림 바로가기 🚀
+                    </button>
+                </div>
+                <div class="inquiry-text">
+                    <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
                 </div>
             </div>
         </div>
@@ -602,32 +777,31 @@
                     </div>
                 </div>
             </div>
+
+            <div class="static-action-group">
+                <div class="btn-group">
+                    <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
+                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                    </a>
+                    <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
+                        보증드림 바로가기 🚀
+                    </button>
+                </div>
+                <div class="inquiry-text">
+                    <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
+                </div>
+            </div>
         </div>
 
-    </div>
-
-    <div class="fixed-bottom">
-        <div class="btn-group">
-            <a href="https://www.band.us/@drbiz" target="_blank" class="main-btn band">
-                <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
-            </a>
-            <a href="https://untact.koreg.or.kr" target="_blank" class="main-btn app">
-                보증드림 바로가기 🚀
-            </a>
-        </div>
-        <div class="inquiry-text">
-            <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
-        </div>
     </div>
 
   <script>
-        // --- [기존 UI 기능 유지] ---
+        // 네비게이션 제어
         function goPage(pageId, title) {
             document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             document.getElementById('pageTitle').innerText = title;
             document.querySelector('.back-btn').style.display = 'block';
-            document.querySelector('.fixed-bottom').style.display = 'block';
             window.scrollTo(0, 0);
         }
         function goMain() {
@@ -635,11 +809,25 @@
             document.getElementById('page-main').classList.add('active');
             document.getElementById('pageTitle').innerText = '신용보증재단 통합 안내';
             document.querySelector('.back-btn').style.display = 'none';
-            document.querySelector('.fixed-bottom').style.display = 'none';
         }
-        function closeModal() { document.getElementById('infoModal').classList.remove('active'); }
-        document.getElementById('infoModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-        
+
+        // 모달 제어
+        function closeModal(id) { 
+            const targetId = id || 'infoModal';
+            document.getElementById(targetId).classList.remove('active'); 
+        }
+
+        // 보증드림 버튼 클릭 시 오류 안내 모달 오픈
+        function openGuaranteeDream() {
+            document.getElementById('systemErrorModal').classList.add('active');
+        }
+
+        // 모달에서 확인 클릭 시 실제 URL 이동
+        function confirmAndGo() {
+            window.open('https://untact.koreg.or.kr', '_blank');
+            closeModal('systemErrorModal');
+        }
+
         function toggleAccordion(id) {
             var x = document.getElementById(id);
             x.style.display = (x.style.display === "none" || !x.style.display) ? "block" : "none";
@@ -649,10 +837,8 @@
         }
 
         // -----------------------------------------------------------
-        // [AI 상품 매칭 로직 시작]
+        // [상품 매칭 로직]
         // -----------------------------------------------------------
-
-        // 1. 상품 DB
         const productDB = {
             hope_incheon: {
                 name: "🌅 희망인천 특례보증",
@@ -664,7 +850,6 @@
             }
         };
 
-        // 2. 질문 리스트 (10단계)
         const wizardSteps = [
             {
                 id: "industry",
@@ -678,7 +863,6 @@
                 ]
             },
             {
-                // [수정] 3개월 미만도 신청 가능하므로 '부결' 표기 삭제
                 id: "biz_months",
                 q: "2. 개업일로부터 운영 기간은?", sub: "",
                 options: [
@@ -816,37 +1000,21 @@
             }
         }
 
-        // [★ 핵심] 최종 심사 로직
         function matchProduct() {
             document.getElementById('wizard-container').style.display = 'none';
 
-            // 1. [절대 부결 사유 체크]
             if (userData.industry === "banned") return showFail("banned_industry");
             if (userData.status === "bad" || userData.risk >= 100) return showFail("legal_issue");
             if (userData.last_guarantee_gap <= 1) return showFail("recent_guarantee");
 
-            // [수정됨] 3개월 미만 거절 로직 삭제됨 (이제 3개월 미만도 통과)
-
-            // 전자상거래 요건 (6개월 미만 or 부가세 0회) -> 부결
             if (userData.industry === "ecommerce") {
                 if (userData.biz_months < 9 || userData.vat_count === 0) {
                     return showFail("ecommerce_strict");
                 }
             }
 
-            // 2. [상품 추천 로직]
-            // 기본값: 희망인천 특례보증 (웬만하면 이거 추천)
             let recommended = productDB.hope_incheon;
-
-            // [밸류업 추천 조건 (AND)]
-            // ① 매출 3억 이상 (val >= 30000)
-            // ② 희망금액 5천만 원 이상 (val >= 5000)
-            // ③ 최근 6개월 이내 보증 이력 없음 (val >= 7)
-            if (
-                userData.revenue >= 30000 && 
-                userData.hope_amount >= 5000 && 
-                userData.last_guarantee_gap >= 7
-            ) {
+            if (userData.revenue >= 30000 && userData.hope_amount >= 5000 && userData.last_guarantee_gap >= 7) {
                 recommended = productDB.valueup_startup;
             }
 
@@ -901,7 +1069,6 @@
                     <button class="next-btn" style="background:#555; margin-top:20px;" onclick="initCalculator()">처음으로</button>
                 </div>`;
         }
-    </script>
     </script>
 </body>
 </html>
