@@ -52,12 +52,12 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* [수정된 메뉴 디자인 - 그리드 적용] */
+        /* [메뉴 디자인] */
         .menu-container {
             display: flex; flex-direction: column; gap: 12px; margin-top: 15px;
         }
 
-        /* 1. 상단 중요 메뉴 (가로 꽉 참) */
+        /* 상단 중요 메뉴 (가로 꽉 참) */
         .menu-full-card {
             background: var(--white); border-radius: 16px; padding: 20px;
             display: flex; align-items: center; justify-content: space-between;
@@ -67,7 +67,7 @@
         }
         .menu-full-card:active { transform: scale(0.98); background: #f9f9f9; }
         
-        /* 2. 하단 일반 메뉴 (2개씩 배치) */
+        /* 하단 일반 메뉴 (2개씩 배치) */
         .menu-grid-2col {
             display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
         }
@@ -76,7 +76,7 @@
             background: var(--white); border-radius: 16px; padding: 20px 15px;
             display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid #e9ecef;
-            cursor: pointer; height: 110px; /* 높이 고정 */
+            cursor: pointer; height: 110px;
         }
         .menu-half-card:active { transform: scale(0.98); background: #f8f9fa; }
 
@@ -90,7 +90,6 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 20px; margin-bottom: 10px;
         }
-        .full-icon { font-size: 24px; color: inherit; }
 
         /* [밴드 배너] */
         .band-banner {
@@ -162,7 +161,7 @@
         .text-val { font-size: 12px; color: #333; font-weight: 500; line-height: 1.3; margin-right: 5px; }
         .copy-btn { background: #333; color: white; border: none; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; white-space: nowrap; font-weight: bold; }
 
-        /* [수정됨] 본문 하단 버튼 그룹 (Static) */
+        /* 본문 하단 버튼 그룹 */
         .static-action-group {
             margin-top: 40px;
             padding: 25px 15px;
@@ -183,10 +182,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .action-btn:active { opacity: 0.9; transform: scale(0.98); }
-        
-        /* 왼쪽: 자료실/질문 (회색) */
         .btn-gray { background: var(--btn-gray); flex: 1; font-size: 14px; }
-        /* 오른쪽: 보증드림 (파란색) */
         .btn-blue { background: var(--primary); flex: 1.8; font-size: 17px; }
 
         .inquiry-text { text-align: center; font-size: 13px; color: #666; font-weight: 600; }
@@ -205,46 +201,10 @@
 
         footer { font-size: 12px; color: #999; text-align: center; margin-top: 40px; border-top: 1px solid #e5e8eb; padding-top: 20px; padding-bottom: 20px; }
 
-        /* [상품찾기 관련 스타일 - 모바일 흔들림 방지 적용] */
-        #wizard-container {
-            /* [중요] 최소 높이를 지정하여 질문 변경 시 화면이 덜컹거리는 현상 방지 */
-            min-height: 400px; 
-            transition: all 0.2s ease;
-        }
-
-        .q-title { font-size: 19px; font-weight: 800; margin-bottom: 8px; color: #333; line-height: 1.3; }
-        .q-sub { font-size: 13px; color: #666; margin-bottom: 15px; display: block; }
-
-        .option-btn {
-            width: 100%; padding: 16px; margin-bottom: 10px; border: 1px solid #e5e8eb; border-radius: 12px;
-            background: white; font-size: 15px; font-weight: 600; color: #333; text-align: left; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;
-        }
-        .option-btn:active { background: #f2f4f6; transform: scale(0.98); }
-        .option-btn:hover { border-color: #004c99; color: #004c99; background: #eef6fc; }
-
-        .recommend-box { background: #f4f9ff; border: 2px solid #2b6fd3; border-radius: 16px; padding: 25px; margin: 20px 0; text-align: center; }
-        .recommend-badge { display: inline-block; background: #2b6fd3; color: white; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
-        .recommend-title { font-size: 22px; font-weight: 800; color: #004c99; margin-bottom: 10px; line-height: 1.3; }
-        .recommend-desc { font-size: 14px; color: #555; line-height: 1.5; }
-        
-        .next-btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; }
-
-        /* [추가됨] 영상 가이드 버튼 스타일 */
-        .video-box {
-            border: 2px solid #ff9999;
-            background: #fff5f5;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 25px;
-            margin-bottom: 20px;
-        }
-        .video-box-header {
-            font-size: 16px; font-weight: 800; color: #d32f2f; margin-bottom: 12px;
-            display: flex; align-items: center;
-        }
+        /* [영상 가이드 버튼 스타일] */
+        .video-box { border: 2px solid #ff9999; background: #fff5f5; border-radius: 12px; padding: 20px; margin-top: 25px; margin-bottom: 20px; }
+        .video-box-header { font-size: 16px; font-weight: 800; color: #d32f2f; margin-bottom: 12px; display: flex; align-items: center; }
         .video-box-header i { margin-right: 8px; font-size: 20px; }
-        
         .video-link-btn {
             display: flex; justify-content: space-between; align-items: center;
             background: white; padding: 14px; border-radius: 8px;
@@ -281,31 +241,24 @@
     <div id="systemErrorModal" class="modal-overlay">
         <div class="modal-sheet">
             <div style="width:40px; height:4px; background:#e0e0e0; margin:0 auto 20px; border-radius:2px;"></div>
-            
             <div style="text-align:center; font-size:50px; margin-bottom:10px;">⚙️</div>
-            
             <h2 style="text-align:center; font-size:20px; margin-bottom:15px; color:#333; line-height:1.3; font-weight:800;">
                 잠깐! 앱이 멈추거나<br>작동하지 않으시나요?
             </h2>
-            
             <div style="text-align:center; font-size:15px; color:#444; margin-bottom:20px; line-height:1.6; word-break:keep-all; background:#f8f9fa; padding:15px; border-radius:12px;">
                 "사진 <strong>업로드가 안 되거나</strong>,<br>
                 다음 <strong>화면으로 넘어가지 않는</strong> 경우"<br><br>
-                
                 이러한 시스템(전산) 오류는<br>
                 <span style="color:#d32f2f; font-weight:bold; background:#fff0f0; padding:2px 4px;">❌ 지점 직원분들이 해결해 드릴 수 없습니다.</span>
             </div>
-
             <p style="text-align:center; font-size:14px; color:#666; margin-bottom:15px;">
                 번거로우시겠지만, 문제 해결을 위해<br>아래 <strong>전산 전용 센터</strong>로 문의 부탁드립니다.
             </p>
-            
             <div style="text-align:center; margin-bottom:25px;">
                 <a href="tel:044-270-4036" style="font-size:26px; font-weight:900; color:#004c99; text-decoration:none; border-bottom:2px solid #004c99; padding-bottom:2px;">
                     📞 044-270-4036
                 </a>
             </div>
-            
             <button class="close-btn" style="background:#2b6fd3; width:100%;" onclick="confirmAndGo()">
                 확인했습니다. 앱으로 이동 🚀
             </button>
@@ -338,21 +291,12 @@
             </a>
 
             <div class="menu-container">
-                
                 <div class="menu-full-card" onclick="goPage('page-video-guide', '영상 가이드')" style="border:2px solid #ff9999; background:#fff5f5;">
                     <div class="menu-text">
-                        <h2 style="color:#d32f2f;">📂 서류제출 / 약정체결</h2>
-                        <p style="color:#d32f2f; font-weight:bold;">문자를 받으신 고객님은 여기!</p>
+                        <h2 style="color:#d32f2f;">📂 서류제출 / 전자약정이 어렵다면?</h2>
+                        <p style="color:#d32f2f; font-weight:bold;">'영상 가이드' 보고 따라하기!</p>
                     </div>
                     <div style="font-size:28px; color:#d32f2f;"><i class="fa-brands fa-youtube"></i></div>
-                </div>
-
-                <div class="menu-full-card" onclick="goPage('page-calc', '상품 찾기'); initCalculator();" style="border:2px solid #2b6fd3; background:#f4f9ff;">
-                    <div class="menu-text">
-                        <h2 style="color:#004c99;">🔍 내게 맞는 상품 찾기</h2>
-                        <p style="color:#2b6fd3; font-weight:bold;">자격요건 간편 조회</p>
-                    </div>
-                    <div style="font-size:26px; color:#004c99;"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
                 </div>
 
                 <div class="menu-grid-2col">
@@ -444,7 +388,6 @@
             </div>
         </div>
 
-
         <div id="page-calc" class="page">
             <div id="wizard-container"></div>
             <div id="result-area"></div>
@@ -452,11 +395,13 @@
 
         <div id="page-apply" class="page">
             <div class="section-header"><i class="fa-solid fa-check-double"></i> 보증신청 6단계</div>
+            
             <div class="step-card">
                 <span class="step-badge">STEP 01</span>
                 <div class="step-title">맨 아래 <span class="ui-menu">보증드림 바로가기</span> 클릭</div>
                 <div style="font-size:13px; color:#888;">* 앱 설치 또는 웹페이지로 이동합니다.</div>
             </div>
+
             <div class="step-card">
                 <span class="step-badge">STEP 02</span>
                 <div class="step-title">사업장 주소지의 <span class="ui-menu">지역 선택</span></div>
@@ -465,10 +410,12 @@
                     서울과 경기는 별도 플랫폼 이용 (여기서 신청 불가)
                 </div>
             </div>
+
             <div class="step-card">
                 <span class="step-badge">STEP 03</span>
                 <div class="step-title"><span class="ui-menu">보증신청하러가기</span> 클릭</div>
             </div>
+
             <div class="step-card">
                 <span class="step-badge">STEP 04 (주의)</span>
                 <div class="step-title">반드시 <strong>왼쪽 버튼</strong>을 눌러주세요.</div>
@@ -478,21 +425,24 @@
                 </div>
                 <div style="font-size:13px; color:#d32f2f; margin-top:5px; text-align:center;">※ 오른쪽 버튼 클릭 금지</div>
             </div>
+            
             <div class="step-card">
                 <span class="step-badge">STEP 05 (상품선택)</span>
                 <div class="step-title">목록에서 <strong>아래 상품</strong>을 선택하세요.</div>
+                
                 <div class="mock-list-item">
                     <div class="list-row">
                         <i class="fa-solid fa-star" style="color:#ccc; margin-right:8px; font-size:14px; margin-top:3px;"></i>
                         <span class="list-label">상품명</span>
                         <div style="flex:1;">
-                            <span class="list-title">일반보증 또는 재단추천상품<br><span class="list-sub" style="font-weight:400;">(소진공 정책자금 대리대출 연계 가능)</span></span>
+                            <span class="list-title">일반보증 또는 재단추천상품<br><span class="list-sub" style="font-weight:400;">(가장 무난한 기본 상품)</span></span>
                         </div>
                     </div>
                 </div>
-                <div style="margin-top:10px; padding:10px; background:#f4f9ff; border-radius:8px; font-size:13px; color:#004c99;">
-                    <strong>💡 본인이 원하는 상품이 있다면?</strong><br>
-                    특정 상품(청년전용 등) 신청이 확실하다면 해당 상품을 선택하셔도 무방합니다.
+                
+                <div style="margin-top:10px; padding:10px; background:#f8f9fa; border-radius:8px; font-size:13px; color:#555; border:1px solid #eee;">
+                    <strong>💡 참고:</strong><br>
+                    특정 전용 상품(청년전용 등) 신청이 확실하다면 해당 상품을 선택하셔도 무방합니다.
                 </div>
             </div>
             
@@ -502,41 +452,50 @@
                 
                 <div class="input-guide">
                     <p style="font-size:13px; color:#333; margin-bottom:10px;">
-                        아래 내용을 참고해주세요.
+                        상황에 맞춰 아래 내용을 복사해 주세요.
                     </p>
 
                     <div class="accordion-box">
-                        <button class="accordion-btn" onclick="toggleAccordion('acc1')">
+                        <button class="accordion-btn" onclick="toggleAccordion('acc_general')">
                             <span>📌 가장 많이 쓰는 예시 (일반)</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
-                        <div id="acc1" class="accordion-content">
-                            <div style="background:#e7f5ff; padding:10px; border-radius:6px; font-size:12px; color:#004c99; margin-bottom:12px; line-height:1.4; border:1px solid #cce5ff;">
-                                <strong>📢 담당자의 신속한 업무 처리를 위해 부탁드립니다!</strong><br>
-                                원하는 상품이 명확하게 있으신 경우, '상품설명 요청'보다 <span style="text-decoration:underline; font-weight:bold;">해당 상품명을 적어주시면 심사가 훨씬 빨라집니다.</span>
-                            </div>
-
-                            <div class="band-mini-btn blue" onclick="goPage('page-calc', '상품 찾기'); initCalculator();" style="display:block; text-align:center; margin-bottom:12px; cursor:pointer;">
-                                🔍 내게 맞는 보증상품 찾으러 가기
-                            </div>
-
-                            <div style="font-size:12px; color:#333; margin-bottom:4px; font-weight:bold;">▼ 상품명을 아시는 경우 (추천)</div>
+                        <div id="acc_general" class="accordion-content">
+                            
+                            <div style="font-size:12px; font-weight:bold; color:#004c99; margin-bottom:5px;">▼ 상품명을 아시는 경우 (추천)</div>
                             <div class="copy-box">
                                 <span class="text-val">[상품명 직접 입력] 신청합니다.</span>
                                 <button class="copy-btn" onclick="copyText('2026년 OOO자금 신청합니다.')">서식복사</button>
                             </div>
-
-                            <div style="border-top:1px dashed #ddd; margin:10px 0;"></div>
-
-                            <div style="font-size:12px; color:#666; margin-bottom:4px;">▼ 잘 모르겠다면?</div>
-                            <div class="copy-box">
-                                <span class="text-val">상품설명 요청합니다.</span>
-                                <button class="copy-btn" onclick="copyText('상품설명 요청합니다.')">복사</button>
+                            <div style="margin-bottom:15px; font-size:11px; color:#888;">
+                                예) 2026년 희망인천 자금 신청합니다.
                             </div>
-                            <div class="copy-box">
-                                <span class="text-val">운전 자금(물품대금) 신청합니다.</span>
-                                <button class="copy-btn" onclick="copyText('운전 자금(물품대금) 신청합니다.')">복사</button>
+
+                            <div style="border-top:1px dashed #ccc; margin:10px 0;"></div>
+
+                            <div style="font-size:12px; font-weight:bold; color:#d32f2f; margin-bottom:5px;">▼ 상품을 모르거나, 심사 시 요청사항이 있다면?</div>
+                            <div style="background:#fff5f5; padding:8px; border-radius:6px; font-size:11px; color:#c92a2a; margin-bottom:8px;">
+                                <strong>💡 심사역이 참고해야 할 내용을 적어주세요.</strong><br>
+                                (예: 자금 용도, 현재 대출 상황, 특이사항 등)
                             </div>
+                            
+                            <div class="copy-box">
+                                <div style="flex:1;">
+                                    <span class="text-val">상품은 잘 모르겠습니다. [내용입력] 등을 고려하여 알맞는 상품으로 진행 부탁드립니다.</span>
+                                </div>
+                                <button class="copy-btn" onclick="copyText('상품은 잘 모르겠습니다. [내용입력] 등을 고려하여 알맞는 상품으로 진행 부탁드립니다.')">서식복사</button>
+                            </div>
+                            <div style="font-size:11px; color:#666; margin-top:4px; margin-bottom:15px;">
+                                * [내용입력] 부분에 사장님의 상황을 간단히 적어주세요.
+                            </div>
+
+                            <div style="font-size:12px; font-weight:bold; color:#333; margin-bottom:5px;">▼ 작성이 어렵다면? (방문요청)</div>
+                            <div class="copy-box">
+                                <span class="text-val">글 작성이 어렵습니다. 방문상담(지점방문) 요청합니다.</span>
+                                <button class="copy-btn" onclick="copyText('글 작성이 어렵습니다. 방문상담(지점방문) 요청합니다.')">복사</button>
+                            </div>
+                            <div style="font-size:11px; color:#d32f2f;">※ 전화 상담은 불가능합니다.</div>
+
                         </div>
 
                         <button class="accordion-btn" onclick="toggleAccordion('acc_semas')">
@@ -564,7 +523,7 @@
                             <div class="copy-box">
                                 <div style="flex:1;">
                                     <div style="font-size:11px; color:#666; margin-bottom:2px;">[가족 소유 건물일 때]</div>
-                                    <span class="text-val">전산상 자가로 체크했으나, 실제로는 가족(부모/배우자) 소유 부동산 무상 거주 중입니다. (가족관계증명서 제출 가능)</span>
+                                    <span class="text-val">전산상 자가 체크 / 실제 가족 소유 부동산 무상 거주 중 (가족관계증명서 제출 가능)</span>
                                 </div>
                                 <button class="copy-btn" onclick="copyText('전산상 자가로 체크했으나, 실제로는 가족(부모/배우자) 소유 부동산 무상 거주 중입니다. (가족관계증명서 제출 가능)')">복사</button>
                             </div>
@@ -572,7 +531,7 @@
                             <div class="copy-box">
                                 <div style="flex:1;">
                                     <div style="font-size:11px; color:#666; margin-bottom:2px;">[지인 소유(무상임대)일 때]</div>
-                                    <span class="text-val">전산상 자가로 체크했으나, 실제로는 지인 부동산 무상 사용 중입니다. (무상임대확인서 제출 가능)</span>
+                                    <span class="text-val">전산상 자가 체크 / 실제 지인 부동산 무상 사용 중 (무상임대확인서 제출 가능)</span>
                                 </div>
                                 <button class="copy-btn" onclick="copyText('전산상 자가로 체크했으나, 실제로는 지인 부동산 무상 사용 중입니다. (무상임대확인서 제출 가능)')">복사</button>
                             </div>
@@ -836,239 +795,9 @@
             navigator.clipboard.writeText(text).then(() => alert('복사되었습니다!'), () => alert('복사 실패!'));
         }
 
-        // -----------------------------------------------------------
-        // [상품 매칭 로직]
-        // -----------------------------------------------------------
-        const productDB = {
-            hope_incheon: {
-                name: "🌅 희망인천 특례보증",
-                desc: "사장님께 딱 맞는 <strong>인천시 대표 상품</strong>입니다.<br>(이자지원 혜택 / 완화된 심사 기준 적용)"
-            },
-            valueup_startup: {
-                name: "💎 소상공인 밸류업 특별보증",
-                desc: "매출과 신용이 우수한 사장님을 위한 <strong>한도 우대(최대 1억)</strong> 상품입니다."
-            }
-        };
-
-        const wizardSteps = [
-            {
-                id: "industry",
-                q: "1. 사업자등록증상 주업종 형태는?", sub: "",
-                options: [
-                    { label: "🏪 일반 점포 (음식/소매/서비스)", val: "store", next: 1 },
-                    { label: "💻 전자상거래/무점포 (통신판매업)", val: "ecommerce", next: 1 },
-                    { label: "🏭 제조업/건설업", val: "manuf", next: 1 },
-                    { label: "🚚 운수/화물", val: "transport", next: 1 },
-                    { label: "🚫 금융/유흥/도박/향락 (금지업종)", val: "banned", next: 1 }
-                ]
-            },
-            {
-                id: "biz_months",
-                q: "2. 개업일로부터 운영 기간은?", sub: "",
-                options: [
-                    { label: "🌱 3개월 미만", val: 2, next: 2 }, 
-                    { label: "🌿 3개월 ~ 6개월 미만", val: 4, next: 2 },
-                    { label: "🌳 6개월 ~ 1년 미만", val: 9, next: 2 },
-                    { label: "🏢 1년 ~ 3년 미만", val: 24, next: 2 },
-                    { label: "🏰 3년 이상", val: 36, next: 2 }
-                ]
-            },
-            {
-                id: "vat_count",
-                q: "3. 부가가치세 확정 신고 내역이 있나요?", sub: "",
-                options: [
-                    { label: "아니요 (신규/미신고)", val: 0, next: 3 },
-                    { label: "네, 1회 이상 신고함", val: 1, next: 3 }
-                ]
-            },
-            {
-                id: "revenue",
-                q: "4. 연 매출액 규모는 어느 정도인가요?", sub: "1년 미만인 경우, 월 평균 매출 x 12로 계산해주세요.",
-                options: [
-                    { label: "5천만 원 미만 (3천만 원 수준)", val: 3000, next: 4 },
-                    { label: "5천만 원 ~ 1억 원", val: 5000, next: 4 },
-                    { label: "1억 원 ~ 3억 원", val: 10000, next: 4 },
-                    { label: "3억 원 ~ 5억 원", val: 30000, next: 4 },
-                    { label: "5억 원 이상", val: 50000, next: 4 }
-                ]
-            },
-            {
-                id: "credit_score",
-                q: "5. 대표님의 NICE 신용평점 구간은?", sub: "",
-                options: [
-                    { label: "💎 최상위 (965점 이상)", val: 970, next: 5 },
-                    { label: "🥇 우수 (880 ~ 964점)", val: 900, next: 5 },
-                    { label: "🥈 양호 (790 ~ 879점)", val: 800, next: 5 },
-                    { label: "🥉 보통 (710 ~ 789점)", val: 750, next: 5 },
-                    { label: "⚠️ 관리 필요 (709점 이하)", val: 650, next: 5 }
-                ]
-            },
-            {
-                id: "loan_quality",
-                q: "6. 현재 보유 중인 대출의 구성(질)은?", sub: "가장 비중이 큰 대출을 기준으로 선택해주세요.",
-                options: [
-                    { label: "🌟 1금융권(시중은행) 위주", risk: 0, next: 6 },
-                    { label: "🙂 2금융권(저축/캐피탈) 1건 보유", risk: 10, next: 6 },
-                    { label: "😐 2금융권 2건 이상 (복수 이용)", risk: 30, next: 6 },
-                    { label: "😅 현금서비스/카드론 빈번 이용", risk: 50, next: 6 },
-                    { label: "🚨 대부업/사채/연체 중 (부결)", risk: 100, next: 6 }
-                ]
-            },
-            {
-                id: "legal_status",
-                q: "7. 과거 개인회생, 파산 또는 대위변제 이력이 있나요?", sub: "재단 심사 시 필수 확인 사항입니다.",
-                options: [
-                    { label: "없습니다 (해당사항 없음)", status: "clean", next: 7 },
-                    { label: "개인회생/파산/면책 이력 있음", status: "bad", next: 7 },
-                    { label: "재단 대위변제(보증채무이행) 이력 있음", status: "bad", next: 7 },
-                    { label: "현재 국세/지방세 체납 중", status: "bad", next: 7 },
-                    { label: "잘 모르겠습니다", status: "unknown", next: 7 }
-                ]
-            },
-            {
-                id: "last_guarantee_gap",
-                q: "8. 최근 재단 보증서를 발급받은 시점은?", sub: "",
-                options: [
-                    { label: "받은 적 없음 (또는 1년 경과)", val: 12, next: 8 },
-                    { label: "6개월 이상 지났음", val: 7, next: 8 },
-                    { label: "3개월 ~ 6개월 사이", val: 4, next: 8 },
-                    { label: "3개월 이내", val: 1, next: 8 }
-                ]
-            },
-            {
-                id: "hope_amount",
-                q: "9. 희망하시는 보증서 발급 금액은?", sub: "재단 한도 심사에 참고됩니다.",
-                options: [
-                    { label: "1천만 원 ~ 2천만 원", val: 1000, next: 9 },
-                    { label: "3천만 원", val: 3000, next: 9 },
-                    { label: "5천만 원", val: 5000, next: 9 },
-                    { label: "7천만 원", val: 7000, next: 9 },
-                    { label: "1억 원 이상", val: 10000, next: 9 }
-                ]
-            },
-            {
-                id: "preference",
-                q: "10. 가장 중요하게 생각하는 조건은?", sub: "",
-                options: [
-                    { label: "💰 한도가 넉넉해야 합니다", type: "limit", next: 10 },
-                    { label: "📉 금리가 저렴해야 합니다", type: "rate", next: 10 }
-                ]
-            }
-        ];
-
-        let currentStep = 0;
-        let userData = {};
-
-        function initCalculator() {
-            currentStep = 0;
-            userData = {};
-            document.getElementById('wizard-container').style.display = 'block';
-            document.getElementById('result-area').innerHTML = '';
-            renderStep();
-        }
-
-        function renderStep() {
-            const container = document.getElementById('wizard-container');
-            const step = wizardSteps[currentStep];
-            if (!step) { matchProduct(); return; }
-
-            let html = `<div class="wizard-step">
-                            <div class="q-title">${step.q}</div>
-                            <div class="q-sub" style="display:block; font-size:13px; color:#666; margin-bottom:15px;">${step.sub}</div>`;
-            step.options.forEach((opt, idx) => {
-                html += `<div class="option-btn" onclick="handleSelect(${idx})">
-                            <span>${opt.label}</span> <i class="fa-solid fa-chevron-right"></i>
-                         </div>`;
-            });
-            html += `</div>`;
-            container.innerHTML = html;
-        }
-
-        function handleSelect(idx) {
-            const step = wizardSteps[currentStep];
-            const selected = step.options[idx];
-            
-            userData[step.id] = selected.val;
-            if (selected.risk !== undefined) userData['risk'] = selected.risk; 
-            if (selected.status !== undefined) userData['status'] = selected.status;
-            
-            if (currentStep === wizardSteps.length - 1) {
-                matchProduct();
-            } else {
-                currentStep++;
-                renderStep();
-            }
-        }
-
-        function matchProduct() {
-            document.getElementById('wizard-container').style.display = 'none';
-
-            if (userData.industry === "banned") return showFail("banned_industry");
-            if (userData.status === "bad" || userData.risk >= 100) return showFail("legal_issue");
-            if (userData.last_guarantee_gap <= 1) return showFail("recent_guarantee");
-
-            if (userData.industry === "ecommerce") {
-                if (userData.biz_months < 9 || userData.vat_count === 0) {
-                    return showFail("ecommerce_strict");
-                }
-            }
-
-            let recommended = productDB.hope_incheon;
-            if (userData.revenue >= 30000 && userData.hope_amount >= 5000 && userData.last_guarantee_gap >= 7) {
-                recommended = productDB.valueup_startup;
-            }
-
-            showSuccess(recommended);
-        }
-
-        function showSuccess(product) {
-            const resultArea = document.getElementById('result-area');
-            resultArea.innerHTML = `
-                <div class="result-card">
-                    <div style="margin-bottom:10px; color:#2b6fd3; font-weight:bold;">🎉 맞춤 추천</div>
-                    
-                    <div class="recommend-box">
-                        <span class="recommend-badge">추천 상품</span>
-                        <div class="recommend-title">${product.name}</div>
-                        <div class="recommend-desc">${product.desc}</div>
-                    </div>
-
-                    <div style="margin-top:20px; padding:20px; background:#f8f9fa; border-radius:10px; font-size:13px; color:#555; line-height:1.6; text-align:center; border:1px solid #eee;">
-                        해당 결과는 대략적인 결과이며,<br>정확한 상품 안내를 위해서는<br><strong>재단 상담을 통해 다시 확인해 주세요.</strong>
-                    </div>
-                    
-                    <button class="next-btn" style="margin-top:20px;" onclick="initCalculator()">다시 진단하기</button>
-                    <button class="next-btn" style="margin-top:10px; background:#333;" onclick="goPage('page-apply', '보증신청 안내')">신청방법 보러가기</button>
-                </div>`;
-        }
-
-        function showFail(reasonCode) {
-            const resultArea = document.getElementById('result-area');
-            let failTitle = "보증서 발급이 어렵습니다.";
-            let failDesc = "입력하신 정보로는<br>현재 진행 가능한 상품이 없습니다.";
-            
-            if (reasonCode === "ecommerce_strict") {
-                failDesc = "전자상거래(통신판매) 업종은<br><strong>사업기간 6개월 이상 & 부가세 신고 1회 이상</strong><br>내역이 있어야 신청 가능합니다.";
-            } else if (reasonCode === "legal_issue") {
-                failDesc = "개인회생, 파산, 면책, 대위변제 이력<br>또는 현재 연체/대부업 이용 중인 경우<br><strong>보증서 발급이 불가능</strong>합니다.";
-            } else if (reasonCode === "recent_guarantee") {
-                failDesc = "최근 <strong>3개월 이내</strong>에 재단 보증서를<br>발급받은 이력이 있어 추가 신청이 제한됩니다.";
-            } else if (reasonCode === "banned_industry") {
-                failDesc = "도박, 유흥, 향락 등<br><strong>보증 제한 업종</strong>은 신청이 불가능합니다.";
-            }
-
-            resultArea.innerHTML = `
-                <div class="result-card" style="background:#fff5f5; border-color:#ffc9c9; text-align:center;">
-                    <div style="font-size:50px; margin-bottom:10px;">🤔</div>
-                    <h3 style="color:#d32f2f;">${failTitle}</h3>
-                    <p style="color:#666; font-size:14px; margin-bottom:20px; line-height:1.5;">${failDesc}</p>
-                    
-                    <div style="margin-top:20px; padding:20px; background:white; border-radius:10px; font-size:13px; color:#555; line-height:1.6; text-align:center; border:1px solid #eee;">
-                        해당 결과는 대략적인 결과이며,<br>정확한 상품 안내를 위해서는<br><strong>재단 상담을 통해 다시 확인해 주세요.</strong>
-                    </div>
-                    <button class="next-btn" style="background:#555; margin-top:20px;" onclick="initCalculator()">처음으로</button>
-                </div>`;
-        }
+        // [메모] 아래 계산기(상품찾기) 로직은 기능 삭제로 인해 호출되지 않으나,
+        // 혹시 모를 오류 방지를 위해 코드 구조만 유지합니다.
+        function initCalculator() { console.log('Calculator disabled'); }
     </script>
 </body>
 </html>
