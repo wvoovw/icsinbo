@@ -91,21 +91,19 @@
             font-size: 20px; margin-bottom: 10px;
         }
 
-        /* [밴드 배너] */
+        /* [밴드/카톡 배너 스타일] */
         .band-banner {
-            margin-top: 10px; margin-bottom: 20px;
-            background: #fee500; color: #3a1d1d;
             padding: 22px 20px; border-radius: 16px;
             display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 8px 20px rgba(254, 229, 0, 0.2);
             text-decoration: none; cursor: pointer; position: relative; overflow: hidden;
+            transition: transform 0.1s;
         }
         .band-banner:active { transform: scale(0.98); }
         .band-content { flex: 1; position: relative; z-index: 2; }
         .band-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; }
-        .band-tag { font-size: 11px; background: #fff; color: #3a1d1d; padding: 3px 8px; border-radius: 20px; margin-left: 8px; font-weight:800; }
+        .band-tag { font-size: 11px; padding: 3px 8px; border-radius: 20px; margin-left: 8px; font-weight:800; }
         .band-desc { font-size: 13px; font-weight: 600; opacity: 0.9; line-height: 1.4; }
-        .band-icon { font-size: 24px; color: #3a1d1d; margin-left: 15px; width: 40px; text-align: center; }
+        .band-icon { font-size: 24px; margin-left: 15px; width: 40px; text-align: center; }
 
         /* [서브페이지 스타일] */
         .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; }
@@ -149,10 +147,6 @@
 
         .input-guide { background: #fff9db; border: 2px dashed #fab005; border-radius: 10px; padding: 15px; margin-top: 10px; text-align: center; }
         
-        /* 밴드 버튼 & 아코디언 스타일 */
-        .band-mini-btn { display: inline-block; background: var(--band-green); color: white; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .band-mini-btn.blue { background: #004c99; }
-        
         .accordion-box { text-align: left; margin-top: 15px; }
         .accordion-btn { width: 100%; background: white; border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 13px; font-weight: bold; color: #333; border-radius: 8px; margin-bottom: 6px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
         .accordion-content { display: none; background: #fffdf5; padding: 10px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ffeeba; }
@@ -163,7 +157,7 @@
 
         /* 본문 하단 버튼 그룹 */
         .static-action-group {
-            margin-top: 40px;
+            margin-top: 20px;
             padding: 25px 15px;
             background: #fff;
             border-top: 1px solid #eee;
@@ -204,7 +198,6 @@
         /* [영상 가이드 버튼 스타일] */
         .video-box { border: 2px solid #ff9999; background: #fff5f5; border-radius: 12px; padding: 20px; margin-top: 25px; margin-bottom: 20px; }
         .video-box-header { font-size: 16px; font-weight: 800; color: #d32f2f; margin-bottom: 12px; display: flex; align-items: center; }
-        .video-box-header i { margin-right: 8px; font-size: 20px; }
         .video-link-btn {
             display: flex; justify-content: space-between; align-items: center;
             background: white; padding: 14px; border-radius: 8px;
@@ -277,19 +270,35 @@
         
         <div id="page-main" class="page active">
             
-            <a href="https://open.kakao.com/o/pllUO2ci" target="_blank" class="band-banner">
-                <div class="band-content">
-                    <div class="band-title">
-                        정책자금 알림방 <span class="band-tag">무료/Kakao</span>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin: 10px 0 20px;">
+                
+                <a href="https://open.kakao.com/o/pllUO2ci" target="_blank" class="band-banner" style="margin:0; background:#fee500; color:#3a1d1d; border:none;">
+                    <div class="band-content">
+                        <div class="band-title">
+                            🚀 실시간 공지방 <span class="band-tag" style="background:#fff; color:#3a1d1d;">알림전용</span>
+                        </div>
+                        <div class="band-desc">
+                            선착순 접수 일정 & 중요 공고<br>
+                            <strong>대화 없이 "알림만"</strong> 빠르게 받으세요 🔔
+                        </div>
                     </div>
-                    <div class="band-desc">
-                        복잡한 공고 핵심요약 & 신청 가이드<br>
-                        <strong>카톡으로 가장 빠르게</strong> 받으세요 🔔
-                    </div>
-                </div>
-                <div class="band-icon"><i class="fa-solid fa-comment"></i></div>
-            </a>
+                    <div class="band-icon"><i class="fa-solid fa-bell"></i></div>
+                </a>
 
+                <a href="https://www.band.us/@drbiz" target="_blank" class="band-banner" style="margin:0; background:#03c75a; color:white; box-shadow: 0 8px 20px rgba(3, 199, 90, 0.2);">
+                    <div class="band-content">
+                        <div class="band-title">
+                            📖 상세 안내 & 설명 <span class="band-tag" style="background:white; color:#03c75a;">BAND</span>
+                        </div>
+                        <div class="band-desc">
+                            복잡한 공고문 해설 & 신청 꿀팁<br>
+                            <strong>자세한 설명은 밴드에서</strong> 읽어보세요 💡
+                        </div>
+                    </div>
+                    <div class="band-icon" style="color:white;"><i class="fa-solid fa-book-open"></i></div>
+                </a>
+
+            </div>
             <div class="menu-container">
                 <div class="menu-full-card" onclick="goPage('page-video-guide', '영상 가이드')" style="border:2px solid #ff9999; background:#fff5f5;">
                     <div class="menu-text">
@@ -334,6 +343,19 @@
                 </div>
             </div>
 
+            <div class="step-card" style="background:#fff9c4; border:none; text-align:center; margin-top:30px; box-shadow:none;">
+                <div style="font-size:16px; font-weight:800; color:#371c1d; margin-bottom:5px;">
+                    <i class="fa-solid fa-share-nodes"></i> 주변 사장님께 알려주기
+                </div>
+                <div style="font-size:13px; color:#371c1d; margin-bottom:15px; opacity:0.8;">
+                    "좋은 정보는 나눌수록 복이 옵니다!"<br>
+                    힘들어하는 지인 사장님께 공유해보세요.
+                </div>
+                <button onclick="shareMyPage()" style="background:#371c1d; color:white; border:none; padding:12px 20px; border-radius:30px; font-weight:bold; font-size:14px; width:100%; cursor:pointer; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+                    카톡/문자로 링크 보내주기 🚀
+                </button>
+            </div>
+
             <footer>
                 © 2026. 신용보증재단 통합안내<br>
                 <div class="disclaimer-box">
@@ -376,7 +398,7 @@
                 <div style="font-size:13px; color:#d32f2f; font-weight:800; margin-bottom:10px;">👇 위 내용을 모두 확인하셨나요?</div>
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -562,7 +584,7 @@
                 <div style="font-size:13px; color:#d32f2f; font-weight:800; margin-bottom:10px;">👇 위 내용을 모두 확인하셨나요?</div>
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -627,7 +649,7 @@
             <div class="static-action-group">
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -682,7 +704,7 @@
             <div class="static-action-group">
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -740,7 +762,7 @@
             <div class="static-action-group">
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-comments" style="margin-right:6px;"></i> 자료실/질문
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -795,9 +817,27 @@
             navigator.clipboard.writeText(text).then(() => alert('복사되었습니다!'), () => alert('복사 실패!'));
         }
 
-        // [메모] 아래 계산기(상품찾기) 로직은 기능 삭제로 인해 호출되지 않으나,
-        // 혹시 모를 오류 방지를 위해 코드 구조만 유지합니다.
-        function initCalculator() { console.log('Calculator disabled'); }
+        // [추가된 기능] 공유하기 버튼 스크립트
+        function shareMyPage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '신용보증재단 통합 안내',
+                    text: '사장님, 보증재단 서류랑 신청방법 여기서 보세요. 정리가 잘 되어있네요.',
+                    url: window.location.href,
+                })
+                .then(() => console.log('공유 성공'))
+                .catch((error) => console.log('공유 실패', error));
+            } else {
+                // PC 등 공유 기능 미지원 시 URL 복사
+                var dummy = document.createElement("textarea");
+                document.body.appendChild(dummy);
+                dummy.value = window.location.href;
+                dummy.select();
+                document.execCommand("copy");
+                document.body.removeChild(dummy);
+                alert("주소가 복사되었습니다! 카톡방에 붙여넣기 하세요.");
+            }
+        }
     </script>
 </body>
 </html>
