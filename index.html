@@ -22,7 +22,7 @@
             --primary: #004c99; --primary-bg: #eef6fc; --text-main: #191f28;
             --text-sub: #6b7684; --bg: #f2f4f6; --white: #ffffff;
             --alert: #d32f2f; --app-blue: #2b6fd3; --band-green: #03c75a; 
-            --btn-gray: #4a4a4a;
+            --kakao-yellow: #fee500; --btn-gray: #4a4a4a;
         }
 
         body { 
@@ -48,62 +48,66 @@
             display: none; 
         }
 
-        .page { display: none; padding: 20px 16px; animation: fadeIn 0.3s; }
+        .page { display: none; padding: 15px 16px; animation: fadeIn 0.3s; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* [메뉴 디자인] */
-        .menu-container {
-            display: flex; flex-direction: column; gap: 12px; margin-top: 15px;
+        /* [완전히 새로워진 알림 배너 스타일] */
+        .banner-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        
+        .new-banner {
+            flex: 1; border-radius: 14px; padding: 15px;
+            text-decoration: none; display: flex; align-items: center; /* 아이콘과 텍스트 가로 정렬 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.1s;
+            height: 70px; /* 높이 적절히 조절 */
         }
+        .new-banner:active { transform: scale(0.98); }
 
-        /* 상단 중요 메뉴 (가로 꽉 참) */
-        .menu-full-card {
-            background: var(--white); border-radius: 16px; padding: 20px;
+        .banner-icon-box {
+            width: 42px; height: 42px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-right: 12px; flex-shrink: 0; /* 아이콘 박스 고정 */
+        }
+        
+        .banner-text-box { display: flex; flex-direction: column; justify-content: center; }
+        .banner-tag { font-size: 11px; font-weight: 800; opacity: 0.8; margin-bottom: 2px; }
+        .banner-title { font-size: 15px; font-weight: 800; line-height: 1.25; }
+
+        /* 카카오톡 스타일 */
+        .new-banner.kakao { background: var(--kakao-yellow); color: #3a1d1d; }
+        .new-banner.kakao .banner-icon-box { background: rgba(58, 29, 29, 0.1); color: #3a1d1d; }
+        
+        /* 밴드 스타일 */
+        .new-banner.band { background: var(--band-green); color: white; }
+        .new-banner.band .banner-icon-box { background: rgba(255, 255, 255, 0.2); color: white; }
+
+
+        /* [영상 가이드 슬림 배너] */
+        .slim-video-banner {
+            background: white; border: 2px solid #ff9999; border-radius: 14px;
+            padding: 12px 15px; margin-bottom: 20px; cursor: pointer;
             display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
-            cursor: pointer; position: relative; overflow: hidden;
-            transition: transform 0.1s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
-        .menu-full-card:active { transform: scale(0.98); background: #f9f9f9; }
-        
-        /* 하단 일반 메뉴 (2개씩 배치) */
-        .menu-grid-2col {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-        }
-        
-        .menu-half-card {
-            background: var(--white); border-radius: 16px; padding: 20px 15px;
+        .slim-video-banner:active { background: #fff5f5; transform: scale(0.99); }
+
+        /* [메뉴 그리드] */
+        .menu-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .menu-card {
+            background: var(--white); border-radius: 16px; padding: 18px 15px;
             display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid #e9ecef;
-            cursor: pointer; height: 110px;
+            cursor: pointer; height: 100px; position: relative;
         }
-        .menu-half-card:active { transform: scale(0.98); background: #f8f9fa; }
-
-        /* 텍스트 스타일 */
-        .menu-text h2 { margin: 0 0 4px; font-size: 17px; font-weight: 700; color: #333; line-height: 1.3; }
-        .menu-text p { margin: 0; font-size: 12px; color: #888; letter-spacing: -0.5px; }
+        .menu-card:active { transform: scale(0.98); background: #f8f9fa; }
         
-        /* 아이콘 스타일 */
         .icon-box {
-            width: 40px; height: 40px; border-radius: 10px; 
+            width: 36px; height: 36px; border-radius: 10px; 
             display: flex; align-items: center; justify-content: center;
-            font-size: 20px; margin-bottom: 10px;
+            font-size: 18px; margin-bottom: 8px;
         }
-
-        /* [밴드/카톡 배너 스타일] */
-        .band-banner {
-            padding: 22px 20px; border-radius: 16px;
-            display: flex; align-items: center; justify-content: space-between;
-            text-decoration: none; cursor: pointer; position: relative; overflow: hidden;
-            transition: transform 0.1s;
-        }
-        .band-banner:active { transform: scale(0.98); }
-        .band-content { flex: 1; position: relative; z-index: 2; }
-        .band-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; }
-        .band-tag { font-size: 11px; padding: 3px 8px; border-radius: 20px; margin-left: 8px; font-weight:800; }
-        .band-desc { font-size: 13px; font-weight: 600; opacity: 0.9; line-height: 1.4; }
-        .band-icon { font-size: 24px; margin-left: 15px; width: 40px; text-align: center; }
+        .menu-text h2 { margin: 0 0 2px; font-size: 16px; font-weight: 700; color: #333; }
+        .menu-text p { margin: 0; font-size: 12px; color: #888; }
 
         /* [서브페이지 스타일] */
         .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; }
@@ -155,6 +159,20 @@
         .text-val { font-size: 12px; color: #333; font-weight: 500; line-height: 1.3; margin-right: 5px; }
         .copy-btn { background: #333; color: white; border: none; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; white-space: nowrap; font-weight: bold; }
 
+        /* [영상 가이드 버튼 스타일] */
+        .video-box { border: 2px solid #ff9999; background: #fff5f5; border-radius: 12px; padding: 20px; margin-top: 25px; margin-bottom: 20px; }
+        .video-box-header { font-size: 16px; font-weight: 800; color: #d32f2f; margin-bottom: 12px; display: flex; align-items: center; }
+        .video-link-btn {
+            display: flex; justify-content: space-between; align-items: center;
+            background: white; padding: 14px; border-radius: 8px;
+            margin-bottom: 8px; border: 1px solid #ffdcdc;
+            text-decoration: none; color: #333; transition: all 0.2s;
+        }
+        .video-link-btn:active { background: #ffebeb; transform: scale(0.98); }
+        .video-link-title { font-size: 14px; font-weight: 700; color: #333; }
+        .video-link-badge { font-size: 11px; background: #d32f2f; color: white; padding: 2px 6px; border-radius: 4px; margin-right: 6px; }
+        .video-icon { color: #d32f2f; font-size: 18px; }
+
         /* 본문 하단 버튼 그룹 */
         .static-action-group {
             margin-top: 20px;
@@ -194,20 +212,6 @@
         .check-list li::before { content: '🚫'; position: absolute; left: 0; top: 0; font-size: 14px; }
 
         footer { font-size: 12px; color: #999; text-align: center; margin-top: 40px; border-top: 1px solid #e5e8eb; padding-top: 20px; padding-bottom: 20px; }
-
-        /* [영상 가이드 버튼 스타일] */
-        .video-box { border: 2px solid #ff9999; background: #fff5f5; border-radius: 12px; padding: 20px; margin-top: 25px; margin-bottom: 20px; }
-        .video-box-header { font-size: 16px; font-weight: 800; color: #d32f2f; margin-bottom: 12px; display: flex; align-items: center; }
-        .video-link-btn {
-            display: flex; justify-content: space-between; align-items: center;
-            background: white; padding: 14px; border-radius: 8px;
-            margin-bottom: 8px; border: 1px solid #ffdcdc;
-            text-decoration: none; color: #333; transition: all 0.2s;
-        }
-        .video-link-btn:active { background: #ffebeb; transform: scale(0.98); }
-        .video-link-title { font-size: 14px; font-weight: 700; color: #333; }
-        .video-link-badge { font-size: 11px; background: #d32f2f; color: white; padding: 2px 6px; border-radius: 4px; margin-right: 6px; }
-        .video-icon { color: #d32f2f; font-size: 18px; }
 
     </style>
 </head>
@@ -270,75 +274,71 @@
         
         <div id="page-main" class="page active">
             
-            <div style="display: flex; flex-direction: column; gap: 10px; margin: 10px 0 20px;">
-                
-                <a href="https://open.kakao.com/o/pllUO2ci" target="_blank" class="band-banner" style="margin:0; background:#fee500; color:#3a1d1d; border:none;">
-                    <div class="band-content">
-                        <div class="band-title">
-                            🚀 실시간 공지방 <span class="band-tag" style="background:#fff; color:#3a1d1d;">알림전용</span>
-                        </div>
-                        <div class="band-desc">
-                            선착순 접수 일정 & 중요 공고<br>
-                            <strong>대화 없이 "알림만"</strong> 빠르게 받으세요 🔔
-                        </div>
+            <div class="banner-row">
+                <a href="https://open.kakao.com/o/pllUO2ci" target="_blank" class="new-banner kakao">
+                    <div class="banner-icon-box">
+                        <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <div class="band-icon"><i class="fa-solid fa-bell"></i></div>
+                    <div class="banner-text-box">
+                        <span class="banner-tag">선착순 필수</span>
+                        <div class="banner-title">실시간<br>마감 알림방</div>
+                    </div>
                 </a>
 
-                <a href="https://www.band.us/@drbiz" target="_blank" class="band-banner" style="margin:0; background:#03c75a; color:white; box-shadow: 0 8px 20px rgba(3, 199, 90, 0.2);">
-                    <div class="band-content">
-                        <div class="band-title">
-                            📖 상세 안내 & 설명 <span class="band-tag" style="background:white; color:#03c75a;">BAND</span>
-                        </div>
-                        <div class="band-desc">
-                            복잡한 공고문 해설 & 신청 꿀팁<br>
-                            <strong>자세한 설명은 밴드에서</strong> 읽어보세요 💡
-                        </div>
+                <a href="https://www.band.us/@drbiz" target="_blank" class="new-banner band">
+                    <div class="banner-icon-box">
+                        <i class="fa-solid fa-bell"></i>
                     </div>
-                    <div class="band-icon" style="color:white;"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="banner-text-box">
+                        <span class="banner-tag">공고문 구독</span>
+                        <div class="banner-title">정책자금<br>상세 알리미</div>
+                    </div>
                 </a>
-
             </div>
-            <div class="menu-container">
-                <div class="menu-full-card" onclick="goPage('page-video-guide', '영상 가이드')" style="border:2px solid #ff9999; background:#fff5f5;">
-                    <div class="menu-text">
-                        <h2 style="color:#d32f2f;">📂 서류제출 / 전자약정이 어렵다면?</h2>
-                        <p style="color:#d32f2f; font-weight:bold;">'영상 가이드' 보고 따라하기!</p>
+
+            <div onclick="goPage('page-video-guide', '영상 가이드')" class="slim-video-banner">
+                <div style="display:flex; align-items:center;">
+                    <div style="font-size:24px; color:#d32f2f; margin-right:12px;">
+                        <i class="fa-brands fa-youtube"></i>
                     </div>
-                    <div style="font-size:28px; color:#d32f2f;"><i class="fa-brands fa-youtube"></i></div>
+                    <div>
+                        <div style="font-size:15px; font-weight:800; color:#333;">서류/약정이 어려우신가요?</div>
+                        <div style="font-size:12px; color:#d32f2f;">'영상 가이드' 보고 따라하기!</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#aaa;"></i>
+            </div>
+
+            <div class="menu-grid-2col">
+                <div class="menu-card" onclick="goPage('page-apply', '신규 보증신청 안내')">
+                    <div class="icon-box" style="background:#eef6fc; color:#004c99;"><i class="fa-solid fa-file-pen"></i></div>
+                    <div class="menu-text">
+                        <h2>1. 보증신청</h2>
+                        <p>신규 / 추가 대출</p>
+                    </div>
                 </div>
 
-                <div class="menu-grid-2col">
-                    <div class="menu-half-card" onclick="goPage('page-apply', '신규 보증신청 안내')">
-                        <div class="icon-box" style="background:#eef6fc; color:#004c99;"><i class="fa-solid fa-file-pen"></i></div>
-                        <div class="menu-text">
-                            <h2>1. 보증신청</h2>
-                            <p>신규 / 추가 대출</p>
-                        </div>
+                <div class="menu-card" onclick="goPage('page-extension', '기한연장 안내')">
+                    <div class="icon-box" style="background:#fff4e6; color:#fd7e14;"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="menu-text">
+                        <h2>2. 기한연장</h2>
+                        <p>만기 연장 안내</p>
                     </div>
+                </div>
 
-                    <div class="menu-half-card" onclick="goPage('page-extension', '기한연장 안내')">
-                        <div class="icon-box" style="background:#fff4e6; color:#fd7e14;"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                        <div class="menu-text">
-                            <h2>2. 기한연장</h2>
-                            <p>만기 연장 안내</p>
-                        </div>
+                <div class="menu-card" onclick="goPage('page-repayment', '전환보증 신청 안내')">
+                    <div class="icon-box" style="background:#e6fcf5; color:#0ca678;"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="menu-text">
+                        <h2>3. 전환보증</h2>
+                        <p>원금상환 곤란 시</p>
                     </div>
+                </div>
 
-                    <div class="menu-half-card" onclick="goPage('page-repayment', '전환보증 신청 안내')">
-                        <div class="icon-box" style="background:#e6fcf5; color:#0ca678;"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                        <div class="menu-text">
-                            <h2>3. 전환보증</h2>
-                            <p>원금상환 곤란 시</p>
-                        </div>
-                    </div>
-
-                    <div class="menu-half-card" onclick="goPage('page-closure', '폐업 사업자 안내')">
-                        <div class="icon-box" style="background:#f1f3f5; color:#495057;"><i class="fa-solid fa-store-slash"></i></div>
-                        <div class="menu-text">
-                            <h2>4. 폐업한 경우</h2>
-                            <p>브릿지 보증 등</p>
-                        </div>
+                <div class="menu-card" onclick="goPage('page-closure', '폐업 사업자 안내')">
+                    <div class="icon-box" style="background:#f1f3f5; color:#495057;"><i class="fa-solid fa-store-slash"></i></div>
+                    <div class="menu-text">
+                        <h2>4. 폐업한 경우</h2>
+                        <p>브릿지 보증 등</p>
                     </div>
                 </div>
             </div>
