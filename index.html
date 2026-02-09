@@ -52,40 +52,36 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* [완전히 새로워진 알림 배너 스타일] */
+        /* [배너 스타일] */
         .banner-row { display: flex; gap: 10px; margin-bottom: 10px; }
         
         .new-banner {
             flex: 1; border-radius: 14px; padding: 15px;
-            text-decoration: none; display: flex; align-items: center; /* 아이콘과 텍스트 가로 정렬 */
+            text-decoration: none; display: flex; align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.1s;
-            height: 70px; /* 높이 적절히 조절 */
+            height: 70px;
         }
         .new-banner:active { transform: scale(0.98); }
 
         .banner-icon-box {
             width: 42px; height: 42px; border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 22px; margin-right: 12px; flex-shrink: 0; /* 아이콘 박스 고정 */
+            font-size: 22px; margin-right: 12px; flex-shrink: 0;
         }
         
         .banner-text-box { display: flex; flex-direction: column; justify-content: center; }
         .banner-tag { font-size: 11px; font-weight: 800; opacity: 0.8; margin-bottom: 2px; }
         .banner-title { font-size: 15px; font-weight: 800; line-height: 1.25; }
 
-        /* 카카오톡 스타일 */
-        .new-banner.kakao { background: var(--kakao-yellow); color: #3a1d1d; }
-        .new-banner.kakao .banner-icon-box { background: rgba(58, 29, 29, 0.1); color: #3a1d1d; }
-        
         /* 밴드 스타일 */
         .new-banner.band { background: var(--band-green); color: white; }
         .new-banner.band .banner-icon-box { background: rgba(255, 255, 255, 0.2); color: white; }
 
 
-        /* [영상 가이드 슬림 배너] */
+        /* [슬림 배너 공통] */
         .slim-video-banner {
             background: white; border: 2px solid #ff9999; border-radius: 14px;
-            padding: 12px 15px; margin-bottom: 20px; cursor: pointer;
+            padding: 12px 15px; margin-bottom: 10px; cursor: pointer;
             display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
@@ -110,7 +106,7 @@
         .menu-text p { margin: 0; font-size: 12px; color: #888; }
 
         /* [서브페이지 스타일] */
-        .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; }
+        .section-header { display: flex; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: 700; color: #333; margin-top: 20px; }
         .section-header i { color: #fbc02d; margin-right: 8px; font-size: 20px; }
         
         .step-card {
@@ -120,6 +116,33 @@
         .step-badge { display: inline-block; background: var(--primary); color: white; font-size: 12px; font-weight: 800; padding: 4px 8px; border-radius: 6px; margin-bottom: 10px; }
         .step-title { font-size: 17px; font-weight: 700; color: #333; margin-bottom: 8px; line-height: 1.4; }
         .ui-menu { color: var(--primary); background: var(--primary-bg); padding: 2px 6px; border-radius: 4px; font-weight: 800; }
+
+        /* [신규 추가] 프로세스 알약 디자인 (이미지 반영) */
+        .process-pill {
+            display: flex; align-items: center;
+            background: white;
+            border: 2px solid var(--primary); /* 파란 테두리 */
+            border-radius: 50px; /* 둥근 알약 모양 */
+            padding: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pill-label {
+            width: 85px; text-align: center;
+            color: var(--primary); font-weight: 800; font-size: 14px;
+            padding: 15px 5px; flex-shrink: 0;
+            border-right: 1px solid #e5e8eb; /* 중간 구분선 */
+        }
+        .pill-content {
+            flex: 1; padding: 12px 15px;
+            font-size: 13px; color: #333; line-height: 1.4;
+            font-weight: 500;
+        }
+        .step-arrow-down {
+            text-align: center; color: #fbc02d; /* 노란 화살표 */
+            font-size: 18px; margin: 6px 0;
+        }
 
         .scenario-box { border: 2px solid #e5e8eb; border-radius: 12px; padding: 15px; margin-top: 15px; background: #fff; }
         .scenario-title { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 10px; display: flex; align-items: center; }
@@ -275,23 +298,13 @@
         <div id="page-main" class="page active">
             
             <div class="banner-row">
-                <a href="https://open.kakao.com/o/pllUO2ci" target="_blank" class="new-banner kakao">
-                    <div class="banner-icon-box">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-                    <div class="banner-text-box">
-                        <span class="banner-tag">선착순 필수</span>
-                        <div class="banner-title">실시간<br>마감 알림방</div>
-                    </div>
-                </a>
-
                 <a href="https://www.band.us/@drbiz" target="_blank" class="new-banner band">
                     <div class="banner-icon-box">
                         <i class="fa-solid fa-bell"></i>
                     </div>
                     <div class="banner-text-box">
                         <span class="banner-tag">공고문 구독</span>
-                        <div class="banner-title">정책자금<br>상세 알리미</div>
+                        <div class="banner-title">정책자금 알리미<br>가입하기</div>
                     </div>
                 </a>
             </div>
@@ -302,11 +315,24 @@
                         <i class="fa-brands fa-youtube"></i>
                     </div>
                     <div>
-                        <div style="font-size:15px; font-weight:800; color:#333;">서류/약정이 어려우신가요?</div>
+                        <div style="font-size:15px; font-weight:800; color:#333;">서류제출 및 약정서 작성이 어려우신가요?</div>
                         <div style="font-size:12px; color:#d32f2f;">'영상 가이드' 보고 따라하기!</div>
                     </div>
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color:#aaa;"></i>
+            </div>
+            
+            <div onclick="goPage('page-guide', '이용 절차 안내')" class="slim-video-banner" style="border-color:#fcc419; background:#fff9db; margin-bottom:20px;">
+                <div style="display:flex; align-items:center;">
+                    <div style="font-size:24px; margin-right:12px;">
+                        🔰
+                    </div>
+                    <div>
+                        <div style="font-size:15px; font-weight:800; color:#333;">처음 이용하시나요? (필독)</div>
+                        <div style="font-size:12px; color:#e67700;">절차, 소요기간(1~3주), 금리 안내</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#e67700;"></i>
             </div>
 
             <div class="menu-grid-2col">
@@ -360,11 +386,82 @@
                 © 2026. 신용보증재단 통합안내<br>
                 <div class="disclaimer-box">
                     <strong>※ 이용 전 필독 (면책 조항)</strong><br>
-                    1. 본 페이지와 연결된 밴드는 재단 공식 채널이 아니며, <strong>직원 개인이 민원인 편의를 위해 정리한 참고 자료</strong>입니다.<br>
+                    1. 본 페이지와 연결된 곳은 재단 공식 채널이 아니며, <strong>직원 개인이 민원인 편의를 위해 정리한 참고 자료</strong>입니다.<br>
                     2. 모든 보증 심사는 공식 절차에 따라 진행되며, 본 자료가 심사 결과를 보장하지 않습니다.<br>
                     3. 민원 접수 및 상세 상담은 공식 콜센터를 이용해 주시기 바랍니다.
                 </div>
             </footer>
+        </div>
+
+        <div id="page-guide" class="page">
+            
+            <div class="check-bank-box" style="background:#fff5f5; border-color:#ff8787; text-align:left; padding:20px;">
+                <span style="font-size:16px; font-weight:800; color:#c92a2a; display:block; margin-bottom:8px;">
+                    ⏳ 예상 소요 기간: 약 1주 ~ 3주
+                </span>
+                <div style="font-size:14px; color:#333; line-height:1.5;">
+                    <strong>"오늘 신청하면 내일 나오나요?" (❌)</strong><br>
+                    <span style="color:#555; font-size:13px;">
+                    재단은 사장님의 신용과 사업성을 검토하여 보증을 서주는 곳입니다. 자금이 필요하시다면 <strong>시간적 여유를 두고 미리 신청</strong>해주세요.
+                    </span>
+                </div>
+            </div>
+
+            <div class="section-header"><i class="fa-solid fa-list-ol"></i> 신용보증이용절차</div>
+
+            <div class="process-pill">
+                <div class="pill-label">보증상담</div>
+                <div class="pill-content">
+                    인터넷(무방문신용보증) 또는 온라인 예약 후 보증 상담 및 신청
+                </div>
+            </div>
+            <div class="step-arrow-down"><i class="fa-solid fa-caret-down"></i></div>
+
+            <div class="process-pill">
+                <div class="pill-label">신용조사</div>
+                <div class="pill-content">
+                    사업장을 방문하여 신용상태 및 보증지원 타당성 조사
+                </div>
+            </div>
+            <div class="step-arrow-down"><i class="fa-solid fa-caret-down"></i></div>
+
+            <div class="process-pill">
+                <div class="pill-label">보증심사</div>
+                <div class="pill-content">
+                    신청서류 검토 후 신용보증지원여부 및 적정지원규모 결정
+                </div>
+            </div>
+            <div class="step-arrow-down"><i class="fa-solid fa-caret-down"></i></div>
+
+            <div class="process-pill">
+                <div class="pill-label">보증서발급</div>
+                <div class="pill-content">
+                    신용보증약정 체결, 보증료납부 후 보증서 발급
+                </div>
+            </div>
+            <div class="step-arrow-down"><i class="fa-solid fa-caret-down"></i></div>
+
+            <div class="process-pill">
+                <div class="pill-label">금융회사</div>
+                <div class="pill-content">
+                    대출실행(보증서담보)
+                </div>
+            </div>
+
+            <div style="background:#f8f9fa; padding:15px; border-radius:12px; margin-top:20px; border:1px dashed #ccc;">
+                <div style="font-weight:bold; color:#333; margin-bottom:5px;">💡 빠른 처리를 위한 꿀팁</div>
+                <ul style="margin:0; padding-left:20px; font-size:13px; color:#555;">
+                    <li style="margin-bottom:5px;">상담 시 안내받은 <strong>서류를 한 번에</strong> 챙겨주세요.</li>
+                    <li>실사 일정 조율 등 <strong>재단 연락을 잘 받아주세요.</strong></li>
+                </ul>
+            </div>
+
+            <div class="static-action-group">
+                <div style="font-size:14px; font-weight:bold; margin-bottom:10px;">절차를 이해하셨나요?</div>
+                <button onclick="goPage('page-apply', '신규 보증신청 안내')" class="action-btn btn-blue">
+                    네, 신청 방법 보러가기 👉
+                </button>
+            </div>
         </div>
 
         <div id="page-video-guide" class="page">
@@ -398,7 +495,7 @@
                 <div style="font-size:13px; color:#d32f2f; font-weight:800; margin-bottom:10px;">👇 위 내용을 모두 확인하셨나요?</div>
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -408,11 +505,6 @@
                     <i class="fa-solid fa-headset"></i> 시스템 오류/문의 : <a href="tel:044-270-4036">044-270-4036</a>
                 </div>
             </div>
-        </div>
-
-        <div id="page-calc" class="page">
-            <div id="wizard-container"></div>
-            <div id="result-area"></div>
         </div>
 
         <div id="page-apply" class="page">
@@ -516,7 +608,7 @@
                                 <span class="text-val">글 작성이 어렵습니다. 방문상담(지점방문) 요청합니다.</span>
                                 <button class="copy-btn" onclick="copyText('글 작성이 어렵습니다. 방문상담(지점방문) 요청합니다.')">복사</button>
                             </div>
-                            <div style="font-size:11px; color:#d32f2f;">※ 전화 상담은 불가능합니다.</div>
+                            <div style="font-size:11px; color:#d32f2f;">※ 유선 연락(전화)은 어렵습니다.</div>
 
                         </div>
 
@@ -584,7 +676,7 @@
                 <div style="font-size:13px; color:#d32f2f; font-weight:800; margin-bottom:10px;">👇 위 내용을 모두 확인하셨나요?</div>
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -601,7 +693,7 @@
                 <span class="check-icon">🏦</span>
                 <div class="check-title">은행 확인이 먼저입니다!</div>
                 <div class="check-desc">
-                    대출받으신 은행 지점에 전화하여<br>
+                    대출받으신 은행 지점에 연락(방문)하여<br>
                     <strong>"일반연장인지, 대환연장인지"</strong> 꼭 물어보세요.
                 </div>
             </div>
@@ -649,7 +741,7 @@
             <div class="static-action-group">
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -704,7 +796,7 @@
             <div class="static-action-group">
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -762,7 +854,7 @@
             <div class="static-action-group">
                 <div class="btn-group">
                     <a href="https://www.band.us/@drbiz" target="_blank" class="action-btn btn-gray">
-                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명(밴드)
+                        <i class="fa-solid fa-book-open" style="margin-right:6px;"></i> 상세설명
                     </a>
                     <button onclick="openGuaranteeDream()" class="action-btn btn-blue">
                         보증드림 바로가기 🚀
@@ -817,7 +909,7 @@
             navigator.clipboard.writeText(text).then(() => alert('복사되었습니다!'), () => alert('복사 실패!'));
         }
 
-        // [추가된 기능] 공유하기 버튼 스크립트
+        // [공유하기 기능]
         function shareMyPage() {
             if (navigator.share) {
                 navigator.share({
