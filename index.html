@@ -77,7 +77,6 @@
         .new-banner.band { background: var(--band-green); color: white; }
         .new-banner.band .banner-icon-box { background: rgba(255, 255, 255, 0.2); color: white; }
 
-
         /* [슬림 배너 공통] */
         .slim-video-banner {
             background: white; border: 2px solid #ff9999; border-radius: 14px;
@@ -117,32 +116,19 @@
         .step-title { font-size: 17px; font-weight: 700; color: #333; margin-bottom: 8px; line-height: 1.4; }
         .ui-menu { color: var(--primary); background: var(--primary-bg); padding: 2px 6px; border-radius: 4px; font-weight: 800; }
 
-        /* [신규 추가] 프로세스 알약 디자인 (이미지 반영) */
+        /* 프로세스 알약 디자인 */
         .process-pill {
             display: flex; align-items: center;
-            background: white;
-            border: 2px solid var(--primary); /* 파란 테두리 */
-            border-radius: 50px; /* 둥근 알약 모양 */
-            padding: 0;
-            margin-bottom: 0;
-            overflow: hidden;
+            background: white; border: 2px solid var(--primary); border-radius: 50px;
+            padding: 0; margin-bottom: 0; overflow: hidden;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .pill-label {
-            width: 85px; text-align: center;
-            color: var(--primary); font-weight: 800; font-size: 14px;
-            padding: 15px 5px; flex-shrink: 0;
-            border-right: 1px solid #e5e8eb; /* 중간 구분선 */
+            width: 85px; text-align: center; color: var(--primary); font-weight: 800; font-size: 14px;
+            padding: 15px 5px; flex-shrink: 0; border-right: 1px solid #e5e8eb;
         }
-        .pill-content {
-            flex: 1; padding: 12px 15px;
-            font-size: 13px; color: #333; line-height: 1.4;
-            font-weight: 500;
-        }
-        .step-arrow-down {
-            text-align: center; color: #fbc02d; /* 노란 화살표 */
-            font-size: 18px; margin: 6px 0;
-        }
+        .pill-content { flex: 1; padding: 12px 15px; font-size: 13px; color: #333; line-height: 1.4; font-weight: 500; }
+        .step-arrow-down { text-align: center; color: #fbc02d; font-size: 18px; margin: 6px 0; }
 
         .scenario-box { border: 2px solid #e5e8eb; border-radius: 12px; padding: 15px; margin-top: 15px; background: #fff; }
         .scenario-title { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 10px; display: flex; align-items: center; }
@@ -284,6 +270,47 @@
             </button>
             <div style="text-align:center; margin-top:15px;">
                 <span onclick="closeModal('systemErrorModal')" style="font-size:13px; color:#999; text-decoration:underline; cursor:pointer;">취소하고 돌아가기</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="bandCheckModal" class="modal-overlay">
+        <div class="modal-sheet">
+            <div style="width:40px; height:4px; background:#e0e0e0; margin:0 auto 20px; border-radius:2px;"></div>
+            
+            <h2 style="text-align:center; font-size:20px; margin-bottom:15px; color:#d32f2f; line-height:1.3; font-weight:800;">
+                📢 메시지 보내기 전 필독!
+            </h2>
+            
+            <div style="background:#fff0f0; padding:12px; border-radius:8px; margin-bottom:15px; border:1px solid #ffc9c9;">
+                <div style="font-size:14px; color:#333; font-weight:bold; margin-bottom:5px; text-align:center;">
+                    "정확한 심사 결과는 아닙니다"
+                </div>
+                <div style="font-size:12px; color:#555; line-height:1.5; word-break:keep-all;">
+                    사장님이 말씀해주신 내용만 보고 판단하기 때문에, <strong>실제 심사와 다를 수 있으며 대략적인 방향만 안내</strong>해 드립니다.
+                </div>
+            </div>
+
+            <div style="background:#f8f9fa; padding:12px; border-radius:8px; border:1px solid #ddd; margin-bottom:15px;">
+                <div style="font-size:12px; font-weight:bold; color:#004c99; margin-bottom:8px;">
+                    👇 아래 내용을 적어서 보내주세요
+                </div>
+                <div style="font-size:12px; color:#333; line-height:1.6; margin-bottom:5px;">
+                    1. 소재지(구/동):<br>
+                    2. 업종:<br>
+                    3. 개업일:<br>
+                    4. 작년매출:<br>
+                    5. 총 보증잔액 (재단/신보/기보 포함):<br>
+                    6. 최근 보증 이용 시기:<br>
+                    7. 희망 보증 금액:
+                </div>
+            </div>
+
+            <button class="close-btn" style="background:#03c75a; width:100%;" onclick="confirmBandAndGo()">
+                네, 이해했습니다. 밴드로 이동 💬
+            </button>
+            <div style="text-align:center; margin-top:15px;">
+                <span onclick="closeModal('bandCheckModal')" style="font-size:13px; color:#999; text-decoration:underline; cursor:pointer;">취소하고 돌아가기</span>
             </div>
         </div>
     </div>
@@ -566,49 +593,96 @@
                 
                 <div class="input-guide">
                     <p style="font-size:13px; color:#333; margin-bottom:10px;">
-                        상황에 맞춰 아래 내용을 복사해 주세요.
+                        상황에 맞춰 아래 내용을 선택해 주세요.
                     </p>
 
                     <div class="accordion-box">
-                        <button class="accordion-btn" onclick="toggleAccordion('acc_general')">
-                            <span>📌 가장 많이 쓰는 예시 (일반)</span>
+                        
+                        <button class="accordion-btn" onclick="toggleAccordion('acc_known')">
+                            <span>✅ 상품명을 아시는 경우 (추천)</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
-                        <div id="acc_general" class="accordion-content">
-                            
-                            <div style="font-size:12px; font-weight:bold; color:#004c99; margin-bottom:5px;">▼ 상품명을 아시는 경우 (추천)</div>
+                        <div id="acc_known" class="accordion-content">
+                            <div style="font-size:12px; font-weight:bold; color:#004c99; margin-bottom:5px;">▼ 입력 예시</div>
                             <div class="copy-box">
                                 <span class="text-val">[상품명 직접 입력] 신청합니다.</span>
-                                <button class="copy-btn" onclick="copyText('2026년 OOO자금 신청합니다.')">서식복사</button>
+                                <button class="copy-btn" onclick="copyText('2026년 희망인천 자금 신청합니다.')">서식복사</button>
                             </div>
-                            <div style="margin-bottom:15px; font-size:11px; color:#888;">
+                            <div style="margin-bottom:5px; font-size:11px; color:#888;">
                                 예) 2026년 희망인천 자금 신청합니다.
                             </div>
+                        </div>
 
-                            <div style="border-top:1px dashed #ccc; margin:10px 0;"></div>
-
-                            <div style="font-size:12px; font-weight:bold; color:#d32f2f; margin-bottom:5px;">▼ 상품을 모르거나, 심사 시 요청사항이 있다면?</div>
-                            <div style="background:#fff5f5; padding:8px; border-radius:6px; font-size:11px; color:#c92a2a; margin-bottom:8px;">
-                                <strong>💡 심사역이 참고해야 할 내용을 적어주세요.</strong><br>
-                                (예: 자금 용도, 현재 대출 상황, 특이사항 등)
-                            </div>
+                        <button class="accordion-btn" onclick="toggleAccordion('acc_unknown')" style="background:#fff9db; border-color:#ffe066;">
+                            <span>🤷‍♂️ 상품을 잘 모르겠어요 (3가지 방법)</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="acc_unknown" class="accordion-content" style="background:white; padding:15px;">
                             
-                            <div class="copy-box">
-                                <div style="flex:1;">
-                                    <span class="text-val">상품은 잘 모르겠습니다. [내용입력] 등을 고려하여 알맞는 상품으로 진행 부탁드립니다.</span>
-                                </div>
-                                <button class="copy-btn" onclick="copyText('상품은 잘 모르겠습니다. [내용입력] 등을 고려하여 알맞는 상품으로 진행 부탁드립니다.')">서식복사</button>
-                            </div>
-                            <div style="font-size:11px; color:#666; margin-top:4px; margin-bottom:15px;">
-                                * [내용입력] 부분에 사장님의 상황을 간단히 적어주세요.
+                            <div style="font-size:13px; color:#333; margin-bottom:15px; text-align:center; line-height:1.4;">
+                                어떤 상품이 맞는지 모르시겠나요?<br>
+                                <strong>아래 3가지 중 편한 방법을 선택하세요.</strong>
                             </div>
 
-                            <div style="font-size:12px; font-weight:bold; color:#333; margin-bottom:5px;">▼ 작성이 어렵다면? (방문요청)</div>
-                            <div class="copy-box">
-                                <span class="text-val">글 작성이 어렵습니다. 방문상담(지점방문) 요청합니다.</span>
-                                <button class="copy-btn" onclick="copyText('글 작성이 어렵습니다. 방문상담(지점방문) 요청합니다.')">복사</button>
+                            <div style="margin-bottom:15px;">
+                                <div style="font-size:12px; font-weight:bold; color:#555; margin-bottom:6px;">① 재단 공고문 직접 확인하기</div>
+                                <a href="https://www.icsinbo.or.kr/home/board/brdList.do?menu_cd=000196" target="_blank" 
+                                   style="display:flex; align-items:center; background:#f1f3f5; border:1px solid #dee2e6; padding:12px; border-radius:8px; text-decoration:none; color:#333; font-size:13px;">
+                                    <i class="fa-solid fa-magnifying-glass" style="margin-right:10px; color:#495057;"></i>
+                                    <div>
+                                        <span style="font-weight:bold;">시행 중인 보증상품 전체보기</span><br>
+                                        <span style="font-size:11px; color:#888;">인천신보 홈페이지로 이동합니다.</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right" style="margin-left:auto; color:#ccc;"></i>
+                                </a>
                             </div>
-                            <div style="font-size:11px; color:#d32f2f;">※ 유선 연락(전화)은 어렵습니다.</div>
+
+                            <div style="margin-bottom:15px;">
+                                <div style="font-size:12px; font-weight:bold; color:#d32f2f; margin-bottom:6px;">
+                                    ② 지점 방문 상담 (⛔ 주의사항 필독)
+                                </div>
+                                <div style="background:#fff5f5; border:1px solid #ffc9c9; border-radius:8px; padding:12px;">
+                                    <div style="font-size:13px; color:#c92a2a; font-weight:bold; margin-bottom:5px;">
+                                        <i class="fa-solid fa-ban"></i> 예약 잡으면 '앱 신청' 막힙니다!
+                                    </div>
+                                    <div style="font-size:12px; color:#333; line-height:1.5;">
+                                        상담 예약을 하시면, <strong>상담이 끝날 때까지 앱에서 보증 신청이 불가능</strong>합니다.<br>
+                                        <span style="color:#666; font-size:11px; margin-top:4px; display:block;">
+                                            * 예약 없이 방문 시 상담이 어려우니,<br>
+                                            꼭 <strong>[보증드림 > 예약]</strong> 후 방문해 주세요.
+                                        </span>
+                                    </div>
+                                    
+                                    <div style="margin-top:10px; text-align:right;">
+                                        <a href="https://untact.koreg.or.kr" target="_blank" 
+                                           style="display:inline-block; background:#444; color:white; font-size:11px; font-weight:bold; padding:6px 10px; border-radius:4px; text-decoration:none;">
+                                            방문상담 예약하러 가기 <i class="fa-solid fa-chevron-right" style="margin-left:3px; font-size:10px;"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div style="font-size:12px; font-weight:bold; color:#03c75a; margin-bottom:6px;">
+                                    ③ 밴드 1:1 메시지 (비공식 간편 문의)
+                                </div>
+                                <div style="background:#f0fcf5; border:1px solid #03c75a; border-radius:8px; padding:15px;">
+                                    
+                                    <div style="font-size:13px; color:#333; line-height:1.6; margin-bottom:12px; letter-spacing:-0.3px;">
+                                        원칙적으로는 <strong>지점 방문 상담을 가장 권장</strong>합니다.<br>
+                                        다만, 방문이 어려워 막막하신 분들을 위해 <strong>개인적으로 운영하는 1:1 메시지 상담</strong>입니다.<br>
+                                        <span style="font-size:12px; color:#555; display:block; margin-top:8px;">
+                                            개인적으로 운영하는 공간이라, 업무 시간 외에 틈틈이 확인하여 답변드리고 있습니다.<br>
+                                            (메시지 남겨주시면 늦더라도 꼭 답장드릴 수 있도록 노력하겠습니다!)
+                                        </span>
+                                    </div>
+                                    
+                                    <button onclick="openBandModal()" 
+                                       style="display:inline-block; padding:10px 15px; background:#03c75a; color:white; border-radius:6px; border:none; font-weight:bold; font-size:13px; cursor:pointer;">
+                                       메시지 보내기 <i class="fa-solid fa-chevron-right" style="margin-left:4px;"></i>
+                                    </button>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -623,11 +697,11 @@
                             </div>
                         </div>
 
-                        <button class="accordion-btn" onclick="toggleAccordion('acc2')">
+                        <button class="accordion-btn" onclick="toggleAccordion('acc_lease')">
                             <span>🏠 임대차계약서가 없는 경우 (가족/지인)</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
-                        <div id="acc2" class="accordion-content">
+                        <div id="acc_lease" class="accordion-content">
                             <div style="background:#fff0f0; border:1px solid #ffc9c9; border-radius:6px; padding:10px; margin-bottom:12px; font-size:12px; color:#d32f2f; text-align:left;">
                                 <strong>🚨 잠깐! 임대차계약서가 없으신가요?</strong><br>
                                 '임차' 선택 시 계약서를 첨부해야 넘어갑니다.<br>
@@ -650,6 +724,7 @@
                                 <button class="copy-btn" onclick="copyText('전산상 자가로 체크했으나, 실제로는 지인 부동산 무상 사용 중입니다. (무상임대확인서 제출 가능)')">복사</button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -895,10 +970,21 @@
             document.getElementById('systemErrorModal').classList.add('active');
         }
 
+        // 밴드 모달 오픈 (신규 추가)
+        function openBandModal() {
+            document.getElementById('bandCheckModal').classList.add('active');
+        }
+
         // 모달에서 확인 클릭 시 실제 URL 이동
         function confirmAndGo() {
             window.open('https://untact.koreg.or.kr', '_blank');
             closeModal('systemErrorModal');
+        }
+
+        // 밴드 모달 확인 후 이동 (신규 추가)
+        function confirmBandAndGo() {
+            window.open('https://www.band.us/@drbiz', '_blank');
+            closeModal('bandCheckModal');
         }
 
         function toggleAccordion(id) {
