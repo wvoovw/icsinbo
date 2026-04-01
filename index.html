@@ -216,9 +216,29 @@
         .modal-overlay.active { visibility: visible; opacity: 1; }
         .modal-sheet { background: white; width: 100%; max-width: 600px; margin: 0 auto; border-radius: 20px 20px 0 0; padding: 30px 20px 40px; transform: translateY(100%); transition: transform 0.3s; max-height: 80vh; overflow-y: auto; }
         .modal-overlay.active .modal-sheet { transform: translateY(0); }
-        .close-btn { width: 100%; padding: 15px; background: #333; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; margin-top: 20px; cursor: pointer; }
+        .close-btn { width: 100%; padding: 15px; color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; }
         .check-list li { margin-bottom: 10px; font-size: 15px; padding-left: 24px; position: relative; list-style: none; }
         .check-list li::before { content: '🚫'; position: absolute; left: 0; top: 0; font-size: 14px; }
+
+        /* [추가] 팝업 버튼 애니메이션 효과 */
+        @keyframes pulse-btn {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(43, 111, 211, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(43, 111, 211, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(43, 111, 211, 0); }
+        }
+        .highlight-btn {
+            animation: pulse-btn 2s infinite;
+            background: linear-gradient(135deg, #004c99, #2b6fd3) !important;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 76, 153, 0.4);
+            font-size: 16px !important;
+            letter-spacing: -0.5px;
+        }
+
+        /* 서류 안내 페이지 전용 매출증빙 박스 스타일 */
+        .sales-box { background:#f8f9fa; border:1px solid #e9ecef; border-radius:8px; padding:12px; margin-bottom:8px; display:flex; flex-direction:column; justify-content:center; }
+        .sales-title { font-size:13px; font-weight:800; color:#004c99; margin-bottom:4px; }
+        .sales-desc { font-size:13px; color:#555; word-break:keep-all; line-height:1.4; }
 
         footer { font-size: 12px; color: #999; text-align: center; margin-top: 40px; border-top: 1px solid #e5e8eb; padding-top: 20px; padding-bottom: 20px; }
 
@@ -240,7 +260,11 @@
                 <li>휴업 또는 폐업 상태</li>
                 <li style="font-weight:bold; color:#004c99;">💡 최근 3~6개월 내 재단 대출 이력 있음</li>
             </ul>
-            <button class="close-btn" onclick="closeModal('infoModal')">네, 확인했습니다 (닫기)</button>
+            
+            <button class="close-btn highlight-btn" style="margin-top:25px;" onclick="closeModal('infoModal'); goPage('page-document', '서류 준비 시 주의 및 안내 사항')">
+                <i class="fa-solid fa-bell" style="margin-right:5px; color:#ffdd57;"></i> 필수! 서류 준비 및 주의사항 바로가기
+            </button>
+            <button class="close-btn" style="background:#495057; margin-top:10px;" onclick="closeModal('infoModal')">네, 확인했습니다 (메인으로)</button>
         </div>
     </div>
 
@@ -287,7 +311,7 @@
                     "정확한 심사 결과는 아닙니다"
                 </div>
                 <div style="font-size:12px; color:#555; line-height:1.5; word-break:keep-all;">
-                    사장님이 말씀해주신 내용만 보고 판단하기 때문에, <strong>실제 심사와 다를 수 있으며 대략적인 방향만 안내</strong>해 드립니다.
+                    회원님이 말씀해주신 내용만 보고 판단하기 때문에, <strong>실제 심사와 다를 수 있으며 대략적인 방향만 안내</strong>해 드립니다.
                 </div>
             </div>
 
@@ -396,6 +420,19 @@
                 </div>
             </div>
 
+            <div onclick="goPage('page-document', '서류 준비 시 주의 및 안내 사항')" class="slim-video-banner" style="border-color:#ced4da; background:#f8f9fa; margin-top:15px;">
+                <div style="display:flex; align-items:center;">
+                    <div style="font-size:24px; color:#495057; margin-right:12px;">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <div>
+                        <div style="font-size:15px; font-weight:800; color:#333;">서류 준비 시 주의 및 안내 사항</div>
+                        <div style="font-size:12px; color:#666;">임대차계약서, 사진, 매출증빙 필수 확인</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#adb5bd;"></i>
+            </div>
+
             <div class="step-card" style="background:#fff9c4; border:none; text-align:center; margin-top:30px; box-shadow:none;">
                 <div style="font-size:16px; font-weight:800; color:#371c1d; margin-bottom:5px;">
                     <i class="fa-solid fa-share-nodes"></i> 주변 사장님께 알려주기
@@ -429,7 +466,7 @@
                 <div style="font-size:14px; color:#333; line-height:1.5;">
                     <strong>"오늘 신청하면 내일 나오나요?" (❌)</strong><br>
                     <span style="color:#555; font-size:13px;">
-                    재단은 사장님의 신용과 사업성을 검토하여 보증을 서주는 곳입니다. 자금이 필요하시다면 <strong>시간적 여유를 두고 미리 신청</strong>해주세요.
+                    재단은 신청인의 신용과 사업성을 검토하여 보증을 서주는 곳입니다. 자금이 필요하시다면 <strong>시간적 여유를 두고 미리 신청</strong>해주세요.
                     </span>
                 </div>
             </div>
@@ -834,7 +871,7 @@
                 <div class="check-title" style="color:#1971c2;">신청 대상 확인</div>
                 <div class="check-desc">
                     <strong>현재 신용보증재단 보증서를 이용 중인</strong><br>
-                    고객님만 신청 가능합니다.<br>
+                    회원님만 신청 가능합니다.<br>
                     <span style="font-size:13px; color:#666; margin-top:5px; display:block;">(타기관 대출 대환 불가 / 상환유예 불가)</span>
                 </div>
             </div>
@@ -864,7 +901,7 @@
                     </div>
                 </div>
                 <div style="margin-top:15px; font-size:13px; color:#666; background:#eee; padding:10px; border-radius:8px;">
-                    ※ 기존에 이용 중인 재단 보증부 대출을 갚으면서 상환 기간을 늘리는 상품입니다. (신규자금 아님)
+                    ※ 기존에 이용 중인 재단 보증부 대출을 갚으면서 상환 기간을 늘리는 상품입니다. (신규자금 아닙니다.)
                 </div>
             </div>
 
@@ -941,7 +978,108 @@
             </div>
         </div>
 
-    </div>
+        <div id="page-document" class="page">
+            
+            <div class="section-header">서류 준비 시 주의 및 안내 사항</div>
+
+            <div class="step-card">
+                <div class="step-badge" style="background:#004c99; font-size:14px; margin-bottom:12px;">1. 임대차계약서</div>
+                
+                <div style="font-size:14px; color:#333; line-height:1.6;">
+                    일부가 아닌 <strong>누락되는 장 없이 계약서 전체 페이지</strong>를 모두 제출해 주셔야 합니다.
+                </div>
+
+                <div style="background:#fff0f0; border:1px solid #ffc9c9; border-radius:8px; padding:12px; margin-top:15px; font-size:13px; color:#d32f2f;">
+                    <strong><i class="fa-solid fa-triangle-exclamation"></i> 본인 명의 계약서가 없는 경우</strong><br>
+                    <span style="color:#555; line-height:1.5;">(가족 명의, 자가 소유, 무상 임대 등) 서류 제출 시 해당 상황을 문자로 함께 남겨주시면 알맞은 대체 서류를 안내해 드립니다.</span>
+                </div>
+
+                <div style="background:#eef6fc; border:1px solid #cce5ff; border-radius:8px; padding:12px; margin-top:10px; font-size:13px; color:#004c99;">
+                    <strong><i class="fa-solid fa-file-signature"></i> 전대차계약인 경우</strong><br>
+                    <span style="color:#555; line-height:1.5;">반드시 건물주(원임대인)가 작성한 <strong>'전대차계약 동의서'</strong>를 함께 첨부해 주셔야 합니다.</span>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge" style="background:#004c99; font-size:14px; margin-bottom:12px;">2. 사업장 사진</div>
+                
+                <div style="font-size:14px; color:#333; line-height:1.6;">
+                    위치 정보 확인을 위해 반드시 <strong>'보증드림' 앱을 통해 촬영</strong>해 주셔야 합니다.
+                </div>
+
+                <button onclick="goPage('page-video-guide', '영상 가이드')" style="background:#eef6fc; color:#004c99; border:1px solid #cce5ff; padding:10px 15px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; display:flex; align-items:center; margin-top:12px; width:100%; justify-content:space-between;">
+                    <span><i class="fa-solid fa-play" style="margin-right:6px; color:#d32f2f;"></i> 앱 촬영 영상 가이드 보기</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div style="background:#fff; border:1px solid #ced4da; border-radius:8px; margin-top:15px; overflow:hidden;">
+                    <div style="background:#f1f3f5; padding:10px 15px; font-size:13px; font-weight:bold; color:#495057; border-bottom:1px solid #ced4da;">
+                        🚨 단, 아래 업종은 대체 자료 제출 가능
+                    </div>
+                    <div style="padding:15px; font-size:13px; color:#333; line-height:1.6;">
+                        <div style="margin-bottom:15px;">
+                            <strong style="color:#004c99; display:block; margin-bottom:4px;">🚕 운송 및 택시업</strong>
+                            <span style="color:#555;">앱 사진 촬영을 생략하고, 차량 사진(앞뒤 번호판 포함) 제출 만약 본인 차량이 아닌 경우 차량 사진과 함께 지입계약서 제출</span>
+                        </div>
+                        <div style="margin-bottom:15px;">
+                            <strong style="color:#004c99; display:block; margin-bottom:4px;">📦 전자상거래(통신판매)업</strong>
+                            <span style="color:#555;">재고 물품 사진 제출. 자택을 사업장으로 등록하고 외부 창고/위탁물류 이용 시 '창고 임대차계약서' 또는 '물류 위탁 계약서' 추가 제출</span>
+                        </div>
+                        <div>
+                            <strong style="color:#004c99; display:block; margin-bottom:4px;">🔨 건설 및 인테리어 업종</strong>
+                            <span style="color:#555;">외부 현장 업무가 주를 이루므로, 대표자 분이 시공하고 있는 현장 작업 사진 제출</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge" style="background:#004c99; font-size:14px; margin-bottom:12px;">3. 최근 3개월 매출 증빙 자료</div>
+                
+                <div style="background:#fff9db; border:1px solid #fcc419; padding:12px; border-radius:8px; margin-bottom:15px; font-size:13px; color:#333; line-height:1.5;">
+                    <i class="fa-solid fa-circle-exclamation" style="color:#e67700;"></i> 제출 자료에는 반드시 대표자님의 사업자등록번호 등 <strong>대표자님을 식별할 수 있는 내용이 표기</strong>되어야 합니다.
+                </div>
+
+                <div style="font-size:13px; color:#555; margin-bottom:15px;">
+                    사업장 상황에 맞춰 <strong>가장 편한 방법 1가지만 선택</strong>하여 제출해 주세요.
+                </div>
+
+                <div class="sales-box">
+                    <div class="sales-title">① 세금계산서 위주</div>
+                    <div class="sales-desc">홈택스 > 전자(세금)계산서 합계표 및 통계조회 > 기간별 매출/매입 통계조회 (최근 3개월)</div>
+                </div>
+                
+                <div class="sales-box">
+                    <div class="sales-title">② 면세 사업자</div>
+                    <div class="sales-desc">위 ①번 경로에서 조회조건을 '전자계산서'로 선택하여 조회</div>
+                </div>
+                
+                <div class="sales-box">
+                    <div class="sales-title">③ 식당 / 소매업</div>
+                    <div class="sales-desc">홈택스 > 신용카드 매출자료 조회 또는 현금영수증 매출내역 누계조회</div>
+                </div>
+
+                <div class="sales-box">
+                    <div class="sales-title">④ 배달 / 온라인 매장</div>
+                    <div class="sales-desc">배달의민족, 스마트스토어 등 플랫폼 정산관리 메뉴에서 부가세 신고 내역 조회</div>
+                </div>
+
+                <div class="sales-box" style="border-color:#ffc9c9; background:#fff5f5;">
+                    <div class="sales-title" style="color:#d32f2f;">⑤ 기타 (위 방법이 어려울 때)</div>
+                    <div class="sales-desc">
+                        최근 3개월 사업자 통장 거래내역<br>
+                        <strong>(※ 반드시 은행 창구에서 발급받으시거나, 기업 인터넷 뱅킹에서 '제출용(증명서 발급)'으로 다운로드하여 은행 직인(마크)이 포함된 서류여야 합니다. 단순 화면 캡처나 엑셀 다운로드 파일은 인정되지 않습니다.)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="static-action-group">
+                <button onclick="goMain()" class="action-btn btn-gray" style="width:100%; border-radius:8px; background:#495057; color:white; height:48px; font-size:15px; font-weight:bold; border:none; cursor:pointer;">
+                    메인 화면으로 돌아가기
+                </button>
+            </div>
+        </div>
+        </div>
 
   <script>
         // 네비게이션 제어
@@ -970,7 +1108,7 @@
             document.getElementById('systemErrorModal').classList.add('active');
         }
 
-        // 밴드 모달 오픈 (신규 추가)
+        // 밴드 모달 오픈
         function openBandModal() {
             document.getElementById('bandCheckModal').classList.add('active');
         }
@@ -981,7 +1119,7 @@
             closeModal('systemErrorModal');
         }
 
-        // 밴드 모달 확인 후 이동 (신규 추가)
+        // 밴드 모달 확인 후 이동
         function confirmBandAndGo() {
             window.open('https://www.band.us/@drbiz', '_blank');
             closeModal('bandCheckModal');
@@ -1000,7 +1138,7 @@
             if (navigator.share) {
                 navigator.share({
                     title: '신용보증재단 통합 안내',
-                    text: '사장님, 보증재단 서류랑 신청방법 여기서 보세요. 정리가 잘 되어있네요.',
+                    text: '회원님, 보증재단 서류랑 신청방법 여기서 보세요. 정리가 잘 되어있네요.',
                     url: window.location.href,
                 })
                 .then(() => console.log('공유 성공'))
