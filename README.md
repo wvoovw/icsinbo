@@ -1,0 +1,1847 @@
+[index.html](https://github.com/user-attachments/files/34875880/index.html)
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<title>신용보증재단 보증서 발급 통합 안내</title>
+
+<!-- 카카오톡·문자 스미싱 방지용 미리보기(Open Graph) 메타 태그 -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="인천신용보증재단 모바일 이용 가이드" />
+<meta property="og:description" content="보증드림 앱 신청 절차부터 필수 서류 준비까지 한눈에 확인하세요." />
+<meta property="og:url" content="https://www.icsinbo.or.kr" />
+
+<!-- Pretendard & JetBrains Mono 폰트 적용 -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ══════════════════════════════════
+   DESIGN TOKENS (Modern Fintech Light)
+══════════════════════════════════ */
+:root {
+  --bg-page:      #f2f4f6;
+  --bg-surface:   #ffffff;
+  --bg-subtle:    #f9fafb;
+  --bg-muted:     #f1f5f9;
+
+  --text-primary:   #191f28;
+  --text-secondary: #4e5968;
+  --text-tertiary:  #8b95a1;
+
+  --primary:       #2563eb;
+  --primary-dark:  #1d4ed8;
+  --primary-soft:  #eff6ff;
+  --primary-border:#bfdbfe;
+
+  --danger:        #e11d48;
+  --danger-soft:   #fff1f2;
+  --danger-border: #fecdd3;
+
+  --warning:       #d97706;
+  --warning-soft:  #fffbeb;
+  --warning-border:#fde68a;
+
+  --success:       #059669;
+  --success-soft:  #ecfdf5;
+  --success-border:#a7f3d0;
+
+  --border-color:  #e5e8eb;
+  --border-strong: #d1d6db;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.12);
+
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 26px;
+  --r-full: 9999px;
+
+  --nav-h: 56px;
+  --max-w: 440px;
+  --page-px: 20px;
+
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* 글자 크기 배율 (글씨 크게 모드 대응) */
+  --scale: 1;
+}
+
+/* 시니어(글씨 크게) 모드 활성화 시 변수 조정 */
+body.large-text {
+  --scale: 1.12;
+}
+body.large-text .hero-sub,
+body.large-text .notice-item,
+body.large-text .step-sub,
+body.large-text .proc-body,
+body.large-text .ab,
+body.large-text .sales-desc,
+body.large-text .industry-desc,
+body.large-text .copy-text,
+body.large-text .step-row {
+  font-size: calc(13.5px * var(--scale)) !important;
+  line-height: 1.65 !important;
+}
+body.large-text .ql-title,
+body.large-text .step-title,
+body.large-text .mc-name {
+  font-size: calc(16px * var(--scale)) !important;
+}
+
+/* ══════════════════════════════════
+   BASE
+══════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  background: #e5e8eb;
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  word-break: keep-all;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* ══════════════════════════════════
+   APP WRAP
+══════════════════════════════════ */
+.app {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg-page);
+  position: relative;
+  box-shadow: 0 0 40px rgba(0,0,0,0.06);
+}
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
+.navbar {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 12px;
+}
+.nav-back {
+  position: absolute;
+  left: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-primary);
+  transition: background 0.15s;
+}
+.nav-back:active { background: var(--bg-muted); }
+.nav-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+.nav-zoom {
+  position: absolute;
+  right: 12px;
+  padding: 5px 10px;
+  border-radius: var(--r-full);
+  background: var(--bg-muted);
+  border: 1px solid var(--border-strong);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s;
+}
+.nav-zoom.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.scroll-progress-container {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: transparent;
+  z-index: 901;
+}
+.scroll-progress-bar {
+  height: 100%;
+  background: var(--primary);
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+/* ══════════════════════════════════
+   PAGES & ANIMATIONS
+══════════════════════════════════ */
+.page { display: none; padding: var(--page-px); padding-bottom: 90px; }
+.page.active { display: block; animation: pageIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.stagger > * { opacity: 0; transform: translateY(12px); animation: staggerIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.stagger > *:nth-child(1) { animation-delay: 0.03s; }
+.stagger > *:nth-child(2) { animation-delay: 0.07s; }
+.stagger > *:nth-child(3) { animation-delay: 0.11s; }
+.stagger > *:nth-child(4) { animation-delay: 0.15s; }
+.stagger > *:nth-child(5) { animation-delay: 0.19s; }
+.stagger > *:nth-child(6) { animation-delay: 0.23s; }
+.stagger > *:nth-child(7) { animation-delay: 0.27s; }
+@keyframes staggerIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════
+   HERO HEADER (메인)
+══════════════════════════════════ */
+.hero {
+  padding: 16px 4px 24px;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 5px 12px;
+  border-radius: var(--r-full);
+  margin-bottom: 12px;
+}
+.hero-title {
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+  margin-bottom: 8px;
+}
+.hero-sub {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════
+   NOTICE STRIP (신청 전 필독)
+══════════════════════════════════ */
+.notice-strip {
+  background: var(--bg-surface);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.notice-strip-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--danger);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--danger-soft);
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+}
+.notice-items { display: flex; flex-direction: column; gap: 9px; padding: 0 4px; }
+.notice-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  line-height: 1.45;
+}
+.notice-item .ni { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+.notice-btn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 13px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s;
+}
+.notice-btn i { color: var(--primary); }
+.notice-btn:active { background: var(--bg-muted); transform: scale(0.98); }
+
+/* ══════════════════════════════════
+   QUICK LINKS
+══════════════════════════════════ */
+.quick-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+
+.ql {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: var(--shadow-sm);
+}
+.ql:active { transform: scale(0.98); background: var(--bg-subtle); }
+
+/* 공식 홈페이지 배너 스타일 */
+.ql.official {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  border: none;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.22);
+}
+.ql.official .ql-label { color: rgba(255,255,255,0.85); }
+.ql.official .ql-title { color: #ffffff; }
+.ql.official .ql-sub   { color: rgba(255,255,255,0.75); }
+.ql.official .ql-arrow { color: rgba(255,255,255,0.85); }
+
+.ql-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+.ql-icon.official-icon { background: rgba(255,255,255,0.2); color: #ffffff; }
+.ql-icon.yt-icon       { background: #fff1f2; color: #e11d48; }
+.ql-icon.info-icon     { background: #eff6ff; color: #2563eb; }
+
+.ql-body { flex: 1; min-width: 0; }
+.ql-label { font-size: 11px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+.ql-title { font-size: 15px; font-weight: 700; color: var(--text-primary); line-height: 1.35; letter-spacing: -0.3px; }
+.ql-sub   { font-size: 12.5px; color: var(--text-tertiary); margin-top: 2px; font-weight: 500; }
+.ql-arrow { color: var(--text-tertiary); font-size: 13px; flex-shrink: 0; }
+
+/* ══════════════════════════════════
+   SECTION LABEL
+══════════════════════════════════ */
+.sec-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-secondary);
+  letter-spacing: -0.2px;
+  margin-bottom: 12px;
+  margin-top: 8px;
+  padding-left: 4px;
+}
+
+/* ══════════════════════════════════
+   MENU GRID (업무 유형)
+══════════════════════════════════ */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.menu-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  padding: 20px 18px 18px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.menu-card:active { transform: scale(0.97); background: var(--bg-subtle); }
+
+.mc-top { display: flex; align-items: center; justify-content: space-between; }
+.mc-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: var(--ic, var(--primary-soft));
+  color: var(--icc, var(--primary));
+}
+.mc-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+.mc-name { font-size: 16px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.4px; }
+.mc-sub  { font-size: 12.5px; color: var(--text-secondary); margin-top: 3px; font-weight: 500; }
+
+/* ══════════════════════════════════
+   PAGE HEADER (서브 페이지)
+══════════════════════════════════ */
+.pg-header {
+  padding: 12px 4px 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+.pg-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.pg-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.7px;
+  line-height: 1.3;
+}
+.pg-sub { font-size: 14px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; font-weight: 500; }
+
+/* ══════════════════════════════════
+   ALERT BOX
+══════════════════════════════════ */
+.ab {
+  border-radius: var(--r-md);
+  padding: 15px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 12px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+.ab i { flex-shrink: 0; font-size: 16px; margin-top: 3px; }
+.ab.danger  { background: var(--danger-soft); border: 1px solid var(--danger-border); color: #9f1239; }
+.ab.danger i { color: var(--danger); }
+.ab.danger strong { color: #881337; font-weight: 800; }
+
+.ab.warning { background: var(--warning-soft); border: 1px solid var(--warning-border); color: #92400e; }
+.ab.warning i { color: var(--warning); }
+.ab.warning strong { color: #78350f; font-weight: 800; }
+
+.ab.info    { background: var(--primary-soft); border: 1px solid var(--primary-border); color: #1e40af; }
+.ab.info i  { color: var(--primary); }
+.ab.info strong { color: #1e3a8a; font-weight: 800; }
+
+/* ══════════════════════════════════
+   PROCESS STEPS
+══════════════════════════════════ */
+.proc-wrap { display: flex; flex-direction: column; gap: 0; margin-bottom: 20px; }
+.proc-step {
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.proc-label {
+  width: 68px;
+  background: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--primary);
+  text-align: center;
+  padding: 14px 6px;
+  line-height: 1.3;
+  flex-shrink: 0;
+  border-right: 1px solid var(--primary-border);
+}
+.proc-body {
+  flex: 1;
+  padding: 16px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 500;
+}
+.proc-body strong { color: var(--text-primary); font-weight: 700; }
+.proc-arrow {
+  text-align: center;
+  padding: 4px 0;
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+
+/* ══════════════════════════════════
+   STEP CARDS
+══════════════════════════════════ */
+.step-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.step-badge {
+  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  margin-bottom: 10px;
+}
+.step-badge.red {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.step-title {
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 6px;
+  letter-spacing: -0.4px;
+}
+.step-sub { font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; font-weight: 500; }
+.ui-tag {
+  display: inline-block;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  border: 1px solid var(--primary-border);
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 6px;
+  font-size: 0.92em;
+}
+
+/* ══════════════════════════════════
+   MOCK BUTTONS (STEP 04)
+══════════════════════════════════ */
+.mock-row { display: flex; gap: 10px; margin: 16px 0 28px; }
+.mock-btn {
+  flex: 1;
+  border-radius: var(--r-sm);
+  padding: 16px 10px;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-align: center;
+  position: relative;
+  line-height: 1.4;
+}
+.mock-btn.correct {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25), 0 6px 16px rgba(37, 99, 235, 0.2);
+}
+.mock-btn.correct::after {
+  content: '👆 여기를 누르세요';
+  position: absolute;
+  bottom: -26px;
+  left: 0; right: 0;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+}
+.mock-btn.wrong {
+  background: var(--bg-muted);
+  border: 1px dashed var(--border-strong);
+  color: var(--text-tertiary);
+  position: relative;
+}
+.mock-btn.wrong::before {
+  content: '✕';
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--danger);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 0.65;
+}
+.mock-note { font-size: 12.5px; color: var(--danger); text-align: center; margin-top: 4px; font-weight: 700; }
+
+/* ══════════════════════════════════
+   PRODUCT ITEM
+══════════════════════════════════ */
+.product-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+.prod-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.prod-row:last-child { margin-bottom: 0; }
+.prod-key {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-soft);
+  min-width: 56px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.prod-key.dim { background: var(--bg-muted); color: var(--text-secondary); }
+.prod-val { font-size: 14px; font-weight: 800; color: var(--text-primary); line-height: 1.4; }
+.prod-val-sub { font-size: 12.5px; font-weight: 500; color: var(--text-secondary); margin-top: 2px; }
+
+/* ══════════════════════════════════
+   ACCORDION
+══════════════════════════════════ */
+.accordion { display: flex; flex-direction: column; gap: 8px; }
+.acc-btn {
+  width: 100%;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-sm);
+  padding: 15px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: left;
+  gap: 10px;
+  transition: all 0.2s;
+}
+.acc-btn:active { background: var(--bg-muted); }
+.acc-btn.open {
+  background: var(--primary-soft);
+  border-color: var(--primary-border);
+  color: var(--primary-dark);
+}
+.acc-icon { flex-shrink: 0; font-size: 12px; color: var(--text-tertiary); transition: transform 0.25s ease; }
+.acc-btn.open .acc-icon { transform: rotate(180deg); color: var(--primary); }
+.acc-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  background: var(--bg-surface);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 0 16px;
+  transition: all 0.3s ease;
+}
+.acc-body.open {
+  max-height: 1000px;
+  opacity: 1;
+  padding: 16px;
+  border-color: var(--border-color);
+  margin-top: -2px;
+}
+
+/* ══════════════════════════════════
+   TOAST NOTIFICATION
+══════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 96px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #191f28;
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: var(--r-full);
+  font-size: 13.5px;
+  font-weight: 700;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toast i { color: #34d399; }
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ══════════════════════════════════
+   COPY ROW
+══════════════════════════════════ */
+.copy-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+.copy-text { flex: 1; font-size: 13.5px; color: var(--text-primary); line-height: 1.45; font-weight: 600; }
+.copy-btn-sm {
+  flex-shrink: 0;
+  padding: 7px 13px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.copy-btn-sm:active { transform: scale(0.95); background: var(--primary-dark); }
+.copy-btn-sm.ok { background: var(--success); color: #ffffff; }
+
+/* ══════════════════════════════════
+   VIDEO SECTION
+══════════════════════════════════ */
+.video-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.video-head {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.video-head i { color: var(--danger); font-size: 18px; }
+.video-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+  padding: 15px 16px;
+  margin-bottom: 10px;
+  gap: 10px;
+  transition: all 0.15s;
+}
+.video-link:last-child { margin-bottom: 0; }
+.video-link:active { background: var(--bg-muted); transform: scale(0.98); }
+.vbadge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+.video-link-title { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.video-play {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--danger-soft);
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════
+   SCENARIO
+══════════════════════════════════ */
+.scenario {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.scenario-head {
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.case-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.case-badge.b { background: var(--primary-soft); color: var(--primary); }
+.case-badge.g { background: var(--success-soft); color: var(--success); }
+.scenario-head-text { font-size: 14.5px; font-weight: 800; color: var(--text-primary); }
+.scenario-body { padding: 18px 16px; }
+.step-list { display: flex; flex-direction: column; gap: 12px; }
+.step-row { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text-secondary); line-height: 1.5; font-weight: 500; }
+.step-circle {
+  font-family: var(--font-mono);
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 12px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-row strong { color: var(--text-primary); font-weight: 700; }
+.step-em { color: var(--danger); font-weight: 800; background: var(--danger-soft); padding: 2px 7px; border-radius: 5px; }
+
+/* ══════════════════════════════════
+   INDUSTRY & SALES LIST
+══════════════════════════════════ */
+.industry-list, .sales-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.industry-item, .sales-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+}
+.industry-item { border-left: 3px solid var(--primary); }
+.industry-name { font-size: 13.5px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+.industry-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; font-weight: 500; }
+
+.sales-item.urgent {
+  background: var(--danger-soft);
+  border-color: var(--danger-border);
+  border-left: 4px solid var(--danger);
+}
+.sales-num { font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+.sales-item.urgent .sales-num { color: var(--danger); }
+.sales-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; font-weight: 500; }
+.sales-desc strong { color: #881337; font-weight: 700; }
+
+/* ══════════════════════════════════
+   TIP BOX
+══════════════════════════════════ */
+.tip-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--r-md);
+  padding: 16px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  box-shadow: var(--shadow-sm);
+}
+.tip-box strong { color: var(--text-primary); font-weight: 800; }
+.tip-box ul { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; list-style: none; }
+.tip-box li { display: flex; gap: 8px; font-weight: 500; }
+.tip-box li::before { content: '•'; color: var(--primary); font-weight: 900; }
+
+/* ══════════════════════════════════
+   ACTION BAR (Bottom Area)
+══════════════════════════════════ */
+.action-bar {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-color);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  padding: 22px var(--page-px) 34px;
+  margin: 28px -20px -90px;
+  box-shadow: 0 -6px 24px rgba(15, 23, 42, 0.05);
+}
+.action-note { font-size: 13px; color: var(--text-secondary); text-align: center; margin-bottom: 12px; font-weight: 600; }
+.action-row { display: flex; gap: 10px; }
+.action-btn {
+  flex: 1;
+  height: 52px;
+  border-radius: var(--r-md);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.action-btn:active { transform: scale(0.97); }
+.action-btn.sec {
+  background: var(--bg-muted);
+  color: var(--text-primary);
+  flex: 0.55;
+}
+.action-btn.pri {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+.action-btn.gold-btn {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+.action-btn.full { flex: 1; }
+.action-hotline {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  margin-top: 14px;
+  font-weight: 500;
+}
+.action-hotline a {
+  font-family: var(--font-mono);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════
+   SHARE CARD
+══════════════════════════════════ */
+.share-card {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--r-lg);
+  padding: 24px 20px;
+  text-align: center;
+  margin-top: 18px;
+}
+.share-card h3 { font-size: 17px; font-weight: 800; color: var(--primary-dark); margin-bottom: 6px; letter-spacing: -0.4px; }
+.share-card p  { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 18px; line-height: 1.5; font-weight: 500; }
+.share-btn {
+  width: 100%;
+  height: 48px;
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: var(--r-full);
+  font-size: 14.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+  transition: transform 0.15s;
+}
+.share-btn:active { transform: scale(0.97); }
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+.pg-footer {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-top: 32px;
+  padding: 20px 0 10px;
+  border-top: 1px solid var(--border-color);
+  font-weight: 600;
+}
+.disclaimer {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-sm);
+  padding: 14px;
+  margin-top: 12px;
+  text-align: left;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════
+   VISIT WARNING BOX
+══════════════════════════════════ */
+.band-warn {
+  background: var(--danger-soft);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--r-md);
+  padding: 15px 16px;
+}
+.band-warn-title { font-size: 13.5px; font-weight: 800; color: var(--danger); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.band-warn-body  { font-size: 13px; color: #881337; line-height: 1.55; font-weight: 500; }
+.band-warn-body strong { font-weight: 800; }
+
+/* ══════════════════════════════════
+   MODALS
+══════════════════════════════════ */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 9000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.modal-bg.open { opacity: 1; visibility: visible; }
+
+.modal-sheet {
+  background: var(--bg-surface);
+  width: 100%;
+  max-width: var(--max-w);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  padding: 8px 22px 36px;
+  max-height: 88vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: var(--shadow-lg);
+}
+.modal-bg.open .modal-sheet { transform: translateY(0); }
+
+.modal-handle {
+  width: 40px; height: 5px;
+  background: var(--border-strong);
+  border-radius: 3px;
+  margin: 10px auto 20px;
+}
+.modal-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.modal-sub {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 18px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+.modal-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: var(--r-md);
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.15s;
+}
+.modal-btn:active { transform: scale(0.97); }
+.modal-btn.pri { background: var(--primary); color: #ffffff; }
+.modal-cancel {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  cursor: pointer;
+}
+
+.phone-disp {
+  text-align: center;
+  margin: 16px 0 20px;
+  background: var(--primary-soft);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--r-md);
+  padding: 15px;
+}
+.phone-disp-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+.phone-disp a {
+  font-family: var(--font-mono);
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--primary-dark);
+  letter-spacing: -0.5px;
+}
+
+/* UTIL */
+.mt8  { margin-top: 8px;  }
+.mt12 { margin-top: 12px; }
+.mt16 { margin-top: 16px; }
+.mb8  { margin-bottom: 8px;  }
+.mb12 { margin-bottom: 12px; }
+.mb14 { margin-bottom: 14px; }
+.mb16 { margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ MODAL (보증드림 이동 전 안내) ══════════ -->
+<div class="modal-bg" id="sysModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div style="text-align:center;font-size:38px;margin-bottom:8px;">📱</div>
+    <div class="modal-title">보증드림 이동 전 안내</div>
+    <div class="modal-sub">보증드림 앱(또는 웹)으로 이동하여 신청을 진행합니다.<br>진행 중 앱 오류가 발생할 경우 아래 번호로 문의해 주세요.</div>
+    <div class="ab danger mb12">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <div>사진 업로드 오류, 다음 화면 미진행 등 <strong>시스템·전산 오류는 지점에서 해결이 불가</strong>하며 전용 센터에서만 처리 가능합니다.</div>
+    </div>
+    <div class="phone-disp">
+      <div class="phone-disp-label">보증드림 전산 전용 고객센터</div>
+      <a href="tel:044-270-4036"><i class="fa-solid fa-phone-volume"></i> 044-270-4036</a>
+    </div>
+    <button class="modal-btn pri" onclick="confirmSys()">확인했습니다 · 보증드림 이동 🚀</button>
+    <span class="modal-cancel" onclick="closeModal('sysModal')">취소하고 돌아가기</span>
+  </div>
+</div>
+
+<div class="app">
+  <!-- 네비게이션 -->
+  <nav class="navbar">
+    <div class="scroll-progress-container"><div class="scroll-progress-bar" id="scrollProgress"></div></div>
+    <button class="nav-back" id="navBack" onclick="goBack()" aria-label="뒤로가기"><i class="fa-solid fa-chevron-left"></i></button>
+    <span class="nav-title" id="navTitle">신용보증재단 통합 안내</span>
+    <button class="nav-zoom" id="zoomBtn" onclick="toggleZoom()" aria-label="글씨 크기 조절"><i class="fa-solid fa-magnifying-glass-plus"></i> 글씨크게</button>
+  </nav>
+
+  <!-- ══ 메인 ══ -->
+  <div id="pg-main" class="page active">
+    <div class="hero">
+      <div class="hero-eyebrow"><i class="fa-solid fa-shield-halved"></i> 신용보증재단 모바일 가이드</div>
+      <div class="hero-title">보증서 발급<br>통합 안내</div>
+      <div class="hero-sub">복잡한 보증 신청 절차부터 필수 서류 준비까지<br>대표님께 필요한 핵심 정보만 모았습니다.</div>
+    </div>
+
+    <div class="stagger">
+      <!-- 신청 전 공지 -->
+      <div class="notice-strip">
+        <div class="notice-strip-title"><i class="fa-solid fa-circle-exclamation"></i> 신청 전 필독 — 아래 해당 시 발급 제한</div>
+        <div class="notice-items">
+          <div class="notice-item"><span class="ni">🚫</span><span>현재 대출금·카드값 연체 중인 경우</span></div>
+          <div class="notice-item"><span class="ni">🚫</span><span>국세·지방세 체납 중인 경우 (완납 후 가능)</span></div>
+          <div class="notice-item"><span class="ni">🚫</span><span>압류·경매·회생·파산 진행 중인 경우</span></div>
+          <div class="notice-item"><span class="ni">🚫</span><span>현재 휴업 또는 폐업 상태인 경우</span></div>
+          <div class="notice-item"><span class="ni">💡</span><span><strong style="color:var(--text-primary);">최근 3~6개월 내 재단 보증 이용 이력 있음</strong></span></div>
+        </div>
+        <button class="notice-btn" onclick="nav('pg-document','서류 준비 주의사항')">
+          <i class="fa-solid fa-folder-open"></i> 서류 준비 및 주의사항 바로가기
+        </button>
+      </div>
+
+      <!-- 빠른 링크 -->
+      <div class="quick-list">
+        <a href="https://www.icsinbo.or.kr" target="_blank" class="ql official">
+          <div class="ql-icon official-icon"><i class="fa-solid fa-building-columns"></i></div>
+          <div class="ql-body">
+            <div class="ql-label">인천신용보증재단 공식 홈페이지</div>
+            <div class="ql-title">시행 중인 보증상품 · 공고문 확인</div>
+            <div class="ql-sub">www.icsinbo.or.kr 바로가기</div>
+          </div>
+          <i class="fa-solid fa-chevron-right ql-arrow"></i>
+        </a>
+        <div class="ql" onclick="nav('pg-video','영상 가이드')">
+          <div class="ql-icon yt-icon"><i class="fa-brands fa-youtube"></i></div>
+          <div class="ql-body">
+            <div class="ql-label" style="color:var(--danger);">단계별 영상 가이드</div>
+            <div class="ql-title">서류 제출 & 약정서 작성 따라하기</div>
+            <div class="ql-sub">스마트폰 화면 그대로 쉽게 설명해 드려요</div>
+          </div>
+          <i class="fa-solid fa-chevron-right ql-arrow"></i>
+        </div>
+        <div class="ql" onclick="nav('pg-guide','이용 절차 안내')">
+          <div class="ql-icon info-icon"><i class="fa-solid fa-compass"></i></div>
+          <div class="ql-body">
+            <div class="ql-label">처음 이용하시나요? 필독</div>
+            <div class="ql-title">전체 절차 · 소요기간(1~3주) 안내</div>
+          </div>
+          <i class="fa-solid fa-chevron-right ql-arrow"></i>
+        </div>
+      </div>
+
+      <!-- 메뉴 -->
+      <div class="sec-label">진행하실 업무를 선택해 주세요</div>
+      <div class="menu-grid">
+        <div class="menu-card" style="--ic:#eff6ff;--icc:#2563eb;" onclick="nav('pg-apply','신규 보증신청 안내')">
+          <div class="mc-top">
+            <div class="mc-icon"><i class="fa-solid fa-file-pen"></i></div>
+            <div class="mc-num">01</div>
+          </div>
+          <div><div class="mc-name">보증신청</div><div class="mc-sub">신규·추가 대출</div></div>
+        </div>
+        <div class="menu-card" style="--ic:#fffbeb;--icc:#d97706;" onclick="nav('pg-extension','기한연장 안내')">
+          <div class="mc-top">
+            <div class="mc-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="mc-num">02</div>
+          </div>
+          <div><div class="mc-name">기한연장</div><div class="mc-sub">기존 만기 연장</div></div>
+        </div>
+        <div class="menu-card" style="--ic:#ecfdf5;--icc:#059669;" onclick="nav('pg-repayment','전환보증 신청 안내')">
+          <div class="mc-top">
+            <div class="mc-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <div class="mc-num">03</div>
+          </div>
+          <div><div class="mc-name">전환보증</div><div class="mc-sub">원금상환 곤란 시</div></div>
+        </div>
+        <div class="menu-card" style="--ic:#f1f5f9;--icc:#475569;" onclick="nav('pg-closure','폐업 사업자 안내')">
+          <div class="mc-top">
+            <div class="mc-icon"><i class="fa-solid fa-store-slash"></i></div>
+            <div class="mc-num">04</div>
+          </div>
+          <div><div class="mc-name">폐업한 경우</div><div class="mc-sub">브릿지 보증 안내</div></div>
+        </div>
+      </div>
+
+      <!-- 서류 링크 -->
+      <div class="ql" onclick="nav('pg-document','서류 준비 주의사항')">
+        <div class="ql-icon" style="background:#f1f5f9;color:#475569;"><i class="fa-solid fa-folder-open"></i></div>
+        <div class="ql-body">
+          <div class="ql-title">서류 준비 주의 및 안내사항</div>
+          <div class="ql-sub">임대차계약서 · 사업장 사진 · 매출증빙 필수 확인</div>
+        </div>
+        <i class="fa-solid fa-chevron-right ql-arrow"></i>
+      </div>
+
+      <!-- 공유 -->
+      <div class="share-card">
+        <h3><i class="fa-solid fa-share-nodes"></i> 주변 대표님께 안내 공유하기</h3>
+        <p>자금 준비로 고민하는 지인 대표님께<br>보증신청 및 서류 안내 가이드를 공유해 보세요.</p>
+        <button class="share-btn" onclick="sharePage()">
+          <i class="fa-solid fa-paper-plane"></i> 카카오톡 · 문자로 링크 공유하기
+        </button>
+      </div>
+
+      <!-- 푸터 -->
+      <div class="pg-footer">
+        © 2026. 신용보증재단 모바일 통합안내 가이드
+        <div class="disclaimer">
+          <strong style="color:var(--text-primary);">※ 이용 전 필독 (안내 사항)</strong><br>
+          1. 본 페이지는 민원인의 비대면 앱(보증드림) 이용 및 서류 준비 편의를 돕기 위해 제작된 모바일 요약 가이드입니다.<br>
+          2. 모든 보증 심사는 재단 공식 절차 및 규정에 따라 진행되며, 본 안내 자료가 심사 결과를 보장하지 않습니다.<br>
+          3. 공고문 확인 및 상세 안내는 인천신용보증재단 공식 홈페이지(www.icsinbo.or.kr)를 이용해 주시기 바랍니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 이용절차 ══ -->
+  <div id="pg-guide" class="page">
+    <div class="stagger">
+      <div class="pg-header">
+        <div class="pg-eyebrow">처음 이용하시나요?</div>
+        <div class="pg-title">신용보증 이용 절차</div>
+        <div class="pg-sub">전체 흐름을 미리 파악하면 훨씬 빠르게 진행됩니다.</div>
+      </div>
+      <div class="ab danger mb16">
+        <i class="fa-solid fa-clock"></i>
+        <div><strong>예상 소요기간: 약 1주 ~ 3주</strong><br>"오늘 신청하면 내일 바로 나오나요?" ❌<br>자금이 필요한 날짜보다 여유를 두고 신청해 주세요.</div>
+      </div>
+      <div class="proc-wrap">
+        <div class="proc-step"><div class="proc-label">01<br>보증상담</div><div class="proc-body"><strong>비대면(보증드림 앱)</strong> 또는 온라인 방문예약 후 보증 상담 및 신청</div></div>
+        <div class="proc-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="proc-step"><div class="proc-label">02<br>신용조사</div><div class="proc-body">사업장 현장 방문(또는 비대면 실사)을 통해 사업 영위 여부 및 신용상태 조사</div></div>
+        <div class="proc-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="proc-step"><div class="proc-label">03<br>보증심사</div><div class="proc-body">제출 서류 검토 후 보증 지원 가능 여부 및 최종 지원 한도 결정</div></div>
+        <div class="proc-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="proc-step"><div class="proc-label">04<br>보증발급</div><div class="proc-body">전자약정(또는 방문약정) 체결 및 보증료 납부 후 은행으로 보증서 전자 전송</div></div>
+        <div class="proc-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="proc-step"><div class="proc-label">05<br>대출실행</div><div class="proc-body">협약 금융회사(은행) 앱 또는 영업점을 통해 최종 대출 실행</div></div>
+      </div>
+      <div class="tip-box mt16">
+        <strong>💡 빠른 심사를 위한 핵심 팁</strong>
+        <ul>
+          <li>안내받은 <strong>요청 서류를 누락 없이 한 번에</strong> 제출해 주세요.</li>
+          <li>현장 실사 일정 조율 등 <strong>재단 담당자의 연락을 꼭 받아주세요.</strong></li>
+        </ul>
+      </div>
+      <div class="action-bar">
+        <div class="action-note">전체 절차를 확인하셨나요?</div>
+        <div class="action-row">
+          <button class="action-btn gold-btn full" onclick="nav('pg-apply','신규 보증신청 안내')">신규 보증신청 방법 보기 <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 영상 가이드 ══ -->
+  <div id="pg-video" class="page">
+    <div class="stagger">
+      <div class="pg-header">
+        <div class="pg-eyebrow">스마트폰 화면 그대로 따라하기</div>
+        <div class="pg-title">단계별 영상 가이드</div>
+        <div class="pg-sub">막히는 부분의 영상을 선택해 확인해 보세요.</div>
+      </div>
+      <div class="video-section">
+        <div class="video-head"><i class="fa-brands fa-youtube"></i> 업무별 핵심 가이드 영상</div>
+        <a href="https://youtube.com/clip/UgkxSxTnpVdKwszH78ZcCyYTkO3WJ0_5ASsw?si=C_kjym7PAbdPrmz6" target="_blank" class="video-link">
+          <div>
+            <div><span class="vbadge" style="background:var(--primary);">서류 · 사진</span></div>
+            <div class="video-link-title">필요서류 제출 & 사업사실 증빙 방법</div>
+          </div>
+          <div class="video-play"><i class="fa-solid fa-play"></i></div>
+        </a>
+        <a href="https://youtube.com/clip/UgkxQ2GrbjyhpbYoOumpvskiQntut-7EJv3W?si=0HoI7Gzr3yM08qeq" target="_blank" class="video-link">
+          <div>
+            <div><span class="vbadge" style="background:var(--danger);">전자약정</span></div>
+            <div class="video-link-title">심사 통과 후 전자약정 서명 방법</div>
+          </div>
+          <div class="video-play"><i class="fa-solid fa-play"></i></div>
+        </a>
+      </div>
+      <div class="action-bar">
+        <div class="action-note">영상을 모두 확인하셨나요?</div>
+        <div class="action-row">
+          <a href="https://www.icsinbo.or.kr" target="_blank" class="action-btn sec"><i class="fa-solid fa-building-columns"></i> 홈페이지</a>
+          <button class="action-btn pri" onclick="openModal('sysModal')">보증드림 바로가기 🚀</button>
+        </div>
+        <div class="action-hotline"><i class="fa-solid fa-headset"></i> 앱 전산 오류 문의 : <a href="tel:044-270-4036">044-270-4036</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 보증신청 ══ -->
+  <div id="pg-apply" class="page">
+    <div class="stagger">
+      <div class="pg-header">
+        <div class="pg-eyebrow">신규 · 추가 대출</div>
+        <div class="pg-title">보증신청 6단계 가이드</div>
+        <div class="pg-sub">순서대로 따라 하시면 실수 없이 접수됩니다.</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-badge">STEP 01</div>
+        <div class="step-title">화면 맨 아래 <span class="ui-tag">보증드림 바로가기</span> 클릭</div>
+        <div class="step-sub">보증드림 앱 설치 또는 모바일 웹페이지로 이동합니다.</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-badge">STEP 02</div>
+        <div class="step-title">사업장 주소지의 <span class="ui-tag">지역 재단 선택</span></div>
+        <div class="ab danger mt8" style="margin-bottom:0;">
+          <i class="fa-solid fa-ban"></i>
+          <div><strong>서울 · 경기 지역 제외</strong><br>서울·경기는 자체 앱을 운영하므로 이곳에서 신청이 불가합니다.</div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-badge">STEP 03</div>
+        <div class="step-title">메인 화면에서 <span class="ui-tag">보증신청하러가기</span> 클릭</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-badge red">STEP 04 · 선택 주의</div>
+        <div class="step-title">반드시 <strong>왼쪽 버튼</strong>을 눌러주세요</div>
+        <div class="mock-row">
+          <div class="mock-btn correct">상품 선택 후<br>보증신청</div>
+          <div class="mock-btn wrong">재단 추천 상품<br>보증신청</div>
+        </div>
+        <div class="mock-note">※ 오른쪽 버튼 클릭 금지 (원하는 자금 배정 불가)</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-badge">STEP 05 · 상품 선택</div>
+        <div class="step-title">목록에서 아래 기본 상품을 선택하세요</div>
+        <div class="product-box">
+          <div class="prod-row">
+            <span class="prod-key">상품명</span>
+            <div>
+              <div class="prod-val">일반보증 또는 재단추천상품</div>
+              <div class="prod-val-sub">심사 시 담당자가 대표님께 가장 유리한 자금으로 배정해 드립니다.</div>
+            </div>
+          </div>
+        </div>
+        <div class="ab info mt12" style="margin-bottom:0;">
+          <i class="fa-solid fa-lightbulb"></i>
+          <div>특정 전용 상품(청년창업 등) 대상임이 확실하다면 해당 상품을 바로 선택하셔도 무방합니다.</div>
+        </div>
+      </div>
+
+      <div class="step-card" style="border: 1.5px solid var(--primary);">
+        <div class="step-badge red">STEP 06 · 필수 입력</div>
+        <div class="step-title">마지막 <strong>'요청사항'</strong> 칸에 문구 붙여넣기</div>
+        <div class="step-sub mb12">본인 상황에 맞는 항목을 눌러 문구를 복사한 뒤 입력해 주세요.</div>
+        <div class="accordion">
+
+          <button class="acc-btn" onclick="toggleAcc('a1',this)">
+            <span>✅ 신청할 상품명을 아시는 경우</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </button>
+          <div class="acc-body" id="a1">
+            <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:6px;">아래 문구를 복사해 요청사항에 붙여넣으세요</div>
+            <div class="copy-row" style="margin-bottom:0;">
+              <span class="copy-text">2026년 희망인천 자금 신청합니다.</span>
+              <button class="copy-btn-sm" onclick="copyTxt('2026년 희망인천 자금 신청합니다.',this)">복사</button>
+            </div>
+          </div>
+
+          <button class="acc-btn" onclick="toggleAcc('a2',this)">
+            <span>🤷 어떤 상품이 맞는지 잘 모르겠어요</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </button>
+          <div class="acc-body" id="a2">
+            <div style="font-size:13.5px;color:var(--text-secondary);margin-bottom:14px;">비대면 신청 시에는 일단 <strong>'일반보증'</strong>으로 접수해 주시면 담당자가 심사 과정에서 적합한 상품을 안내해 드립니다. 직접 확인하거나 방문 상담을 원하시면 아래 경로를 이용해 주세요.</div>
+            
+            <div class="mb8" style="font-size:12px;font-weight:800;color:var(--text-primary);">① 재단 공식 홈페이지 공고문 확인</div>
+            <a href="https://www.icsinbo.or.kr" target="_blank" class="ql mb16" style="padding:12px 14px;">
+              <div class="ql-icon" style="width:38px;height:38px;background:var(--primary-soft);color:var(--primary);"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <div class="ql-body">
+                <div class="ql-title" style="font-size:13.5px;">인천신용보증재단 홈페이지</div>
+                <div class="ql-sub">www.icsinbo.or.kr 이동</div>
+              </div>
+              <i class="fa-solid fa-chevron-right ql-arrow"></i>
+            </a>
+
+            <div class="mb8" style="font-size:12px;font-weight:800;color:var(--danger);">② 지점 방문 상담 예약 (주의사항 필독)</div>
+            <div class="band-warn">
+              <div class="band-warn-title"><i class="fa-solid fa-ban"></i> 방문 예약을 잡으면 '앱 신청'이 막힙니다!</div>
+              <div class="band-warn-body">
+                방문 상담 예약을 하시면 상담 완료 전까지 앱에서 비대면 신청이 불가합니다. 지점 방문을 원하실 때만 예약해 주세요.
+                <div style="margin-top:10px;">
+                  <a href="https://untact.koreg.or.kr" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--danger);color:#fff;font-size:12px;font-weight:700;padding:8px 14px;border-radius:8px;">
+                    방문상담 예약하기 <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="acc-btn" onclick="toggleAcc('a3',this)">
+            <span>📜 소상공인진흥공단 확인서를 받으신 경우</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </button>
+          <div class="acc-body" id="a3">
+            <div class="copy-row" style="margin-bottom:0;">
+              <span class="copy-text">소상공인시장진흥공단에서 대리대출확인서를 발급받았습니다.</span>
+              <button class="copy-btn-sm" onclick="copyTxt('소상공인시장진흥공단에서 대리대출확인서를 발급받았습니다.',this)">복사</button>
+            </div>
+          </div>
+
+          <button class="acc-btn" onclick="toggleAcc('a4',this)">
+            <span>🏠 본인 명의 임대차계약서가 없는 경우 (가족·무상)</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </button>
+          <div class="acc-body" id="a4">
+            <div class="ab danger mb12">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <div>앱에서 '임차' 선택 시 계약서 첨부가 필수입니다. 계약서가 없다면 <strong>일단 '자가'로 체크</strong>한 뒤 아래 문구를 복사해 요청사항에 적어주세요.</div>
+            </div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:6px;">[가족 소유 건물인 경우]</div>
+            <div class="copy-row mb12">
+              <span class="copy-text">전산상 자가로 체크했으나, 실제로는 가족(부모/배우자) 소유 부동산 무상 거주 중입니다. (가족관계증명서 제출 가능)</span>
+              <button class="copy-btn-sm" onclick="copyTxt('전산상 자가로 체크했으나, 실제로는 가족(부모/배우자) 소유 부동산 무상 거주 중입니다. (가족관계증명서 제출 가능)',this)">복사</button>
+            </div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:6px;">[지인 소유 · 무상임대인 경우]</div>
+            <div class="copy-row" style="margin-bottom:0;">
+              <span class="copy-text">전산상 자가로 체크했으나, 실제로는 지인 부동산 무상 사용 중입니다. (무상임대확인서 제출 가능)</span>
+              <button class="copy-btn-sm" onclick="copyTxt('전산상 자가로 체크했으나, 실제로는 지인 부동산 무상 사용 중입니다. (무상임대확인서 제출 가능)',this)">복사</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="ql mt12" onclick="window.open('https://www.youtube.com/watch?v=AZFNrC_PQxo','_blank')" style="border-color:var(--danger-border);background:var(--danger-soft);">
+        <div class="ql-icon yt-icon" style="background:#ffffff;"><i class="fa-brands fa-youtube"></i></div>
+        <div class="ql-body">
+          <div class="ql-title" style="color:#881337;">영상으로 보는 신청 방법</div>
+          <div class="ql-sub" style="color:var(--danger);">글로 보기 어려우시다면 영상을 따라 해보세요!</div>
+        </div>
+        <i class="fa-solid fa-chevron-right ql-arrow" style="color:var(--danger);"></i>
+      </div>
+
+      <div class="action-bar">
+        <div class="action-note">6단계 내용을 모두 확인하셨나요?</div>
+        <div class="action-row">
+          <a href="https://www.icsinbo.or.kr" target="_blank" class="action-btn sec"><i class="fa-solid fa-building-columns"></i> 홈페이지</a>
+          <button class="action-btn pri" onclick="openModal('sysModal')">보증드림 바로가기 🚀</button>
+        </div>
+        <div class="action-hotline"><i class="fa-solid fa-headset"></i> 앱 전산 오류 문의 : <a href="tel:044-270-4036">044-270-4036</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 기한연장 ══ -->
+  <div id="pg-extension" class="page">
+    <div class="stagger">
+      <div class="pg-header">
+        <div class="pg-eyebrow">기존 보증 만기 도래</div>
+        <div class="pg-title">기한연장 신청 안내</div>
+        <div class="pg-sub">은행 안내 방식에 따라 신청 메뉴가 다릅니다.</div>
+      </div>
+      <div class="ab warning mb16">
+        <i class="fa-solid fa-building-columns"></i>
+        <div><strong>대출받은 은행 확인이 먼저입니다!</strong><br>먼저 해당 은행 지점에 연락하여 <strong>"일반 기한연장인지, 대환(전환) 연장인지"</strong> 꼭 확인해 주세요.</div>
+      </div>
+      <div class="sec-label">은행 답변에 따른 신청 경로</div>
+      <div class="scenario mb12">
+        <div class="scenario-head"><span class="case-badge g">CASE 1</span><span class="scenario-head-text">"그냥 기한연장 하시면 됩니다"</span></div>
+        <div class="scenario-body">
+          <div class="step-list">
+            <div class="step-row"><div class="step-circle">1</div><div>하단 <strong>보증드림 바로가기</strong> 클릭</div></div>
+            <div class="step-row"><div class="step-circle">2</div><div>앱 메인 화면 하단 <strong>[보증기한연장 바로가기]</strong> 클릭</div></div>
+            <div class="step-row"><div class="step-circle">3</div><div>화면 안내에 따라 연장 진행</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="scenario mb12">
+        <div class="scenario-head"><span class="case-badge b">CASE 2</span><span class="scenario-head-text">"대환으로 연장해야 합니다"</span></div>
+        <div class="scenario-body">
+          <div class="step-list mb14">
+            <div class="step-row"><div class="step-circle">1</div><div>하단 <strong>보증드림 바로가기</strong> 클릭</div></div>
+            <div class="step-row"><div class="step-circle">2</div><div><strong>[보증신청 하러가기]</strong> 클릭 (신규 신청 경로와 동일)</div></div>
+            <div class="step-row"><div class="step-circle">3</div><div>상품 선택 화면에서 <span class="step-em">[전환보증]</span> 선택</div></div>
+          </div>
+          <div class="product-box">
+            <div class="prod-row"><span class="prod-key">상품명</span><span class="prod-val">전환보증</span></div>
+            <div class="prod-row"><span class="prod-key dim">특성</span><span class="prod-val-sub">법인 가능 · 재기지원 특화</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="action-bar">
+        <div class="action-row">
+          <a href="https://www.icsinbo.or.kr" target="_blank" class="action-btn sec"><i class="fa-solid fa-building-columns"></i> 홈페이지</a>
+          <button class="action-btn pri" onclick="openModal('sysModal')">보증드림 바로가기 🚀</button>
+        </div>
+        <div class="action-hotline"><i class="fa-solid fa-headset"></i> 앱 전산 오류 문의 : <a href="tel:044-270-4036">044-270-4036</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 전환보증 ══ -->
+  <div id="pg-repayment" class="page">
+    <div class="stagger">
+      <div class="pg-header">
+        <div class="pg-eyebrow">원금상환 곤란 시</div>
+        <div class="pg-title">전환보증 신청 안내</div>
+        <div class="pg-sub">상환 기간을 늘려 월 상환 부담을 줄이는 제도입니다.</div>
+      </div>
+      <div class="ab info mb16">
+        <i class="fa-solid fa-circle-info"></i>
+        <div><strong>신청 대상 확인</strong><br>현재 신용보증재단 보증서를 이용 중인 고객님만 신청 가능합니다.<br><span style="font-size:12.5px;opacity:0.85;">(타 기관 대출 대환 불가 / 단순 상환유예 불가)</span></div>
+      </div>
+      <div class="scenario mb12">
+        <div class="scenario-head"><span class="case-badge b">전환보증 신청 순서</span></div>
+        <div class="scenario-body">
+          <div class="step-list mb14">
+            <div class="step-row"><div class="step-circle">1</div><div>하단 <strong>보증드림 바로가기</strong> 클릭</div></div>
+            <div class="step-row"><div class="step-circle">2</div><div><strong>[보증신청 하러가기]</strong> 메뉴 클릭</div></div>
+            <div class="step-row"><div class="step-circle">3</div><div>상품 목록에서 <span class="step-em">[전환보증]</span> 선택</div></div>
+          </div>
+          <div class="product-box mb14">
+            <div class="prod-row"><span class="prod-key">상품명</span><span class="prod-val">전환보증</span></div>
+            <div class="prod-row"><span class="prod-key dim">특성</span><span class="prod-val-sub">법인 가능 · 재기지원 특화</span></div>
+          </div>
+          <div class="ab warning" style="margin-bottom:0;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <div>기존 재단 보증부 대출을 대환하며 상환 기간을 늘리는 상품으로, <strong>추가 신규 자금이 입금되는 것이 아닙니다.</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="action-bar">
+        <div class="action-row">
+          <a href="https://www.icsinbo.or.kr" target="_blank" class="action-btn sec"><i class="fa-solid fa-building-columns"></i> 홈페이지</a>
+          <button class="action-btn pri" onclick="openModal('sysModal')">보증드림 바로가기 🚀</button>
+        </div>
+        <div class="action-hotline"><i class="fa-solid fa-headset"></i> 앱 전산 오류 문의 : <a href="tel:044-270-4036">044-270-4036</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 폐업 ══ -->
+  <div id="pg-closure" class="page">
+    <div class="stagger">
+      <div class="pg-header">
+        <div class="pg-eyebrow">폐업 사업자 지원</div>
+        <div class="pg-title">브릿지보증 신청 안내</div>
+        <div class="pg-sub">폐업 후 일시상환 부담을 분할상환으로 전환합니다.</div>
+      </div>
+      <div class="ab danger mb16">
+        <i class="fa-solid fa-store-slash"></i>
+        <div><strong>폐업 신고를 하셨나요?</strong><br>'브릿지 보증'을 통한 분할상환 취급이 가능한지 <strong>기존 대출 은행에 먼저 확인</strong>하셔야 합니다.</div>
+      </div>
+      <div class="scenario mb12">
+        <div class="scenario-head"><span class="case-badge b">브릿지보증 신청 순서</span></div>
+        <div class="scenario-body">
+          <div class="step-list mb14">
+            <div class="step-row"><div class="step-circle">1</div><div>하단 <strong>보증드림 바로가기</strong> 클릭</div></div>
+            <div class="step-row"><div class="step-circle">2</div><div><strong>[보증신청 하러가기]</strong> 메뉴 클릭</div></div>
+            <div class="step-row"><div class="step-circle">3</div><div>왼쪽 <strong>[상품 선택 후 보증신청]</strong> 클릭 후 목록에서 <span class="step-em">[브릿지보증]</span> 선택</div></div>
+          </div>
+          <div class="product-box">
+            <div class="prod-row"><span class="prod-key">상품명</span><span class="prod-val">브릿지보증</span></div>
+            <div class="prod-row"><span class="prod-key dim">특성</span><span class="prod-val-sub">재기지원 특화 (폐업자 전용)</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="action-bar">
+        <div class="action-row">
+          <a href="https://www.icsinbo.or.kr" target="_blank" class="action-btn sec"><i class="fa-solid fa-building-columns"></i> 홈페이지</a>
+          <button class="action-btn pri" onclick="openModal('sysModal')">보증드림 바로가기 🚀</button>
+        </div>
+        <div class="action-hotline"><i class="fa-solid fa-headset"></i> 앱 전산 오류 문의 : <a href="tel:044-270-4036">044-270-4036</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 서류 안내 ══ -->
+  <div id="pg-document" class="page">
+    <div class="stagger">
+      <div class="pg-header">
+        <div class="pg-eyebrow">제출 전 필수 체크리스트</div>
+        <div class="pg-title">서류 준비 주의사항</div>
+        <div class="pg-sub">서류 보완 요청 없이 한 번에 통과하는 기준입니다.</div>
+      </div>
+
+      <div class="step-card mb14">
+        <div class="step-badge">01 · 임대차계약서</div>
+        <div class="step-title mt8">계약서 전체 페이지 빠짐없이 제출</div>
+        <div class="step-sub mb12">표지만 찍거나 일부만 올리면 보완 처리됩니다. 특약사항 및 도장 날인 면까지 전체 페이지를 올려주세요.</div>
+        <div class="ab danger mb8">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div><strong>본인 명의 계약서가 없는 경우</strong><br>가족 명의, 자가 소유, 무상 임대 등은 요청사항이나 담당자 문자로 상황을 남겨주시면 대체 서류를 안내해 드립니다.</div>
+        </div>
+        <div class="ab info" style="margin-bottom:0;">
+          <i class="fa-solid fa-file-signature"></i>
+          <div><strong>전대차계약인 경우</strong><br>건물주(원임대인)가 동의한 <strong>'전대차계약 동의서'</strong>를 반드시 함께 첨부해 주셔야 합니다.</div>
+        </div>
+      </div>
+
+      <div class="step-card mb14">
+        <div class="step-badge">02 · 사업장 사진</div>
+        <div class="step-title mt8">반드시 '보증드림' 앱 카메라로 직접 촬영</div>
+        <div class="step-sub mb12">GPS 위치 정보 확인을 위해 갤러리 사진 업로드가 아닌 앱 내 촬영 기능 이용이 필수입니다.</div>
+        <div class="ql mb14" onclick="nav('pg-video','영상 가이드')" style="background:var(--bg-subtle);">
+          <div class="ql-icon yt-icon"><i class="fa-brands fa-youtube"></i></div>
+          <div class="ql-body"><div class="ql-title" style="font-size:14px;">앱 사진 촬영 영상 가이드 보기</div></div>
+          <i class="fa-solid fa-chevron-right ql-arrow"></i>
+        </div>
+        <div style="font-size:12.5px;font-weight:800;color:var(--text-primary);margin-bottom:8px;">🚨 아래 업종은 현장 대신 대체 자료 제출 가능</div>
+        <div class="industry-list">
+          <div class="industry-item"><div class="industry-name">🚕 운송 및 택시업</div><div class="industry-desc">차량 사진(앞·뒤 번호판 식별 가능) 제출. 본인 명의 차량이 아닌 경우 지입계약서 추가</div></div>
+          <div class="industry-item"><div class="industry-name">📦 전자상거래(통신판매)업</div><div class="industry-desc">보관 중인 재고 물품 사진 제출. 외부 창고·3PL 이용 시 창고 임대차계약서 또는 물류 위탁 계약서 추가</div></div>
+          <div class="industry-item"><div class="industry-name">🔨 건설 및 인테리어 업종</div><div class="industry-desc">최근 진행한 현장 작업 사진 제출</div></div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-badge">03 · 최근 3개월 매출증빙</div>
+        <div class="step-title mt8">아래 5가지 중 가장 편한 방법 1가지 선택</div>
+        <div class="ab warning mt8 mb14">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <div>제출 서류에는 반드시 <strong>사업자등록번호 또는 상호·대표자명</strong> 등 식별 정보가 함께 찍혀 있어야 인정됩니다.</div>
+        </div>
+        <div class="sales-list">
+          <div class="sales-item"><div class="sales-num">① 세금계산서 발행 업종</div><div class="sales-desc">홈택스 › 전자(세금)계산서 합계표 및 통계조회 › 기간별 매출/매입 통계조회 (최근 3개월)</div></div>
+          <div class="sales-item"><div class="sales-num">② 면세 사업자</div><div class="sales-desc">위 ①번 경로에서 조회 조건을 '전자계산서'로 변경하여 조회</div></div>
+          <div class="sales-item"><div class="sales-num">③ 식당 · 소매업 등</div><div class="sales-desc">홈택스 › 신용카드 매출자료 조회 또는 현금영수증 매출내역 누계조회</div></div>
+          <div class="sales-item"><div class="sales-num">④ 배달 · 온라인 스토어</div><div class="sales-desc">배달의민족, 스마트스토어, 쿠팡 등 플랫폼 정산관리 메뉴의 부가세 신고용 매출 내역</div></div>
+          <div class="sales-item urgent"><div class="sales-num">⑤ 기타 (위 방법 모두 어려울 때)</div><div class="sales-desc">최근 3개월 사업자 통장 거래내역<br><strong>※ 반드시 은행 창구 발급본 또는 인터넷뱅킹에서 '제출용(증명서 발급)'으로 출력해 은행 직인이 찍힌 서류여야 합니다. (단순 앱 화면 캡처·엑셀 파일 인정 불가)</strong></div></div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <div class="action-row">
+          <button class="action-btn gold-btn full" onclick="goBack()">
+            <i class="fa-solid fa-chevron-left"></i> 이전 화면으로 돌아가기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+/* ── NAVIGATION & HASH ROUTING ── */
+const defaultTitle = '신용보증재단 통합 안내';
+const pageTitles = {
+  'pg-main': defaultTitle,
+  'pg-guide': '이용 절차 안내',
+  'pg-video': '영상 가이드',
+  'pg-apply': '신규 보증신청 안내',
+  'pg-extension': '기한연장 안내',
+  'pg-repayment': '전환보증 신청 안내',
+  'pg-closure': '폐업 사업자 안내',
+  'pg-document': '서류 준비 주의사항'
+};
+
+function nav(pageId, title) {
+  const pageTitle = title || pageTitles[pageId] || defaultTitle;
+  history.pushState({ id: pageId, title: pageTitle }, '', '#' + pageId);
+  showPage(pageId, pageTitle);
+}
+
+function goBack() {
+  if (history.state && history.state.id && history.state.id !== 'pg-main') {
+    history.back();
+  } else {
+    history.pushState({ id: 'pg-main', title: defaultTitle }, '', window.location.pathname);
+    showPage('pg-main', defaultTitle);
+  }
+}
+
+function showPage(id, title) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(id) || document.getElementById('pg-main');
+  target.classList.add('active');
+  
+  const isMain = target.id === 'pg-main';
+  document.getElementById('navTitle').textContent = isMain ? defaultTitle : (title || pageTitles[target.id] || defaultTitle);
+  document.getElementById('navBack').style.display = isMain ? 'none' : 'flex';
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+window.addEventListener('popstate', (e) => {
+  const hashId = window.location.hash.replace('#', '');
+  if (e.state && e.state.id) {
+    showPage(e.state.id, e.state.title);
+  } else if (hashId && document.getElementById(hashId)) {
+    showPage(hashId, pageTitles[hashId]);
+  } else {
+    showPage('pg-main', defaultTitle);
+  }
+});
+
+/* ── SENIOR ZOOM MODE (글씨 크게) ── */
+function toggleZoom() {
+  const isLarge = document.body.classList.toggle('large-text');
+  const btn = document.getElementById('zoomBtn');
+  btn.classList.toggle('active', isLarge);
+  btn.innerHTML = isLarge 
+    ? '<i class="fa-solid fa-magnifying-glass-minus"></i> 기본크기' 
+    : '<i class="fa-solid fa-magnifying-glass-plus"></i> 글씨크게';
+  showToast(isLarge ? '큰 글씨 모드가 켜졌습니다' : '기본 글씨 크기로 변경되었습니다');
+}
+
+/* ── MODALS ── */
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+document.querySelectorAll('.modal-bg').forEach(bg => bg.addEventListener('click', e => { if (e.target === bg) closeModal(bg.id); }));
+
+function confirmSys() { window.open('https://untact.koreg.or.kr','_blank'); closeModal('sysModal'); }
+
+/* ── ACCORDION ── */
+function toggleAcc(bodyId, btn) {
+  const body = document.getElementById(bodyId);
+  const isOpen = body.classList.contains('open');
+  btn.closest('.accordion').querySelectorAll('.acc-body.open').forEach(b => {
+    b.classList.remove('open');
+    b.previousElementSibling.classList.remove('open');
+  });
+  if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+}
+
+/* ── TOAST ── */
+function showToast(msg) {
+  let toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${msg}`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+/* ── COPY ── */
+function copyTxt(text, btn) {
+  const orig = btn.textContent;
+  const done = () => { 
+    btn.textContent = '✓ 복사됨'; 
+    btn.classList.add('ok'); 
+    showToast('클립보드에 복사되었습니다');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 1500); 
+  };
+  navigator.clipboard ? navigator.clipboard.writeText(text).then(done).catch(fbCopy) : fbCopy();
+  function fbCopy() {
+    const el = Object.assign(document.createElement('textarea'),{value:text,style:'position:fixed;opacity:0'});
+    document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); done();
+  }
+}
+
+/* ── SHARE ── */
+function sharePage() {
+  if (navigator.share) {
+    navigator.share({ title:'신용보증재단 통합 안내', text:'보증재단 서류 준비 및 신청 방법 모바일 안내페이지입니다.', url: window.location.href });
+  } else {
+    const el = Object.assign(document.createElement('textarea'),{value:window.location.href,style:'position:fixed;opacity:0'});
+    document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+    showToast('링크가 복사되었습니다! 카톡방에 붙여넣기 하세요.');
+  }
+}
+
+/* ── INIT (새로고침 및 해시 직접 진입 대응) ── */
+(function init() {
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash && document.getElementById(initialHash)) {
+    const title = pageTitles[initialHash] || defaultTitle;
+    history.replaceState({ id: initialHash, title: title }, '', '#' + initialHash);
+    showPage(initialHash, title);
+  } else {
+    history.replaceState({ id: 'pg-main', title: defaultTitle }, '', window.location.pathname + window.location.search);
+    showPage('pg-main', defaultTitle);
+  }
+})();
+
+/* ── SCROLL PROGRESS ── */
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+  const bar = document.getElementById('scrollProgress');
+  if (bar) bar.style.width = scrolled + "%";
+});
+</script>
+</body>
+</html>
